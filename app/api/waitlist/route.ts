@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/app/lib/supabase'
+import { supabaseAdmin } from '@/app/lib/supabase-admin'
 
 export async function POST(request: Request) {
   try {
     // Check if Supabase is configured
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error('Supabase environment variables not configured')
       return NextResponse.json(
         { error: 'Service temporarily unavailable. Please try again later.' },
@@ -23,8 +23,8 @@ export async function POST(request: Request) {
       )
     }
 
-    // Insert into waitlist_signups table
-    const { data, error } = await supabase
+    // Insert into waitlist_signups table (admin client bypasses RLS)
+    const { data, error } = await supabaseAdmin
       .from('waitlist_signups')
       .insert([
         {
@@ -45,7 +45,12 @@ export async function POST(request: Request) {
         )
       }
 
-      console.error('Supabase error:', error)
+      console.error('Supabase error:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+      })
       return NextResponse.json(
         { error: 'Failed to add to the waiting list.' },
         { status: 500 }
@@ -63,9 +68,8 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error processing waitlist signup:', error)
     return NextResponse.json(
-        { error: 'Something went wrong. Please try again.' },
+      { error: 'Something went wrong. Please try again.' },
       { status: 500 }
     )
   }
 }
-
