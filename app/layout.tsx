@@ -2,23 +2,44 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Limba - Feel better in under 5 minutes a day',
+  title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
   description:
-    'Personalised wellness micro-routines that fit seamlessly into your workday.',
+    'AI-personalised micro-routines for desk workers. Limba learns your unique aches and pains, then delivers targeted exercises that fit your workday. Built by Stanford & Imperial College health experts.',
   keywords: [
-    'wellness',
-    'health',
+    'AI wellness app',
+    'AI personalised exercises',
     'micro-routines',
     'desk exercises',
-    'pain relief',
+    'back pain relief',
+    'office stretches',
+    'posture exercises',
+    'remote worker wellness',
+    'AI health coach',
+    'personalised fitness',
+    'musculoskeletal health',
+    'workplace wellness',
   ],
   authors: [{ name: 'Limba' }],
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180' },
+    ],
+  },
+  manifest: '/site.webmanifest',
+  appleWebApp: {
+    title: 'Limba',
+  },
   openGraph: {
-    title: 'Limba - Feel better in under 5 minutes a day',
+    title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
     description:
-      'Personalised wellness micro-routines that fit seamlessly into your workday.',
+      'AI-personalised micro-routines for desk workers. Limba learns your unique aches and delivers targeted exercises. Built by Stanford & Imperial College experts.',
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_GB',
   },
 }
 
@@ -28,9 +49,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <body className="antialiased">{children}</body>
     </html>
   )
 }
-

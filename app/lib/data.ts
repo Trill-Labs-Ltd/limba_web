@@ -8,7 +8,7 @@ export const features: Feature[] = [
     icon: 'sparkle',
     title: 'Personalised to You',
     description:
-      "Tell us where it hurts. Limba's AI learns your unique discomforts tight shoulders from typing, stiff lower back from sitting — and crafts routines that target exactly what you need.",
+      "Tell us where it hurts. Limba learns your unique discomforts: tight shoulders from typing, stiff lower back from sitting — and crafts routines that target exactly what you need.",
   },
   {
     id: 'quick',
