@@ -4,19 +4,21 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
   description:
-    'AI-personalised micro-routines for desk workers. Limba learns your unique aches and pains, then delivers targeted exercises that fit your workday. Built by Stanford & Imperial College health experts.',
+    'AI-personalised micro-routines that fit your life. Limba learns your unique aches and pains, then delivers targeted exercises in under 5 minutes. Built by Stanford & Imperial College health experts.',
   keywords: [
     'AI wellness app',
     'AI personalised exercises',
     'micro-routines',
-    'desk exercises',
+    'quick exercises',
     'back pain relief',
+    'desk exercises',
     'office stretches',
     'posture exercises',
     'remote worker wellness',
     'AI health coach',
     'personalised fitness',
     'musculoskeletal health',
+    '5 minute wellness',
     'workplace wellness',
   ],
   authors: [{ name: 'Limba' }],
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
     description:
-      'AI-personalised micro-routines for desk workers. Limba learns your unique aches and delivers targeted exercises. Built by Stanford & Imperial College experts.',
+      'AI-personalised micro-routines that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
     type: 'website',
     locale: 'en_GB',
   },
