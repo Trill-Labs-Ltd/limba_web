@@ -3,13 +3,22 @@ import { supabase } from '@/app/lib/supabase'
 
 export async function POST(request: Request) {
   try {
+    // Check if Supabase is configured
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      console.error('Supabase environment variables not configured')
+      return NextResponse.json(
+        { error: 'Service temporarily unavailable. Please try again later.' },
+        { status: 503 }
+      )
+    }
+
     const body = await request.json()
     const { email, source, referredByCode } = body
 
     // Validate email
     if (!email || !email.includes('@')) {
       return NextResponse.json(
-        { error: 'Valid email is required' },
+        { error: 'A valid email address is required.' },
         { status: 400 }
       )
     }
@@ -31,14 +40,14 @@ export async function POST(request: Request) {
       // Check for duplicate email
       if (error.code === '23505') {
         return NextResponse.json(
-          { error: 'This email is already on the waiting list' },
+          { error: 'This email is already on the waiting list.' },
           { status: 409 }
         )
       }
 
       console.error('Supabase error:', error)
       return NextResponse.json(
-        { error: 'Failed to add to waiting list' },
+        { error: 'Failed to add to the waiting list.' },
         { status: 500 }
       )
     }
@@ -54,7 +63,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error processing waitlist signup:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+        { error: 'Something went wrong. Please try again.' },
       { status: 500 }
     )
   }

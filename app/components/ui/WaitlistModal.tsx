@@ -207,7 +207,7 @@ export function WaitlistModal({
                     Joining...
                   </span>
                 ) : (
-                  'Join The Waiting List'
+                  'Join the Waiting List'
                 )}
               </button>
             </form>

@@ -8,7 +8,7 @@ export const features: Feature[] = [
     icon: 'sparkle',
     title: 'Personalised to You',
     description:
-      "Tell us where it hurts. Limba's AI learns your unique discomforts tight shoulders from typing, stiff lower back from sitting and crafts routines that target exactly what you need.",
+      "Tell us where it hurts. Limba's AI learns your unique discomforts tight shoulders from typing, stiff lower back from sitting — and crafts routines that target exactly what you need.",
   },
   {
     id: 'quick',
@@ -39,7 +39,7 @@ export const heroContent = {
   headlineContinued: 'a day',
   description:
     'Limba learns your unique aches and pains, then delivers personalised micro-routines that fit seamlessly into your workday. Built for desk warriors, remote workers, and busy parents.',
-  ctaPrimary: 'Join The Waiting List',
+  ctaPrimary: 'Join the Waiting List',
   ctaSecondary: 'Learn More',
 }
 
@@ -48,7 +48,7 @@ export const betaContent = {
   headline: "Your body deserves better than 'I'll stretch later'",
   description:
     'Join our beta waiting list and be among the first to experience personalised musculoskeletal care, backed by AI and built by health specialists from Imperial College London and Stanford.',
-  cta: 'Join The Waiting List',
+  cta: 'Join the Waiting List',
 }
 
 export const footerContent = {
