@@ -6,11 +6,12 @@ export function Logo({ className = '', showText = false }: LogoProps) {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <Image
-        src="/images/Logo.png"
+        src="/images/LIMBA@2x.png"
         alt={`${APP_NAME} logo`}
-        width={160}
-        height={53}
+        width={320}
+        height={106}
         priority
+        quality={100}
         className="h-10 sm:h-12 w-auto"
       />
       {showText && (

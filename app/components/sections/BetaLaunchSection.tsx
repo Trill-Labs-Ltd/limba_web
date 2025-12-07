@@ -1,6 +1,6 @@
+import Image from 'next/image'
 import { Button } from '@/app/components/ui'
 import { betaContent, betaBenefits } from '@/app/lib/data'
-import analysisImage from '@/app/components/assets/analysis.png'
 
 interface BetaLaunchSectionProps {
   onJoinWaitlist?: () => void
@@ -22,9 +22,11 @@ export function BetaLaunchSection({ onJoinWaitlist }: BetaLaunchSectionProps) {
               
               {/* Phone */}
               <div className="relative animate-float py-6 px-4 drop-shadow-2xl">
-                <img
-                  src={analysisImage.src}
+                <Image
+                  src="/images/analysis.png"
                   alt="Limba analysis and wellness insights"
+                  width={600}
+                  height={1200}
                   className="w-[220px] sm:w-[260px] md:w-[300px] h-auto"
                 />
               </div>

@@ -1,7 +1,6 @@
+import Image from 'next/image'
 import { Button, Badge } from '@/app/components/ui'
 import { heroContent } from '@/app/lib/data'
-import loginImage from '@/app/components/assets/login.png'
-import dashboardImage from '@/app/components/assets/dashboard.png'
 
 interface HeroSectionProps {
   onJoinWaitlist?: () => void
@@ -67,18 +66,23 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
               <div className="relative flex items-end justify-center py-6 px-4 md:px-6">
                 {/* Primary Phone - Dashboard Screen */}
                 <div className="relative z-10 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer">
-                  <img
-                    src={dashboardImage.src}
+                  <Image
+                    src="/images/dashboard.png"
                     alt="Limba dashboard showing wellness library"
+                    width={600}
+                    height={1200}
                     className="w-[200px] sm:w-[240px] md:w-[280px] lg:w-[300px] h-auto"
+                    priority
                   />
                 </div>
                 
                 {/* Secondary Phone - Login (static) */}
                 <div className="relative z-0 -ml-12 md:-ml-16 mt-8 md:mt-12 drop-shadow-2xl">
-                  <img
-                    src={loginImage.src}
+                  <Image
+                    src="/images/login.png"
                     alt="Limba login screen"
+                    width={560}
+                    height={1120}
                     className="w-[180px] sm:w-[220px] md:w-[260px] lg:w-[280px] h-auto"
                   />
                 </div>
