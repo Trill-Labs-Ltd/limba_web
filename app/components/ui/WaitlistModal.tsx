@@ -119,7 +119,7 @@ export function WaitlistModal({
                 id="modal-title"
                 className="text-2xl font-bold text-teal-900 mb-2"
               >
-                Join our waiting list!!
+                Join our waiting list!
               </h2>
               <p className="text-gray-600">
                 Be among the first to experience personalised wellness routines
@@ -162,7 +162,6 @@ export function WaitlistModal({
                   id="referralCode"
                   value={referralCode}
                   onChange={(e) => setReferralCode(e.target.value)}
-                  placeholder="e.g., limba_teddy"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   disabled={isLoading}
                 />
