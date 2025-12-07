@@ -1,5 +1,6 @@
-import { Button, PhoneMockup } from '@/app/components/ui'
+import { Button } from '@/app/components/ui'
 import { betaContent, betaBenefits } from '@/app/lib/data'
+import analysisImage from '@/app/components/assets/analysis.png'
 
 interface BetaLaunchSectionProps {
   onJoinWaitlist?: () => void
@@ -12,7 +13,22 @@ export function BetaLaunchSection({ onJoinWaitlist }: BetaLaunchSectionProps) {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Phone Mockup */}
           <div className="order-1 lg:order-1 flex justify-center lg:justify-start">
-            <PhoneMockup variant="beta" />
+            <div className="relative">
+              {/* Gradient blob background */}
+              <div 
+                className="absolute -inset-6 md:-inset-10 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-[2.5rem] md:rounded-[3rem]"
+                aria-hidden="true"
+              />
+              
+              {/* Phone */}
+              <div className="relative animate-float py-6 px-4 drop-shadow-2xl">
+                <img
+                  src={analysisImage.src}
+                  alt="Limba analysis and wellness insights"
+                  className="w-[220px] sm:w-[260px] md:w-[300px] h-auto"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Right Column - Text Content */}

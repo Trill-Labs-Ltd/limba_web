@@ -11,8 +11,10 @@ import { WaitlistModal } from '@/app/components/ui'
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalSource, setModalSource] = useState('landing_page')
 
-  const openModal = () => {
+  const openModal = (source: string) => {
+    setModalSource(source)
     setIsModalOpen(true)
   }
 
@@ -22,15 +24,15 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      <Header onJoinWaitlist={openModal} />
-      <HeroSection onJoinWaitlist={openModal} />
+      <Header onJoinWaitlist={() => openModal('header')} />
+      <HeroSection onJoinWaitlist={() => openModal('hero')} />
       <ValuePropSection />
-      <BetaLaunchSection onJoinWaitlist={openModal} />
+      <BetaLaunchSection onJoinWaitlist={() => openModal('beta_section')} />
       <Footer />
       <WaitlistModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        source="web-app"
+        source={modalSource}
       />
     </main>
   )

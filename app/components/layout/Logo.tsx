@@ -8,10 +8,10 @@ export function Logo({ className = '', showText = false }: LogoProps) {
       <Image
         src="/images/Logo.png"
         alt={`${APP_NAME} logo`}
-        width={120}
-        height={40}
+        width={160}
+        height={53}
         priority
-        className="h-8 sm:h-10 w-auto"
+        className="h-10 sm:h-12 w-auto"
       />
       {showText && (
         <span className="text-teal-800 font-semibold text-xl">{APP_NAME}</span>

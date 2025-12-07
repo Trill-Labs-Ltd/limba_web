@@ -28,6 +28,8 @@ export interface LogoProps {
 export interface PhoneMockupProps {
   variant?: 'hero' | 'beta'
   className?: string
+  imageSrc?: string
+  imageAlt?: string
 }
 
 export interface IconProps {

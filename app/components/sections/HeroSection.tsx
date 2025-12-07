@@ -1,7 +1,7 @@
-import { Button, Badge, PhoneMockup } from '@/app/components/ui'
-import { heroContent, SOCIAL_PROOF_COUNT } from '@/app/lib/data'
-
-const AVATAR_LETTERS = ['A', 'B', 'C', 'D'] as const
+import { Button, Badge } from '@/app/components/ui'
+import { heroContent } from '@/app/lib/data'
+import loginImage from '@/app/components/assets/login.png'
+import dashboardImage from '@/app/components/assets/dashboard.png'
 
 interface HeroSectionProps {
   onJoinWaitlist?: () => void
@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
   return (
-    <section className="w-full">
+    <section className="w-full overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Main Copy */}
@@ -51,29 +51,39 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
                 {heroContent.ctaSecondary}
               </Button>
             </div>
-
-            {/* Social Proof */}
-            <div className="flex items-center gap-3 pt-4">
-              <div className="flex -space-x-2" role="group" aria-label="User avatars">
-                {AVATAR_LETTERS.map((letter, idx) => (
-                  <div
-                    key={`avatar-${letter}`}
-                    className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-gray-600 font-medium text-sm"
-                    aria-label={`User ${idx + 1}`}
-                  >
-                    {letter}
-                  </div>
-                ))}
-              </div>
-              <span className="text-gray-600 text-sm">
-                {SOCIAL_PROOF_COUNT} early adopters waiting
-              </span>
-            </div>
           </div>
 
-          {/* Right Column - Phone Mockup */}
+          {/* Right Column - Phone Mockups with gradient background */}
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-            <PhoneMockup variant="hero" />
+            {/* Large gradient background container */}
+            <div className="relative">
+              {/* Gradient blob background */}
+              <div 
+                className="absolute -inset-6 md:-inset-10 lg:-inset-12 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-[3rem] md:rounded-[4rem]"
+                aria-hidden="true"
+              />
+              
+              {/* Phone container */}
+              <div className="relative flex items-end justify-center py-6 px-4 md:px-6">
+                {/* Primary Phone - Dashboard Screen */}
+                <div className="relative z-10 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer">
+                  <img
+                    src={dashboardImage.src}
+                    alt="Limba dashboard showing wellness library"
+                    className="w-[200px] sm:w-[240px] md:w-[280px] lg:w-[300px] h-auto"
+                  />
+                </div>
+                
+                {/* Secondary Phone - Login (static) */}
+                <div className="relative z-0 -ml-12 md:-ml-16 mt-8 md:mt-12 drop-shadow-2xl">
+                  <img
+                    src={loginImage.src}
+                    alt="Limba login screen"
+                    className="w-[180px] sm:w-[220px] md:w-[260px] lg:w-[280px] h-auto"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
