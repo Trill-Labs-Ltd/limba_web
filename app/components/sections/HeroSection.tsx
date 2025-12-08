@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { Button, Badge } from '@/app/components/ui'
 import { heroContent } from '@/app/lib/data'
@@ -46,7 +48,13 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
               >
                 {heroContent.ctaPrimary}
               </Button>
-              <Button variant="secondary" ariaLabel="Learn more about Limba">
+              <Button
+                variant="secondary"
+                ariaLabel="Learn more about Limba"
+                onClick={() => {
+                  document.getElementById('learn-more')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
                 {heroContent.ctaSecondary}
               </Button>
             </div>

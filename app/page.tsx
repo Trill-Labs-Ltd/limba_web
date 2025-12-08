@@ -5,6 +5,7 @@ import { Header, Footer } from '@/app/components/layout'
 import {
   HeroSection,
   ValuePropSection,
+  LearnMoreSection,
   BetaLaunchSection,
 } from '@/app/components/sections'
 import { WaitlistModal } from '@/app/components/ui'
@@ -27,6 +28,7 @@ export default function Home() {
       <Header onJoinWaitlist={() => openModal('header')} />
       <HeroSection onJoinWaitlist={() => openModal('hero')} />
       <ValuePropSection />
+      <LearnMoreSection />
       <BetaLaunchSection onJoinWaitlist={() => openModal('beta_section')} />
       <Footer />
       <WaitlistModal
