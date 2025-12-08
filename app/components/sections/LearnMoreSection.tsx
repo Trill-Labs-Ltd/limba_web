@@ -4,7 +4,7 @@ import {
   CompassIcon,
   FlameIcon,
   BackpackIcon,
-  TrophyIcon,
+  BadgeIcon,
 } from '@/app/components/icons'
 
 export function LearnMoreSection() {
@@ -117,7 +117,7 @@ export function LearnMoreSection() {
           <div className="bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
-                <TrophyIcon className="w-7 h-7" />
+                <BadgeIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-teal-900">
                 Milestones &amp; Achievements
@@ -125,7 +125,7 @@ export function LearnMoreSection() {
             </div>
             <p className="text-gray-600 leading-relaxed">
               Turn a daunting goal like &quot;get flexible&quot; into small, winnable quests. 
-              Unlock badges as you progress — from your first session to 90 days of consistency. Try and beat them all.
+              Unlock badges as you progress. From your first session to 90 days of consistency. Try and beat them all.
             </p>
             
             {/* Milestone Preview Image */}

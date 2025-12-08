@@ -1,6 +1,6 @@
 import type { IconProps } from '@/app/types'
 
-export function TrophyIcon({
+export function BadgeIcon({
   className = 'w-7 h-7',
   'aria-hidden': ariaHidden = true,
 }: IconProps) {
