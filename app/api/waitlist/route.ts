@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       .insert([
         {
           email: email.toLowerCase().trim(),
-          source: source || 'landing_page',
+          source: source || 'Landing page - Unknown',
           referred_by_code: referredByCode || null,
           status: 'waiting',
         },

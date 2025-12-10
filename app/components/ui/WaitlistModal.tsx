@@ -6,7 +6,7 @@ import type { WaitlistModalProps } from '@/app/types'
 export function WaitlistModal({
   isOpen,
   onClose,
-  source = 'landing_page',
+  source = 'Landing page - Unknown',
 }: WaitlistModalProps) {
   const [email, setEmail] = useState('')
   const [referralCode, setReferralCode] = useState('')

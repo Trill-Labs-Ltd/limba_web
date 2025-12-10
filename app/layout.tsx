@@ -42,6 +42,23 @@ export const metadata: Metadata = {
       'AI-personalised micro-routines that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
     type: 'website',
     locale: 'en_GB',
+    url: 'https://getlimba.com',
+    siteName: 'Limba',
+    images: [
+      {
+        url: 'https://getlimba.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Limba - AI-Powered Wellness App',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
+    description:
+      'AI-personalised micro-routines that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
+    images: ['https://getlimba.com/og-image.png'],
   },
 }
 
