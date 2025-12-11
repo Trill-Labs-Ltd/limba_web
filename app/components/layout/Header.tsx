@@ -22,8 +22,7 @@ export function Header({ onJoinWaitlist }: HeaderProps) {
           ariaLabel="Join the waiting list"
           className="text-sm sm:text-base whitespace-nowrap"
         >
-          <span className="hidden sm:inline">Join The Waiting List</span>
-          <span className="sm:hidden">Join List</span>
+          Join The Waiting List
         </Button>
       </nav>
     </header>
