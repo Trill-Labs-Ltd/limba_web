@@ -73,7 +73,7 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
               {/* Phone container */}
               <div className="relative flex items-end justify-center py-6 px-4 md:px-6">
                 {/* Primary Phone - Dashboard Screen */}
-                <div className="relative z-10 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer">
+                <div className="relative z-10 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
                   <Image
                     src="/images/dashboard.png"
                     alt="Limba dashboard showing wellness library"

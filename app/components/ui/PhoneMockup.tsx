@@ -9,7 +9,7 @@ export function PhoneMockup({
 }: PhoneMockupProps) {
   return (
     <div 
-      className={`relative w-full max-w-[280px] sm:max-w-xs md:max-w-sm group cursor-pointer ${className}`}
+      className={`relative w-full max-w-[280px] sm:max-w-xs md:max-w-sm group ${className}`}
     >
       {/* Background with gradient */}
       <div

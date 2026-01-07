@@ -195,7 +195,7 @@ export function LearnMoreSection() {
                 </p>
               </div>
               <div className="flex justify-center">
-                <div className="bg-white rounded-2xl p-6 drop-shadow-2xl text-center space-y-3 transition-transform duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer">
+                <div className="bg-white rounded-2xl p-6 drop-shadow-2xl text-center space-y-3 transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
                   <Image
                     src="/images/limba-mascot-asset.png"
                     alt="Happy Limba mascot"
