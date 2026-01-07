@@ -2,7 +2,7 @@ import Image from 'next/image'
 import type { PhoneMockupProps } from '@/app/types'
 
 export function PhoneMockup({
-  variant = 'hero',
+  variant: _variant = 'hero',
   className = '',
   imageSrc,
   imageAlt = 'App screenshot',

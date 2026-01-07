@@ -8,6 +8,18 @@ export function WaitlistModal({
   onClose,
   source = 'Landing page - Unknown',
 }: WaitlistModalProps) {
+  type Turnstile = {
+    render: (
+      element: HTMLElement,
+      options: {
+        sitekey: string
+        callback: (token: string) => void
+        'expired-callback'?: () => void
+        'error-callback'?: () => void
+      }
+    ) => void
+  }
+
   const [email, setEmail] = useState('')
   const [referralCode, setReferralCode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -50,7 +62,7 @@ export function WaitlistModal({
     if (!isOpen || !turnstileSiteKey) return
 
     const renderWidget = () => {
-      const turnstile = (window as any).turnstile
+      const turnstile = (window as typeof window & { turnstile?: Turnstile }).turnstile
       if (!turnstile || !widgetRef.current) return
 
       // Clear previous widget (if any)

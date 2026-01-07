@@ -55,7 +55,7 @@ export async function POST(request: Request) {
     }
 
     // Insert into waitlist_signups table (admin client bypasses RLS)
-    const { data, error } = await supabaseAdmin
+    const { error } = await supabaseAdmin
       .from('waitlist_signups')
       .insert([
         {
