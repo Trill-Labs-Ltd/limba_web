@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent, useEffect } from 'react'
+import { useState, FormEvent, useEffect, useRef } from 'react'
 import type { WaitlistModalProps } from '@/app/types'
 
 export function WaitlistModal({
@@ -13,6 +13,10 @@ export function WaitlistModal({
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState('')
+  const widgetRef = useRef<HTMLDivElement | null>(null)
+
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
   // Close modal on ESC key
   useEffect(() => {
@@ -41,9 +45,61 @@ export function WaitlistModal({
     }
   }, [isOpen])
 
+  // Load and render Cloudflare Turnstile when modal opens
+  useEffect(() => {
+    if (!isOpen || !turnstileSiteKey) return
+
+    const renderWidget = () => {
+      const turnstile = (window as any).turnstile
+      if (!turnstile || !widgetRef.current) return
+
+      // Clear previous widget (if any)
+      widgetRef.current.innerHTML = ''
+      setCaptchaToken('')
+
+      turnstile.render(widgetRef.current, {
+        sitekey: turnstileSiteKey,
+        callback: (token: string) => setCaptchaToken(token),
+        'expired-callback': () => setCaptchaToken(''),
+        'error-callback': () =>
+          setError('Captcha failed to load. Please reload and try again.'),
+      })
+    }
+
+    // If script already present, just render
+    if (document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]')) {
+      renderWidget()
+      return
+    }
+
+    const script = document.createElement('script')
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
+    script.async = true
+    script.defer = true
+    script.onload = renderWidget
+    script.onerror = () => setError('Captcha failed to load. Please reload and try again.')
+    document.body.appendChild(script)
+
+    return () => {
+      script.onload = null
+      script.onerror = null
+    }
+  }, [isOpen, turnstileSiteKey])
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError('')
+
+    if (!turnstileSiteKey) {
+      setError('Captcha is not configured. Please try again later.')
+      return
+    }
+
+    if (!captchaToken) {
+      setError('Please complete the captcha to continue.')
+      return
+    }
+
     setIsLoading(true)
 
     try {
@@ -56,6 +112,7 @@ export function WaitlistModal({
           email,
           source,
           referredByCode: referralCode || undefined,
+          captchaToken,
         }),
       })
 
@@ -210,6 +267,16 @@ export function WaitlistModal({
                   'Join the Waiting List'
                 )}
               </button>
+
+              {/* Captcha */}
+              <div className="pt-2">
+                <div ref={widgetRef} className="flex justify-center" />
+                {!turnstileSiteKey && (
+                  <p className="text-sm text-red-600 mt-2">
+                    Captcha is not configured. Please try again later.
+                  </p>
+                )}
+              </div>
             </form>
           </>
         ) : (

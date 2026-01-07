@@ -61,13 +61,13 @@ export function LearnMoreSection() {
             </div>
             <p className="text-gray-600 leading-relaxed">
               No more generic stretching videos. Limba uses the latest AI models to generate 
-              routines uniquely tailored to your body — targeting your tight neck, achy lower 
+              routines uniquely tailored to your body. Targeting your tight neck, achy lower 
               back, or stiff hips based on your profile and progress.
             </p>
             <p className="text-gray-600 leading-relaxed">
               Each 5–10 minute session adapts as you do. The AI learns what works for you, 
               refining your plan over time. Short, beginner-friendly, and designed to be 
-              done anywhere — next to your desk, in your kitchen, or even in a hotel room.
+              done anywhere. Like next to your desk, in your kitchen, or even in a hotel room.
             </p>
           </div>
 
@@ -83,7 +83,7 @@ export function LearnMoreSection() {
             </div>
             <p className="text-gray-600 leading-relaxed">
               Some days, you want to choose your own adventure. Browse our library of 
-              stretches by body area — neck &amp; shoulders, lower back, hips, and more. 
+              stretches by body area e.g. neck &amp; shoulders, lower back, hips, and more. 
               Search by stretch name.
             </p>
             <p className="text-gray-600 leading-relaxed">
@@ -103,12 +103,12 @@ export function LearnMoreSection() {
               </h3>
             </div>
             <p className="text-gray-600 leading-relaxed">
-              Your streak counter shows consecutive days of movement — a gentle flame 
+              Your streak counter shows consecutive days of movement. A gentle flame 
               that grows as you show up. When you&apos;re at risk of breaking your streak, 
               Limba sends a warm nudge to keep you going.
             </p>
             <p className="text-gray-600 leading-relaxed">
-              We frame notifications as &quot;future-you support&quot; — because consistency 
+              We like to frame notifications as &quot;future-you support&quot;  because consistency 
               should feel encouraging, not exhausting.
             </p>
           </div>
@@ -152,7 +152,7 @@ export function LearnMoreSection() {
             </div>
             <p className="text-gray-600 leading-relaxed">
               Every milestone you hit is met with genuine 
-              celebration. Because showing up — especially on hard days, deserves 
+              celebration. Because showing up especially on hard days - deserves 
               recognition.
             </p>
             <p className="text-gray-600 leading-relaxed">
@@ -184,7 +184,7 @@ export function LearnMoreSection() {
                   for your routines, Limba thrives: bright-eyed, playful, and full of energy.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  Skip a few days? Limba gets a little sleepy. It&apos;s not guilt — it&apos;s 
+                  Skip a few days? Limba gets a little sleepy. It&apos;s not guilt  but rather it&apos;s 
                   a gentle, visual reminder that your body (and your cat) feels better when 
                   you move. Taking care of Limba means taking care of yourself.
                 </p>
