@@ -55,5 +55,19 @@ export const footerContent = {
   tagline:
     'Built with ❤️ by health experts from Imperial College London & Stanford',
   copyright: '© 2025 Limba. All rights reserved.',
+  legalLinks: [
+    {
+      label: 'Privacy Policy',
+      href: '/privacy-policy',
+    },
+    {
+      label: 'Health & Safety Guidance',
+      href: '/health-safety',
+    },
+    {
+      label: 'Terms of Use',
+      href: '/terms-of-use',
+    },
+  ],
 }
 

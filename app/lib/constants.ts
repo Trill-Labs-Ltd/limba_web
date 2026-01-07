@@ -2,6 +2,9 @@ export const APP_NAME = 'Limba'
 
 export const ROUTES = {
   home: '/',
+  privacyPolicy: '/privacy-policy',
+  healthSafety: '/health-safety',
+  termsOfUse: '/terms-of-use',
 } as const
 
 export const SOCIAL_PROOF_COUNT = '500+'
