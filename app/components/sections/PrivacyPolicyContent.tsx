@@ -11,6 +11,7 @@ export function PrivacyPolicyContent() {
           <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
             <li>We collect only the data needed to create your wellness profile, generate stretching routines, and track progress.</li>
             <li>Some information you choose to provide (such as a yes/no medical history indicator) is treated as health data and used only with your explicit consent.</li>
+            <li>We use a third-party AI service (Anthropic) to generate personalised stretching routines. Before any data is sent to this service, we ask for your explicit consent. See Section 8 for full details.</li>
             <li>We do not provide medical advice and do not store medical records.</li>
             <li>Payments are handled by trusted third parties; we do not store card details.</li>
             <li>You control your data and can withdraw consent or request deletion at any time.</li>
@@ -127,7 +128,7 @@ export function PrivacyPolicyContent() {
           <ol className="list-decimal list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
             <li><strong>Onboarding</strong> – you create an account and provide basic information</li>
             <li><strong>Wellness profile</strong> – you choose preferences such as target muscle groups, sedentary time, and (optionally) a yes/no medical history indicator</li>
-            <li><strong>Routine generation</strong> – the app generates stretching routines based on your selected preferences</li>
+            <li><strong>Routine generation</strong> – the app uses AI (powered by Anthropic Claude) to generate personalised stretching routines based on your selected preferences (see Section 8)</li>
             <li><strong>Tracking</strong> – your completed sessions and usage are recorded to help you track progress over time</li>
           </ol>
           <p className="text-gray-600 leading-relaxed">
@@ -228,9 +229,11 @@ export function PrivacyPolicyContent() {
           We use trusted third-party services to operate and improve the app, including:
         </p>
         <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
+          <li>Anthropic (AI-powered routine generation and conversational features — see Section 8)</li>
           <li>RevenueCat (payment processing)</li>
           <li>Apple App Store and Google Play (subscriptions)</li>
-          <li>Analytics providers</li>
+          <li>Sentry (error monitoring and crash reporting)</li>
+          <li>Mixpanel (analytics)</li>
           <li>Cloud hosting services</li>
           <li>Customer support tools</li>
         </ul>
@@ -244,7 +247,66 @@ export function PrivacyPolicyContent() {
 
       {/* Section 8 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">8. Media and content delivery</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">8. AI-powered features and third-party AI services</h2>
+        <p className="text-gray-600 leading-relaxed">
+          LIMBA uses artificial intelligence to generate personalised stretching routines and to power the &ldquo;Ask Limba&rdquo; conversational coaching feature. This AI functionality is provided by <strong>Anthropic, PBC</strong> (&ldquo;Anthropic&rdquo;), a third-party AI company based in the United States, through its Claude language model.
+        </p>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-semibold text-teal-800 mb-3">What data is sent to Anthropic</h3>
+          <p className="text-gray-600 leading-relaxed">
+            When you use AI-powered features, the following data may be sent to Anthropic&apos;s servers for processing:
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
+            <li><strong>Wellness profile data:</strong> discomfort frequency, morning stiffness frequency, sedentary time, primary wellness goal, target muscle groups, and preferred difficulty level</li>
+            <li><strong>Ask Limba messages:</strong> the text messages you type when using the Ask Limba conversational feature, along with conversation history within that session</li>
+            <li><strong>Routine parameters:</strong> preferred duration, difficulty level, and focus areas for stretching routines</li>
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-semibold text-teal-800 mb-3">What data is NOT sent to Anthropic</h3>
+          <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
+            <li>Your name, email address, or account credentials</li>
+            <li>Your payment or subscription information</li>
+            <li>Your device identifiers or precise location</li>
+            <li>Your medical history indicator</li>
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-semibold text-teal-800 mb-3">How Anthropic processes your data</h3>
+          <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
+            <li>Your data is sent to Anthropic solely for the purpose of generating a response (a stretching routine or coaching reply) and is not used by Anthropic to train or improve its AI models.</li>
+            <li>Anthropic processes data in accordance with its <a href="https://www.anthropic.com/privacy" className="text-teal-600 hover:text-teal-700 underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and commercial API terms, which prohibit using customer inputs for model training.</li>
+            <li>Data is transmitted securely via encrypted connections (TLS).</li>
+            <li>Anthropic may temporarily retain API inputs and outputs for trust and safety purposes (such as abuse prevention) for a limited period, as described in their data retention policies.</li>
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-semibold text-teal-800 mb-3">Your consent</h3>
+          <p className="text-gray-600 leading-relaxed">
+            Before any personal data is sent to Anthropic, LIMBA asks for your explicit consent. You will be presented with a clear disclosure explaining what data will be shared and with whom before you first use AI-powered features.
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
+            <li>You may decline or withdraw consent at any time through the app settings.</li>
+            <li>If you decline consent, AI-powered features (such as personalised routine generation and Ask Limba) will not be available, but you may still use the rest of the app.</li>
+            <li>Withdrawing consent does not affect the lawfulness of processing carried out before withdrawal.</li>
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-semibold text-teal-800 mb-3">Safety measures</h3>
+          <p className="text-gray-600 leading-relaxed">
+            LIMBA applies a safety filter before sending data to Anthropic. If your message contains medical red-flag terms (such as references to numbness, chest pain, or other clinical symptoms), the app will respond with a safety message and a recommendation to consult a healthcare professional, without sending your data to Anthropic.
+          </p>
+        </div>
+      </section>
+
+      {/* Section 9 */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">9. Media and content delivery</h2>
         <p className="text-gray-600 leading-relaxed">
           LIMBA delivers videos, images, and other media content using secure, time-limited access methods (such as signed URLs).
         </p>
@@ -261,20 +323,20 @@ export function PrivacyPolicyContent() {
         </p>
       </section>
 
-      {/* Section 9 */}
+      {/* Section 10 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">9. International data transfers</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">10. International data transfers</h2>
         <p className="text-gray-600 leading-relaxed">
-          Some service providers may process data outside the UK or EU.
+          Some service providers may process data outside the UK or EU. For example, Anthropic (our AI service provider) processes data in the United States.
         </p>
         <p className="text-gray-600 leading-relaxed">
-          When this occurs, we utilize appropriate safeguards approved under the GDPR, such as standard contractual clauses.
+          When this occurs, we utilize appropriate safeguards approved under the GDPR, such as standard contractual clauses, to ensure your data receives an equivalent level of protection.
         </p>
       </section>
 
-      {/* Section 10 */}
+      {/* Section 11 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">10. Users outside the UK or EU</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">11. Users outside the UK or EU</h2>
         <p className="text-gray-600 leading-relaxed">
           If you access the LIMBA app from outside the United Kingdom or European Union, your personal data will still be processed in accordance with this Privacy Policy and UK GDPR standards.
         </p>
@@ -286,9 +348,9 @@ export function PrivacyPolicyContent() {
         </p>
       </section>
 
-      {/* Section 11 */}
+      {/* Section 12 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">11. How long we keep your data</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">12. How long we keep your data</h2>
         <p className="text-gray-600 leading-relaxed">
           We keep personal data only for as long as necessary to:
         </p>
@@ -302,9 +364,9 @@ export function PrivacyPolicyContent() {
         </p>
       </section>
 
-      {/* Section 12 */}
+      {/* Section 13 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">12. Your rights</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">13. Your rights</h2>
         <p className="text-gray-600 leading-relaxed">You have the right to:</p>
         <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
           <li>Access your personal data</li>
@@ -319,9 +381,9 @@ export function PrivacyPolicyContent() {
         </p>
       </section>
 
-      {/* Section 13 */}
+      {/* Section 14 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">13. Consent recording and versioning</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">14. Consent recording and versioning</h2>
         <p className="text-gray-600 leading-relaxed">
           When you create an account or continue using LIMBA after policy updates, we record your acceptance of this Privacy Policy and the Terms of Use.
         </p>
@@ -338,9 +400,9 @@ export function PrivacyPolicyContent() {
         </p>
       </section>
 
-      {/* Section 14 */}
+      {/* Section 15 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">14. Complaints</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">15. Complaints</h2>
         <p className="text-gray-600 leading-relaxed">
           If you have concerns about how we handle your data, please contact us first.
         </p>
@@ -349,25 +411,25 @@ export function PrivacyPolicyContent() {
         </p>
       </section>
 
-      {/* Section 15 */}
+      {/* Section 16 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">15. Children</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">16. Children</h2>
         <p className="text-gray-600 leading-relaxed">
           LIMBA is not intended for children under 16, and we do not knowingly collect personal data from children.
         </p>
       </section>
 
-      {/* Section 16 */}
+      {/* Section 17 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">16. Data Protection Impact Assessment (DPIA)</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">17. Data Protection Impact Assessment (DPIA)</h2>
         <p className="text-gray-600 leading-relaxed">
           Because LIMBA processes limited health-related information, we have carried out a Data Protection Impact Assessment (DPIA) to assess potential risks to users and identify appropriate safeguards. This assessment confirms that data collection is minimal, consent-based, proportionate, and subject to appropriate security and user controls.
         </p>
       </section>
 
-      {/* Section 17 */}
+      {/* Section 18 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold text-teal-900 mb-4">17. Changes to this policy</h2>
+        <h2 className="text-2xl font-bold text-teal-900 mb-4">18. Changes to this policy</h2>
         <p className="text-gray-600 leading-relaxed">
           We may update this Privacy Policy from time to time.
         </p>
