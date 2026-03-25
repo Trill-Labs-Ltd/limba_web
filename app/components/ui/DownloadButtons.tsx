@@ -6,11 +6,13 @@ const APP_STORE_URL =
 
 interface DownloadButtonsProps {
   className?: string
+  justify?: 'start' | 'center'
 }
 
-export function DownloadButtons({ className = '' }: DownloadButtonsProps) {
+export function DownloadButtons({ className = '', justify = 'start' }: DownloadButtonsProps) {
+  const justifyClass = justify === 'center' ? 'justify-center' : 'justify-start'
   return (
-    <div className={`flex flex-col sm:flex-row items-center justify-center gap-3 w-full ${className}`}>
+    <div className={`flex flex-col sm:flex-row items-center ${justifyClass} gap-3 w-full ${className}`}>
       <a
         href={APP_STORE_URL}
         target="_blank"
