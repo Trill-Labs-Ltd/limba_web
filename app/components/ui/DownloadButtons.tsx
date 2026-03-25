@@ -33,9 +33,9 @@ export function DownloadButtons({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Limba on the App Store"
-        className={`inline-flex items-center justify-center gap-2.5 bg-black hover:bg-gray-800 text-white rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-md ${
+        className={`inline-flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-md ${
           isSm
-            ? 'px-3.5 py-2'
+            ? 'px-2.5 py-2 sm:px-3.5'
             : 'w-full sm:w-48 px-5 py-3.5'
         }`}
       >
@@ -63,9 +63,9 @@ export function DownloadButtons({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Limba on Google Play"
-        className={`inline-flex items-center justify-center gap-2.5 bg-black hover:bg-gray-800 text-white rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-md ${
+        className={`inline-flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-md ${
           isSm
-            ? 'px-3.5 py-2'
+            ? 'px-2.5 py-2 sm:px-3.5'
             : 'w-full sm:w-48 px-5 py-3.5'
         }`}
       >
