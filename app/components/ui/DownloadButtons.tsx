@@ -1,8 +1,8 @@
 const PLAY_STORE_URL =
   'https://play.google.com/store/apps/details?id=com.trillLabs.limba'
 
-// TODO: Replace with the live App Store URL once the app is published on iOS
-const APP_STORE_URL = 'https://apps.apple.com/app/limba/id6743743684'
+const APP_STORE_URL =
+  'https://apps.apple.com/us/app/limba-stretch-flexibility/id6756675956'
 
 interface DownloadButtonsProps {
   className?: string
