@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { AndroidAppBanner } from '@/app/components/ui'
 
 export const metadata: Metadata = {
   title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
@@ -60,6 +61,9 @@ export const metadata: Metadata = {
       'AI-personalised micro-routines that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
     images: ['https://getlimba.com/og-image.png'],
   },
+  other: {
+    'apple-itunes-app': 'app-id=6756675956',
+  },
 }
 
 export default function RootLayout({
@@ -69,7 +73,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-GB">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <AndroidAppBanner />
+        {children}
+      </body>
     </html>
   )
 }
