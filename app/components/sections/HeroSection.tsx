@@ -1,14 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import { Button, Badge } from '@/app/components/ui'
+import { Badge, Button, DownloadButtons } from '@/app/components/ui'
 import { heroContent } from '@/app/lib/data'
 
-interface HeroSectionProps {
-  onJoinWaitlist?: () => void
-}
-
-export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
+export function HeroSection() {
   return (
     <section className="w-full overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
@@ -40,14 +36,8 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <Button
-                variant="primary"
-                onClick={onJoinWaitlist}
-                ariaLabel="Join the waiting list"
-              >
-                {heroContent.ctaPrimary}
-              </Button>
+            <div className="space-y-3 pt-2">
+              <DownloadButtons />
               <Button
                 variant="secondary"
                 ariaLabel="Learn more about Limba"

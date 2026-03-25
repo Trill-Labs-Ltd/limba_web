@@ -1,12 +1,8 @@
 import Image from 'next/image'
-import { Button } from '@/app/components/ui'
+import { DownloadButtons } from '@/app/components/ui'
 import { betaContent, betaBenefits } from '@/app/lib/data'
 
-interface BetaLaunchSectionProps {
-  onJoinWaitlist?: () => void
-}
-
-export function BetaLaunchSection({ onJoinWaitlist }: BetaLaunchSectionProps) {
+export function BetaLaunchSection() {
   return (
     <section className="w-full bg-white py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,16 +61,8 @@ export function BetaLaunchSection({ onJoinWaitlist }: BetaLaunchSectionProps) {
               ))}
             </ul>
 
-            {/* CTA Button */}
-            <div className="pt-4">
-              <Button
-                variant="primary"
-                onClick={onJoinWaitlist}
-                ariaLabel="Join the beta waiting list"
-              >
-                {betaContent.cta}
-              </Button>
-            </div>
+            {/* Download CTAs */}
+            <DownloadButtons className="pt-4" />
           </div>
         </div>
       </div>

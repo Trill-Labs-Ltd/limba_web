@@ -39,16 +39,14 @@ export const heroContent = {
   headlineContinued: 'a day',
   description:
     'Limba learns your unique aches and pains, then delivers personalised micro-routines that fit seamlessly into your workday. Built for desk warriors, remote workers, and busy parents.',
-  ctaPrimary: 'Join the Waiting List',
   ctaSecondary: 'Learn More',
 }
 
 export const betaContent = {
-  badge: 'Beta launching soon',
+  badge: 'Now available',
   headline: "Your body deserves better than 'I'll stretch later'",
   description:
-    'Join our beta waiting list and be among the first to experience personalised musculoskeletal care, backed by AI and built by health specialists from Imperial College London and Stanford.',
-  cta: 'Join the Waiting List',
+    'Experience personalised musculoskeletal care, backed by AI and built by health specialists from Imperial College London and Stanford. Download Limba today.',
 }
 
 export const footerContent = {
