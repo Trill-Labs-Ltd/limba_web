@@ -4,6 +4,13 @@ export const SOCIAL_PROOF_COUNT = '500+'
 
 export const features: Feature[] = [
   {
+    id: 'ask-limba',
+    icon: 'chat',
+    title: 'Ask Limba',
+    description:
+      'Describe how you feel in plain language and get a focused routine instantly for you particular target goals. No guesswork, just guided relief tailored to your body.',
+  },
+  {
     id: 'personalised',
     icon: 'sparkle',
     title: 'Personalised to You',

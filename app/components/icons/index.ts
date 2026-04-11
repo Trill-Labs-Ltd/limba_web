@@ -1,4 +1,5 @@
 export { SparkleIcon } from './SparkleIcon'
 export { ClockIcon } from './ClockIcon'
 export { BadgeIcon } from './BadgeIcon'
+export { ChatIcon } from './ChatIcon'
 export * from './MilestoneIcons'

@@ -26,7 +26,7 @@ export function DownloadButtons({
 
   return (
     <div
-      className={`flex flex-row items-center ${justifyClass} gap-2 ${isSm ? '' : 'flex-col sm:flex-row gap-3 w-full'} ${className}`}
+      className={`flex flex-row items-center ${justifyClass} gap-2 ${isSm ? '' : 'gap-3 w-full'} ${className}`}
     >
       <a
         href={APP_STORE_URL}
@@ -36,7 +36,7 @@ export function DownloadButtons({
         className={`inline-flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-md ${
           isSm
             ? 'px-2.5 py-2 sm:px-3.5'
-            : 'w-full sm:w-48 px-5 py-3.5'
+            : 'flex-1 sm:flex-none sm:w-48 px-3 py-3 sm:px-5 sm:py-3.5'
         }`}
       >
         <svg
@@ -66,7 +66,7 @@ export function DownloadButtons({
         className={`inline-flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-md ${
           isSm
             ? 'px-2.5 py-2 sm:px-3.5'
-            : 'w-full sm:w-48 px-5 py-3.5'
+            : 'flex-1 sm:flex-none sm:w-48 px-3 py-3 sm:px-5 sm:py-3.5'
         }`}
       >
         <svg

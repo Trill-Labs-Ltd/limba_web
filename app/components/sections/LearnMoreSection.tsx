@@ -26,9 +26,9 @@ export function LearnMoreSection() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
             {/* AI Wellness Profile */}
-          <div className="bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
                 <SparkIcon className="w-7 h-7" />
@@ -50,7 +50,7 @@ export function LearnMoreSection() {
           </div>
 
           {/* Personalised Daily Routines */}
-          <div className="bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
                 <CompassIcon className="w-7 h-7" />
@@ -72,7 +72,7 @@ export function LearnMoreSection() {
           </div>
 
           {/* Wellness Library */}
-          <div className="bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
                 <BackpackIcon className="w-7 h-7" />
@@ -93,7 +93,7 @@ export function LearnMoreSection() {
           </div>
 
           {/* Smart Streaks */}
-          <div className="bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
                 <FlameIcon className="w-7 h-7" />
@@ -114,7 +114,7 @@ export function LearnMoreSection() {
           </div>
 
           {/* Milestones */}
-          <div className="bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
                 <BadgeIcon className="w-7 h-7" />
@@ -141,7 +141,7 @@ export function LearnMoreSection() {
           </div>
 
           {/* Celebrations */}
-          <div className="bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
                 <SparkIcon className="w-7 h-7" />
