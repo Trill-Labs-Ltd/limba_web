@@ -5,11 +5,12 @@ import {
   FlameIcon,
   BackpackIcon,
   BadgeIcon,
+  ChatIcon,
 } from '@/app/components/icons'
 
 export function LearnMoreSection() {
   return (
-    <section className="bg-white py-16 lg:py-24" id="learn-more">
+    <section className="bg-stone-50 py-16 lg:py-24" id="learn-more">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
@@ -68,6 +69,24 @@ export function LearnMoreSection() {
               Each 5–10 minute session adapts as you do. The AI learns what works for you, 
               refining your plan over time. Short, beginner-friendly, and designed to be 
               done anywhere. Like next to your desk, in your kitchen, or even in a hotel room.
+            </p>
+          </div>
+
+          {/* Ask Limba */}
+          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+                <ChatIcon className="w-7 h-7" />
+              </div>
+              <h3 className="text-xl font-bold text-teal-900">
+                Ask Limba
+              </h3>
+            </div>
+            <p className="text-gray-600 leading-relaxed">
+              Have a specific ache or question? Just ask Limba. Our conversational AI is ready to help you troubleshoot stiffness, suggest immediate relief stretches, or answer questions about your wellness journey.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              It&apos;s like having a personal mobility coach in your pocket, available 24/7 to guide you through your aches and pains.
             </p>
           </div>
 

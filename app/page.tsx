@@ -8,7 +8,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-gradient-to-br from-teal-100 via-teal-50 to-white">
       <Header />
       <HeroSection />
       <ValuePropSection />
