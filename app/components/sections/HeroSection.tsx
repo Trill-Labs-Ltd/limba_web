@@ -35,7 +35,7 @@ function PhoneMockup({
 
 export function HeroSection() {
   return (
-    <section className="w-full overflow-hidden">
+    <section className="w-full overflow-hidden bg-gradient-to-b from-teal-100 to-teal-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Main Copy */}

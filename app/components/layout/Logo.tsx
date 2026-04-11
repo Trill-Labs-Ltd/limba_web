@@ -3,7 +3,9 @@ import Link from 'next/link'
 import type { LogoProps } from '@/app/types'
 import { APP_NAME } from '@/app/lib/constants'
 
-export function Logo({ className = '', showText = false }: LogoProps) {
+export function Logo({ className = '', showText = false, variant = 'dark' }: LogoProps) {
+  const isLight = variant === 'light'
+
   return (
     <Link 
       href="/" 
@@ -17,10 +19,10 @@ export function Logo({ className = '', showText = false }: LogoProps) {
         height={106}
         priority
         quality={100}
-        className="h-8 sm:h-9 w-auto"
+        className={`h-8 sm:h-9 w-auto ${isLight ? 'brightness-0 invert' : ''}`}
       />
       {showText && (
-        <span className="text-teal-800 font-semibold text-xl">{APP_NAME}</span>
+        <span className={`font-semibold text-xl ${isLight ? 'text-white' : 'text-teal-800'}`}>{APP_NAME}</span>
       )}
     </Link>
   )

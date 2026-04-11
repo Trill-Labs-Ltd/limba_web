@@ -10,7 +10,7 @@ import {
 
 export function LearnMoreSection() {
   return (
-    <section className="bg-stone-50 py-16 lg:py-24" id="learn-more">
+    <section className="bg-white py-16 lg:py-24" id="learn-more">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
@@ -29,9 +29,9 @@ export function LearnMoreSection() {
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
             {/* AI Wellness Profile */}
-          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
                 <SparkIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-teal-900">
@@ -51,9 +51,9 @@ export function LearnMoreSection() {
           </div>
 
           {/* Personalised Daily Routines */}
-          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
                 <CompassIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-teal-900">
@@ -73,9 +73,9 @@ export function LearnMoreSection() {
           </div>
 
           {/* Ask Limba */}
-          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
                 <ChatIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-teal-900">
@@ -91,9 +91,9 @@ export function LearnMoreSection() {
           </div>
 
           {/* Wellness Library */}
-          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
                 <BackpackIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-teal-900">
@@ -112,9 +112,9 @@ export function LearnMoreSection() {
           </div>
 
           {/* Smart Streaks */}
-          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
                 <FlameIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-teal-900">
@@ -133,9 +133,9 @@ export function LearnMoreSection() {
           </div>
 
           {/* Milestones */}
-          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
                 <BadgeIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-teal-900">
@@ -160,9 +160,9 @@ export function LearnMoreSection() {
           </div>
 
           {/* Celebrations */}
-          <div className="h-full bg-gray-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
                 <SparkIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-teal-900">
@@ -180,9 +180,9 @@ export function LearnMoreSection() {
           </div>
 
           {/* Limba the Cat - Full Width */}
-          <div className="md:col-span-2 bg-gradient-to-br from-teal-50 to-emerald-50 rounded-2xl p-6 lg:p-8 space-y-4">
+          <div className="md:col-span-2 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden shadow-sm">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center overflow-hidden shadow-sm">
                 <Image
                   src="/images/limba-mascot-asset.png"
                   alt="Limba mascot"

@@ -12,7 +12,7 @@ export function BetaLaunchSection() {
             <div className="relative">
               {/* Gradient blob background */}
               <div 
-                className="absolute -inset-6 md:-inset-10 bg-gradient-to-br from-teal-700 via-teal-800 to-emerald-800 rounded-[2.5rem] md:rounded-[3rem]"
+                className="absolute -inset-6 md:-inset-10 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-[2.5rem] md:rounded-[3rem]"
                 aria-hidden="true"
               />
               

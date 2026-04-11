@@ -2,8 +2,8 @@ import type { FeatureCardProps } from '@/app/types'
 
 export function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
-    <div className="h-full bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-      <div className="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+    <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+      <div className="w-14 h-14 bg-white/50 rounded-full flex items-center justify-center mb-6">
         {icon}
       </div>
       <h3 className="text-xl font-bold text-teal-900 mb-3">{title}</h3>

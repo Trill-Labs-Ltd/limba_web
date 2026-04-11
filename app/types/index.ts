@@ -23,6 +23,7 @@ export interface BadgeProps {
 export interface LogoProps {
   className?: string
   showText?: boolean
+  variant?: 'dark' | 'light'
 }
 
 export interface PhoneMockupProps {

@@ -4,13 +4,13 @@ import { footerContent } from '@/app/lib/data'
 
 export function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-100 py-12 md:py-16">
+    <footer className="bg-teal-900 border-t border-teal-800 py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10 lg:gap-12">
           {/* Brand & Tagline Group */}
           <div className="flex flex-col items-center md:items-start gap-4 max-w-xs lg:max-w-sm">
-            <Logo />
-            <p className="text-gray-500 text-sm text-center md:text-left leading-relaxed">
+            <Logo variant="light" />
+            <p className="text-teal-200 text-sm text-center md:text-left leading-relaxed">
               {footerContent.tagline}
             </p>
           </div>
@@ -23,7 +23,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-600 hover:text-teal-600 text-sm font-medium transition-colors whitespace-nowrap"
+                  className="text-teal-200 hover:text-white text-sm font-medium transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -31,7 +31,7 @@ export function Footer() {
             </nav>
 
             {/* Copyright */}
-            <p className="text-gray-400 text-xs sm:text-sm tracking-wide">
+            <p className="text-teal-300/60 text-xs sm:text-sm tracking-wide">
               {footerContent.copyright}
             </p>
           </div>
