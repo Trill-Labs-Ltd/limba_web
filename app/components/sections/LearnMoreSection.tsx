@@ -184,7 +184,7 @@ export function LearnMoreSection() {
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center overflow-hidden shadow-sm">
                 <Image
-                  src="/images/limba-mascot-asset.png"
+                  src="/images/happy-limba.png"
                   alt="Limba mascot"
                   width={48}
                   height={48}
@@ -216,7 +216,7 @@ export function LearnMoreSection() {
               <div className="flex justify-center">
                 <div className="bg-white rounded-2xl p-6 drop-shadow-2xl text-center space-y-3 transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
                   <Image
-                    src="/images/limba-mascot-asset.png"
+                    src="/images/happy-limba.png"
                     alt="Happy Limba mascot"
                     width={200}
                     height={200}
