@@ -192,8 +192,8 @@ export function LearnMoreSection() {
             <div className="grid md:grid-cols-2 gap-6 items-center">
               <div className="space-y-4">
                 <p className="text-gray-600 leading-relaxed">
-                  Grant permission and Limba reads your steps, sleep, and recent
-                  activity from <strong>Apple Health</strong> on iOS or{' '}
+                  Limba can read your steps, sleep, and recent
+                  activity from <strong> Apple Health</strong> on iOS or{' '}
                   <strong>Google Health Connect</strong> on Android. Each routine
                   is calibrated to how your body actually moved today, not a
                   generic plan.
@@ -203,11 +203,6 @@ export function LearnMoreSection() {
                   a Flexibility entry on Apple Health (counting toward your Move
                   and Exercise rings) or an exercise session on  Google Health Connect
                   (contributing to your daily activity totals).
-                </p>
-                <p className="text-gray-600 leading-relaxed">
-                  Your raw health samples never leave your device. Only small,
-                  anonymous aggregates inform your routine. You can revoke
-                  permission at any time from your phone&apos;s settings.
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center gap-6">
