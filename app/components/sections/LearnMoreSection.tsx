@@ -193,16 +193,16 @@ export function LearnMoreSection() {
               <div className="space-y-4">
                 <p className="text-gray-600 leading-relaxed">
                   Grant permission and Limba reads your steps, sleep, and recent
-                  activity from <strong>Apple Health</strong> on iOS or
-                  <strong> Google Health Connect</strong> on Android. Each
-                  routine is calibrated to how your body actually moved today,
-                  not a generic plan.
+                  activity from <strong>Apple Health</strong> on iOS or{' '}
+                  <strong>Google Health Connect</strong> on Android. Each routine
+                  is calibrated to how your body actually moved today, not a
+                  generic plan.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  Every completed session is logged back as a stretching workout
-                  — a Flexibility entry on Apple Health (counting toward your
-                  Move and Exercise rings) or an exercise session on Health
-                  Connect (contributing to your daily activity totals).
+                  Every completed session is logged back as a stretching workout:
+                  a Flexibility entry on Apple Health (counting toward your Move
+                  and Exercise rings) or an exercise session on  Google Health Connect
+                  (contributing to your daily activity totals).
                 </p>
                 <p className="text-gray-600 leading-relaxed">
                   Your raw health samples never leave your device. Only small,
@@ -228,55 +228,6 @@ export function LearnMoreSection() {
                     height={64}
                     className="h-14 w-auto"
                   />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Limba the Cat - Full Width */}
-          <div className="md:col-span-2 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center overflow-hidden shadow-sm">
-                <Image
-                  src="/images/happy-limba.png"
-                  alt="Limba mascot"
-                  width={48}
-                  height={48}
-                  className="w-10 h-10 object-contain"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                Meet Limba the Cat
-              </h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6 items-center">
-              <div className="space-y-4">
-                <p className="text-gray-600 leading-relaxed">
-                  Limba isn&apos;t just an app! It&apos;s a companion. Limba the cat
-                  lives in the app and reflects how you&apos;re doing. When you show up 
-                  for your routines, Limba thrives: bright-eyed, playful, and full of energy.
-                </p>
-                <p className="text-gray-600 leading-relaxed">
-                  Skip a few days? Limba gets a little sleepy. It&apos;s not guilt  but rather it&apos;s 
-                  a gentle, visual reminder that your body (and your cat) feels better when 
-                  you move. Taking care of Limba means taking care of yourself.
-                </p>
-                <p className="text-gray-600 leading-relaxed">
-                  There&apos;s something satisfying about seeing your companion happy. 
-                  It&apos;s the little boost that makes you want to come back. Not because 
-                  you have to, but because it feels good.
-                </p>
-              </div>
-              <div className="flex justify-center">
-                <div className="bg-white rounded-2xl p-6 drop-shadow-2xl text-center space-y-3 transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
-                  <Image
-                    src="/images/happy-limba.png"
-                    alt="Happy Limba mascot"
-                    width={200}
-                    height={200}
-                    className="w-32 h-32 mx-auto object-contain"
-                  />
-                  <p className="text-sm font-medium text-teal-900">Happy Limba</p>
                 </div>
               </div>
             </div>
