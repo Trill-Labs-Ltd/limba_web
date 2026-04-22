@@ -179,6 +179,60 @@ export function LearnMoreSection() {
             </p>
           </div>
 
+          {/* Health App Integrations - Full Width */}
+          <div className="md:col-span-2 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
+                <SparkIcon className="w-7 h-7" />
+              </div>
+              <h3 className="text-xl font-bold text-teal-900">
+                Connects with the health apps you already use
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              <div className="space-y-4">
+                <p className="text-gray-600 leading-relaxed">
+                  Grant permission and Limba reads your steps, sleep, and recent
+                  activity from <strong>Apple Health</strong> on iOS or
+                  <strong> Google Health Connect</strong> on Android. Each
+                  routine is calibrated to how your body actually moved today,
+                  not a generic plan.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Every completed session is logged back as a stretching workout
+                  — a Flexibility entry on Apple Health (counting toward your
+                  Move and Exercise rings) or an exercise session on Health
+                  Connect (contributing to your daily activity totals).
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Your raw health samples never leave your device. Only small,
+                  anonymous aggregates inform your routine. You can revoke
+                  permission at any time from your phone&apos;s settings.
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center gap-6">
+                <div className="bg-white rounded-2xl px-8 py-6 drop-shadow-2xl flex items-center justify-center transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
+                  <Image
+                    src="/images/apple-health.svg"
+                    alt="Works with Apple Health"
+                    width={220}
+                    height={64}
+                    className="h-14 w-auto"
+                  />
+                </div>
+                <div className="bg-white rounded-2xl px-8 py-6 drop-shadow-2xl flex items-center justify-center transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
+                  <Image
+                    src="/images/android-health-connect.png"
+                    alt="Works with Google Health Connect"
+                    width={220}
+                    height={64}
+                    className="h-14 w-auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Limba the Cat - Full Width */}
           <div className="md:col-span-2 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
             <div className="flex items-center gap-3">
