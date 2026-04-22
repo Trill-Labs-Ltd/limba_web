@@ -204,6 +204,48 @@ export function PrivacyPolicyContent() {
         <p className="text-gray-600 leading-relaxed">
           You should consult a qualified healthcare professional before starting any new physical activity program.
         </p>
+
+        <h3 className="text-xl font-semibold text-teal-800 mt-6 mb-3">Apple Health (HealthKit) integration</h3>
+        <p className="text-gray-600 leading-relaxed">
+          If you grant permission on iOS, LIMBA reads a limited set of activity and wellness data from Apple Health (HealthKit) to personalise your daily stretching routine:
+        </p>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
+          <li>Step count</li>
+          <li>Active energy burned</li>
+          <li>Workout sessions</li>
+          <li>Mindful minutes</li>
+          <li>Sleep analysis</li>
+        </ul>
+        <p className="text-gray-600 leading-relaxed">
+          LIMBA also writes each completed stretch session to Apple Health as a Flexibility workout, including its duration and an estimated active energy burned, so your practice contributes to your Move and Exercise rings.
+        </p>
+        <p className="text-gray-600 leading-relaxed">
+          Your raw HealthKit samples never leave your device. Only small, derived aggregates (for example, 7-day step average or a boolean &ldquo;low activity today&rdquo; flag) are sent to our servers to inform routine personalisation. You can revoke this permission at any time in the iOS Settings → Privacy &amp; Security → Health menu.
+        </p>
+
+        <h3 className="text-xl font-semibold text-teal-800 mt-6 mb-3">Google Health Connect (Android) integration</h3>
+        <p className="text-gray-600 leading-relaxed">
+          If you grant permission on Android, LIMBA connects to Google Health Connect to read a limited set of activity and wellness records to personalise your daily stretching routine:
+        </p>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
+          <li>Steps</li>
+          <li>Active calories burned</li>
+          <li>Sleep sessions</li>
+          <li>Exercise sessions</li>
+        </ul>
+        <p className="text-gray-600 leading-relaxed">
+          LIMBA also writes each completed stretch session to Health Connect as two records:
+        </p>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
+          <li>An exercise session (type: stretching), with the session start and end time</li>
+          <li>An active calories burned record covering the same interval, with an estimated energy total</li>
+        </ul>
+        <p className="text-gray-600 leading-relaxed">
+          Your raw Health Connect records never leave your device. Only small, derived aggregates (for example, 7-day step average or a boolean &ldquo;low activity today&rdquo; flag) are sent to our servers to inform routine personalisation. You can review or revoke individual permissions at any time in the Health Connect app, under Permissions → Limba.
+        </p>
+        <p className="text-gray-600 leading-relaxed">
+          Health Connect automatically revokes app permissions if you have not opened LIMBA for 30 days. If that happens, LIMBA will ask for permission again the next time you open the app.
+        </p>
       </section>
 
       {/* Section 6 */}
