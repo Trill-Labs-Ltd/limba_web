@@ -24,8 +24,8 @@ export function ValuePropSection() {
             Wellness that fits your life
           </h2>
           <p className="text-base sm:text-lg text-gray-600">
-            Designed for people who don&apos;t have time to feel bad or spend
-            hours fixing it.
+            For people who need to feel better, not add another thing to their
+            schedule.
           </p>
         </div>
 

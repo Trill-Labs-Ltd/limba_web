@@ -53,6 +53,7 @@ export function PrivacyPolicyContent() {
             <li>Email address</li>
             <li>Age</li>
             <li>Gender</li>
+            <li>Body weight (optional, entered manually in the profile screen and used solely to calculate calories burned for stretches logged to Apple Health or Google Health Connect)</li>
           </ul>
         </div>
 
@@ -212,12 +213,13 @@ export function PrivacyPolicyContent() {
         <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
           <li>Step count</li>
           <li>Active energy burned</li>
+          <li>Body mass (used only at the moment a Flexibility workout is written, to calculate a more accurate calorie estimate for that session)</li>
           <li>Workout sessions</li>
           <li>Mindful minutes</li>
           <li>Sleep analysis</li>
         </ul>
         <p className="text-gray-600 leading-relaxed">
-          LIMBA also writes each completed stretch session to Apple Health as a Flexibility workout, including its duration and an estimated active energy burned, so your practice contributes to your Move and Exercise rings.
+          LIMBA also writes each completed stretch session to Apple Health as a Flexibility workout, including its duration and an estimated active energy burned, so your practice contributes to your Move and Exercise rings. The calorie estimate is calculated on-device from your body mass (read from Apple Health or, if you have entered one, the weight in your LIMBA profile); your body-mass value is never sent to our servers.
         </p>
         <p className="text-gray-600 leading-relaxed">
           Your raw HealthKit samples never leave your device. Only small, derived aggregates (for example, 7-day step average or a boolean &ldquo;low activity today&rdquo; flag) are sent to our servers to inform routine personalisation. You can revoke this permission at any time in the iOS Settings → Privacy &amp; Security → Health menu.
@@ -230,6 +232,7 @@ export function PrivacyPolicyContent() {
         <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
           <li>Steps</li>
           <li>Active calories burned</li>
+          <li>Weight (used only at the moment a stretching session is written, to calculate a more accurate calorie estimate for that session)</li>
           <li>Sleep sessions</li>
           <li>Exercise sessions</li>
         </ul>
@@ -238,7 +241,7 @@ export function PrivacyPolicyContent() {
         </p>
         <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
           <li>An exercise session (type: stretching), with the session start and end time</li>
-          <li>An active calories burned record covering the same interval, with an estimated energy total</li>
+          <li>An active calories burned record covering the same interval, with an estimated energy total calculated on-device from your body weight (read from Health Connect or, if you have entered one, the weight in your LIMBA profile); your weight value is never sent to our servers</li>
         </ul>
         <p className="text-gray-600 leading-relaxed">
           Your raw Health Connect records never leave your device. Only small, derived aggregates (for example, 7-day step average or a boolean &ldquo;low activity today&rdquo; flag) are sent to our servers to inform routine personalisation. You can review or revoke individual permissions at any time in the Health Connect app, under Permissions → Limba.

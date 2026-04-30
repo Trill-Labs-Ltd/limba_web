@@ -22,21 +22,15 @@ export const features: Feature[] = [
     icon: 'clock',
     title: 'Under 5 Minutes',
     description:
-      'No gym required. No mat needed. Just quick, effective micro-movements designed to fit between meetings, during lunch, or while your coffee brews.',
+      'No gym or equipment required. Just quick, effective micro-movements designed to fit into your day and build mobility over time.',
   },
   {
     id: 'progress',
     icon: 'trophy',
     title: 'Progress That Sticks',
     description:
-      'Watch your playful avatar evolve as you build streaks and hit milestones. Gamified wellness that makes consistency feel rewarding, not like a chore.',
+      'True, loose mobility comes with consistency and Limba rewards this. Grow through milestones with Limba the cat so your routines feel rewarding and not like a chore.',
   },
-]
-
-export const betaBenefits = [
-  'Early access to the app',
-  'Exclusive founding member benefits',
-  'Help shape the product with your feedback',
 ]
 
 export const heroContent = {
@@ -45,15 +39,14 @@ export const heroContent = {
   highlightedText: 'under 5 minutes',
   headlineContinued: 'a day',
   description:
-    'Limba learns your unique aches and pains, then delivers personalised micro-routines that fit seamlessly into your workday. Built for desk warriors, remote workers, and busy parents.',
-  ctaSecondary: 'Learn More',
+    'Limba learns your unique aches and pains, then delivers personalised micro-routines that fit seamlessly into your workday.',
 }
 
 export const betaContent = {
   badge: 'Now available',
   headline: "Your body deserves better than 'I'll stretch later'",
   description:
-    'Experience personalised musculoskeletal care, backed by AI and built by health specialists from Imperial College London and Stanford. Download Limba today.',
+    'Experience personalised care for your body, backed by science and built by health professionals from Imperial and Stanford.',
 }
 
 export const footerContent = {

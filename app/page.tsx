@@ -3,7 +3,7 @@ import {
   HeroSection,
   ValuePropSection,
   LearnMoreSection,
-  BetaLaunchSection,
+  HowItWorksPreviewSection,
 } from '@/app/components/sections'
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <HeroSection />
       <ValuePropSection />
       <LearnMoreSection />
-      <BetaLaunchSection />
+      <HowItWorksPreviewSection />
       <Footer />
     </main>
   )

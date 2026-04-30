@@ -23,8 +23,8 @@ export default function PrivacyPolicyPage() {
 
             {/* Metadata */}
             <div className="flex flex-col sm:flex-row gap-4 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-100">
-              <p>Last updated: 22 April 2026</p>
-              <p>Version 1.3</p>
+              <p>Last updated: 30 April 2026</p>
+              <p>Version 1.4</p>
             </div>
 
             {/* Policy Content */}

@@ -98,7 +98,7 @@ Limba-web/
 │   ├── images/                 # App screenshots, assets & branding
 │   │   ├── dashboard.png
 │   │   ├── login.png
-│   │   ├── analysis.png
+│   │   ├── wellness-analysis-screen.png
 │   │   ├── milestone.png       # Seed Planted milestone artwork
 │   │   ├── limba-mascot-asset.png
 │   │   ├── LIMBA@2x.png        # High-res logo for retina

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { DownloadButtons } from '@/app/components/ui'
-import { betaContent, betaBenefits } from '@/app/lib/data'
+import { betaContent } from '@/app/lib/data'
 
 export function BetaLaunchSection() {
   return (
@@ -19,7 +19,7 @@ export function BetaLaunchSection() {
               {/* Phone */}
               <div className="relative animate-float py-6 px-4 drop-shadow-2xl">
                 <Image
-                  src="/images/analysis.png"
+                  src="/images/wellness-analysis-screen.png"
                   alt="Limba analysis and wellness insights"
                   width={600}
                   height={1200}
@@ -47,19 +47,6 @@ export function BetaLaunchSection() {
             <p className="text-base sm:text-lg text-teal-100 leading-relaxed max-w-xl">
               {betaContent.description}
             </p>
-
-            {/* Bullet Points */}
-            <ul className="space-y-4 pt-2" role="list">
-              {betaBenefits.map((benefit, idx) => (
-                <li key={`benefit-${idx}`} className="flex items-start gap-3">
-                  <div
-                    className="w-2 h-2 rounded-full bg-teal-300 mt-2 flex-shrink-0"
-                    aria-hidden="true"
-                  />
-                  <p className="text-teal-100 leading-relaxed">{benefit}</p>
-                </li>
-              ))}
-            </ul>
 
             {/* Download CTAs */}
             <DownloadButtons className="pt-4" />

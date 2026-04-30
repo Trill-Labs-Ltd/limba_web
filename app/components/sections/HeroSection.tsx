@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Badge, Button, DownloadButtons } from '@/app/components/ui'
+import { Badge, DownloadButtons } from '@/app/components/ui'
 import { heroContent } from '@/app/lib/data'
 
 function PhoneMockup({
@@ -67,15 +67,6 @@ export function HeroSection() {
             {/* CTAs */}
             <div className="space-y-3 pt-2">
               <DownloadButtons />
-              <Button
-                variant="secondary"
-                ariaLabel="Learn more about Limba"
-                onClick={() => {
-                  document.getElementById('learn-more')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-              >
-                {heroContent.ctaSecondary}
-              </Button>
             </div>
           </div>
 

@@ -1,12 +1,235 @@
+'use client'
+
 import Image from 'next/image'
+import { useState } from 'react'
+import type { ReactNode } from 'react'
 import {
   SparkIcon,
   CompassIcon,
   FlameIcon,
   BackpackIcon,
-  BadgeIcon,
   ChatIcon,
 } from '@/app/components/icons'
+
+type HowItWorksFeature = {
+  title: string
+  icon: ReactNode
+  paragraphs: string[]
+}
+
+const howItWorksFeatures: HowItWorksFeature[] = [
+  {
+    title: 'Your Wellness Profile',
+    icon: <SparkIcon className="w-7 h-7" />,
+    paragraphs: [
+      'Limba wants to get to know you. Answer a few questions about your lifestyle, where you feel stiff, and how you spend your days. We transform your answers into a personalised Wellness Profile with risk insights, tension hotspots, and a 30-day roadmap tailored to your body.',
+      "You'll see how you compare to others similar to you, get a relief forecast, and understand exactly what Limba will focus on.",
+    ],
+  },
+  {
+    title: 'Personalised Daily Routines',
+    icon: <CompassIcon className="w-7 h-7" />,
+    paragraphs: [
+      'No more generic stretching videos. Limba uses the latest AI models to generate routines uniquely tailored to your body, targeting your tight neck, achy lower back, or stiff hips based on your profile and progress.',
+      'Each short routine adapts as you do. Limba learns what works for you, refining your plan over time. Short, beginner-friendly, and designed to be done anywhere.',
+    ],
+  },
+  {
+    title: 'Ask Limba',
+    icon: <ChatIcon className="w-7 h-7" />,
+    paragraphs: [
+      'Have a specific ache or discomfort? Just ask Limba. Describe how you feel and Limba is ready to help you fix stiffness, suggest immediate relief stretches, or answer questions about your wellness journey.',
+      "It's like having a personal mobility coach in your pocket, available 24/7 to guide you through your aches and pains.",
+    ],
+  },
+  {
+    title: 'The Wellness Library',
+    icon: <BackpackIcon className="w-7 h-7" />,
+    paragraphs: [
+      'Some days, you want to choose your own adventure. Browse stretches by body area, including neck and shoulders, lower back, hips, and more.',
+      'Every movement comes with smooth animations so you can see exactly how to move. Perfect for those "my shoulder is killing me right now" moments.',
+    ],
+  },
+  {
+    title: 'Connects with the health apps you already use',
+    icon: <SparkIcon className="w-7 h-7" />,
+    paragraphs: [
+      'Limba can read your steps, sleep, and recent activity from Apple Health on iOS or Google Health Connect on Android, so each routine is calibrated to how your body actually moved today.',
+      'Every completed session is logged back as a stretching workout, helping your mobility work count toward your daily activity totals.',
+    ],
+  },
+  {
+    title: 'Progress that is clear, achievable and fun',
+    icon: <FlameIcon className="w-7 h-7" />,
+    paragraphs: [
+      'Limba helps you build consistency with streaks, milestones, achievements, and celebrations so progress feels clear, achievable, and rewarding, not like a chore.',
+    ],
+  },
+]
+
+const showcaseFeatures = [
+  {
+    ...howItWorksFeatures[0],
+    imageSrc: '/images/wellness-analysis-screen.png',
+    imageAlt: 'Limba wellness profile screen',
+  },
+  {
+    ...howItWorksFeatures[1],
+    imageSrc: '/images/todays-routine.png',
+    imageAlt: 'Limba personalised daily routine screen',
+  },
+  {
+    ...howItWorksFeatures[2],
+    imageSrc: '/images/ask-limba.png',
+    imageAlt: 'Limba chat screen',
+  },
+  {
+    ...howItWorksFeatures[3],
+    imageSrc: '/images/wellness-library.png',
+    imageAlt: 'Limba wellness library screen',
+  },
+]
+
+function HowItWorksCard({ feature }: { feature: HowItWorksFeature }) {
+  return (
+    <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-5">
+      <div className="flex items-center gap-3">
+        <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
+          {feature.icon}
+        </div>
+        <h3 className="text-xl font-bold text-teal-900">{feature.title}</h3>
+      </div>
+      <div className="space-y-3">
+        {feature.paragraphs.map((paragraph) => (
+          <p key={paragraph} className="text-gray-600 leading-relaxed">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      {feature.title === 'Connects with the health apps you already use' ? (
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+          <div className="bg-white rounded-xl px-4 py-3 shadow-sm flex items-center justify-center">
+            <Image
+              src="/images/apple-health.svg"
+              alt="Works with Apple Health"
+              width={160}
+              height={46}
+              className="h-10 w-auto"
+            />
+          </div>
+          <div className="bg-white rounded-xl px-4 py-3 shadow-sm text-sm font-semibold text-teal-900">
+            Google Health Connect
+          </div>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+export function HowItWorksPreviewSection() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const activeFeature = showcaseFeatures[activeIndex]
+
+  const goToPrevious = () => {
+    setActiveIndex((current) =>
+      current === 0 ? showcaseFeatures.length - 1 : current - 1,
+    )
+  }
+
+  const goToNext = () => {
+    setActiveIndex((current) =>
+      current === showcaseFeatures.length - 1 ? 0 : current + 1,
+    )
+  }
+
+  return (
+    <section className="bg-white py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[2rem] bg-gradient-to-b from-teal-50 to-emerald-50 px-4 py-10 sm:px-8 lg:px-14 lg:py-14">
+          <h2 className="text-center text-3xl sm:text-4xl font-bold text-teal-900 mb-10 lg:mb-12">
+            What does Limba include?
+          </h2>
+
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
+            <div className="flex flex-col items-center">
+              <div className="relative rounded-[3rem] bg-teal-950 p-2 shadow-2xl">
+                <div className="overflow-hidden rounded-[2.4rem] bg-white">
+                  <Image
+                    src={activeFeature.imageSrc}
+                    alt={activeFeature.imageAlt}
+                    width={600}
+                    height={1200}
+                    className="w-[220px] sm:w-[260px] lg:w-[300px] h-auto"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={goToPrevious}
+                  className="h-9 w-9 rounded-full border border-teal-900/20 bg-white text-teal-900 shadow-sm transition-colors hover:bg-teal-50"
+                  aria-label="Show previous Limba preview"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  onClick={goToNext}
+                  className="h-9 w-9 rounded-full border border-teal-900/20 bg-white text-teal-900 shadow-sm transition-colors hover:bg-teal-50"
+                  aria-label="Show next Limba preview"
+                >
+                  ›
+                </button>
+              </div>
+
+              <div
+                className="mt-4 flex items-center justify-center gap-2"
+                aria-label="App preview carousel position"
+              >
+                {showcaseFeatures.map((feature, index) => (
+                  <button
+                    key={feature.title}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    className={`h-2.5 rounded-full transition-all ${
+                      index === activeIndex
+                        ? 'w-6 bg-teal-900'
+                        : 'w-2.5 bg-gray-300 hover:bg-teal-300'
+                    }`}
+                    aria-label={`Show ${feature.title} preview`}
+                    aria-current={index === activeIndex}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-5">
+              {showcaseFeatures.map((feature, index) => (
+                <button
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  key={feature.title}
+                  className={`w-full rounded-2xl border bg-white/80 p-5 text-left shadow-sm transition-all sm:p-6 ${
+                    index === activeIndex
+                      ? 'border-teal-900 shadow-md'
+                      : 'border-white/80 hover:border-teal-200 hover:bg-white'
+                  }`}
+                  aria-current={index === activeIndex}
+                >
+                  <h3 className="text-lg font-bold text-teal-900">{feature.title}</h3>
+                  <p className="mt-2 text-sm sm:text-base leading-relaxed text-gray-600">
+                    {feature.paragraphs[0]}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export function LearnMoreSection() {
   return (
@@ -28,205 +251,9 @@ export function LearnMoreSection() {
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-            {/* AI Wellness Profile */}
-          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
-                <SparkIcon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                Your AI Wellness Profile
-              </h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">
-             Limba wants to get to know you. Answer a few questions about 
-              your lifestyle, where you feel stiff, and how you spend your days. We
-              transforms your answers into a personalised Wellness Profile - complete with 
-              risk insights, tension hotspots, and a 30-day roadmap tailored to your body.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              You&apos;ll see how you compare to others your age, get a relief forecast, 
-              and understand exactly what Limba will focus on.
-            </p>
-          </div>
-
-          {/* Personalised Daily Routines */}
-          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
-                <CompassIcon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                AI-Crafted Daily Routines
-              </h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">
-              No more generic stretching videos. Limba uses the latest AI models to generate 
-              routines uniquely tailored to your body. Targeting your tight neck, achy lower 
-              back, or stiff hips based on your profile and progress.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              Each 5–10 minute session adapts as you do. The AI learns what works for you, 
-              refining your plan over time. Short, beginner-friendly, and designed to be 
-              done anywhere. Like next to your desk, in your kitchen, or even in a hotel room.
-            </p>
-          </div>
-
-          {/* Ask Limba */}
-          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
-                <ChatIcon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                Ask Limba
-              </h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">
-              Have a specific ache or question? Just ask Limba. Our conversational AI is ready to help you troubleshoot stiffness, suggest immediate relief stretches, or answer questions about your wellness journey.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              It&apos;s like having a personal mobility coach in your pocket, available 24/7 to guide you through your aches and pains.
-            </p>
-          </div>
-
-          {/* Wellness Library */}
-          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
-                <BackpackIcon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                The Wellness Library
-              </h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">
-              Some days, you want to choose your own adventure. Browse our library of 
-              stretches by body area e.g. neck &amp; shoulders, lower back, hips, and more. 
-              Search by stretch name.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              Every movement comes with smooth animations so you can see exactly how to move. 
-              Perfect for those &quot;my shoulder is killing me right now&quot; moments.
-            </p>
-          </div>
-
-          {/* Smart Streaks */}
-          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
-                <FlameIcon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                Streaks That Support, Not Shame
-              </h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">
-              Your streak counter shows consecutive days of movement. A gentle flame 
-              that grows as you show up. When you&apos;re at risk of breaking your streak, 
-              Limba sends a warm nudge to keep you going.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              We like to frame notifications as &quot;future-you support&quot;  because consistency 
-              should feel encouraging, not exhausting.
-            </p>
-          </div>
-
-          {/* Milestones */}
-          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
-                <BadgeIcon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                Milestones &amp; Achievements
-              </h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">
-              Turn a daunting goal like &quot;get flexible&quot; into small, winnable quests. 
-              Unlock badges as you progress. From your first session to 90 days of consistency. Try and beat them all.
-            </p>
-            
-            {/* Milestone Preview Image */}
-            <div className="rounded-xl overflow-hidden shadow-sm">
-              <Image
-                src="/images/milestone.png"
-                alt="Seed Planted milestone - Complete your first session"
-                width={600}
-                height={300}
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
-
-          {/* Celebrations */}
-          <div className="h-full bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
-                <SparkIcon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                We Celebrate With You
-              </h3>
-            </div>
-            <p className="text-gray-600 leading-relaxed">
-              Every milestone you hit is met with genuine 
-              celebration. Because showing up especially on hard days - deserves 
-              recognition.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              Limba doesn&apos;t just track your progress; it cheers you on.
-            </p>
-          </div>
-
-          {/* Health App Integrations - Full Width */}
-          <div className="md:col-span-2 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-2xl p-6 lg:p-8 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/50 flex items-center justify-center text-teal-600">
-                <SparkIcon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-teal-900">
-                Connects with the health apps you already use
-              </h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6 items-center">
-              <div className="space-y-4">
-                <p className="text-gray-600 leading-relaxed">
-                  Limba can read your steps, sleep, and recent
-                  activity from <strong> Apple Health</strong> on iOS or{' '}
-                  <strong>Google Health Connect</strong> on Android. Each routine
-                  is calibrated to how your body actually moved today, not a
-                  generic plan.
-                </p>
-                <p className="text-gray-600 leading-relaxed">
-                  Every completed session is logged back as a stretching workout:
-                  a Flexibility entry on Apple Health (counting toward your Move
-                  and Exercise rings) or an exercise session on  Google Health Connect
-                  (contributing to your daily activity totals).
-                </p>
-              </div>
-              <div className="flex flex-col items-center justify-center gap-6">
-                <div className="bg-white rounded-2xl px-8 py-6 drop-shadow-2xl flex items-center justify-center transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
-                  <Image
-                    src="/images/apple-health.svg"
-                    alt="Works with Apple Health"
-                    width={220}
-                    height={64}
-                    className="h-14 w-auto"
-                  />
-                </div>
-                <div className="bg-white rounded-2xl px-8 py-6 drop-shadow-2xl flex items-center justify-center transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
-                  <Image
-                    src="/images/android-health-connect.png"
-                    alt="Works with Google Health Connect"
-                    width={220}
-                    height={64}
-                    className="h-14 w-auto"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          {howItWorksFeatures.map((feature) => (
+            <HowItWorksCard key={feature.title} feature={feature} />
+          ))}
         </div>
       </div>
     </section>
