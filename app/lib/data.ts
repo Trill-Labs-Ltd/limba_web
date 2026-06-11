@@ -18,6 +18,13 @@ export const features: Feature[] = [
       "Tell us where it hurts. Limba learns your unique discomforts: tight shoulders from typing, stiff lower back from sitting and crafts routines that target exactly what you need.",
   },
   {
+    id: 'journeys',
+    icon: 'journeys',
+    title: 'Journeys',
+    description:
+      'When an ache has been hanging around, follow a guided programme that builds up stage by stage for your knees, lower back, or hips. One short routine a day, with a badge waiting at the end.',
+  },
+  {
     id: 'quick',
     icon: 'clock',
     title: 'Under 5 Minutes',

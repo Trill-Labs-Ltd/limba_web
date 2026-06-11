@@ -274,7 +274,7 @@ export function PrivacyPolicyContent() {
           We use trusted third-party services to operate and improve the app, including:
         </p>
         <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed ml-4">
-          <li>Anthropic (AI-powered routine generation and conversational features — see Section 8)</li>
+          <li>Anthropic (AI-powered routine generation and conversational features, see Section 8)</li>
           <li>RevenueCat (payment processing)</li>
           <li>Apple App Store and Google Play (subscriptions)</li>
           <li>Sentry (error monitoring and crash reporting)</li>

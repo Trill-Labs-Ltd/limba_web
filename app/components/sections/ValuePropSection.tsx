@@ -4,6 +4,7 @@ import {
   ClockIcon,
   BadgeIcon,
   ChatIcon,
+  FootprintIcon,
 } from '@/app/components/icons'
 import { features } from '@/app/lib/data'
 
@@ -12,6 +13,7 @@ const iconMap = {
   sparkle: <SparkleIcon className="w-10 h-10 text-teal-600" />,
   clock: <ClockIcon className="w-7 h-7 text-teal-600" />,
   trophy: <BadgeIcon className="w-7 h-7 text-teal-600" />,
+  journeys: <FootprintIcon className="w-7 h-7 text-teal-600" />,
 }
 
 export function ValuePropSection() {
@@ -30,7 +32,7 @@ export function ValuePropSection() {
         </div>
 
         {/* Feature Cards */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 items-stretch">
+        <div className="grid md:grid-cols-2 xl:grid-cols-5 gap-6 lg:gap-8 items-stretch">
           {features.map((feature) => (
             <FeatureCard
               key={feature.id}

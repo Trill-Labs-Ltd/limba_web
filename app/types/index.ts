@@ -41,7 +41,7 @@ export interface IconProps {
 
 export interface Feature {
   id: string
-  icon: 'chat' | 'sparkle' | 'clock' | 'trophy'
+  icon: 'chat' | 'sparkle' | 'clock' | 'trophy' | 'journeys'
   title: string
   description: string
 }
