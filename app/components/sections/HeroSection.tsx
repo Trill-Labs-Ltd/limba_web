@@ -92,11 +92,11 @@ export function HeroSection() {
                   />
                 </div>
                 
-                {/* Secondary Phone - Dashboard in matching phone shell */}
+                {/* Secondary Phone - Home dashboard in matching phone shell */}
                 <div className="relative z-0 -ml-2 sm:-ml-1 md:-ml-2 lg:-ml-3 mt-6 sm:mt-8 md:mt-12 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
                   <PhoneMockup
                     src="/images/dashboard.png"
-                    alt="Limba dashboard showing wellness library"
+                    alt="Limba home screen with today's routine and the Find your fix Journeys section"
                     widthClassName="w-[140px] sm:w-[220px] md:w-[260px] lg:w-[280px]"
                   />
                 </div>

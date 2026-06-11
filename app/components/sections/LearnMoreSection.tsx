@@ -35,6 +35,14 @@ const howItWorksFeatures: HowItWorksFeature[] = [
     ],
   },
   {
+    title: 'Journeys',
+    icon: <CompassIcon className="w-7 h-7" />,
+    paragraphs: [
+      'When something has been bothering you for a while, pick a Journey — a structured 15-routine programme across 3 stages for your knees, lower back, or hips.',
+      'Do one ~5-minute routine a day, watch your progress fill in along a winding path, and earn a milestone badge when you finish. Journeys work alongside your daily routine — both keep your streak alive.',
+    ],
+  },
+  {
     title: 'Ask Limba',
     icon: <ChatIcon className="w-7 h-7" />,
     paragraphs: [
@@ -80,11 +88,16 @@ const showcaseFeatures = [
   },
   {
     ...howItWorksFeatures[2],
+    imageSrc: '/images/journey-detail.png',
+    imageAlt: 'Limba Journey detail screen showing the Bulletproof Knees path map',
+  },
+  {
+    ...howItWorksFeatures[3],
     imageSrc: '/images/ask-limba.png',
     imageAlt: 'Limba chat screen',
   },
   {
-    ...howItWorksFeatures[3],
+    ...howItWorksFeatures[4],
     imageSrc: '/images/wellness-library.png',
     imageAlt: 'Limba wellness library screen',
   },

@@ -39,7 +39,7 @@ export const heroContent = {
   highlightedText: 'under 5 minutes',
   headlineContinued: 'a day',
   description:
-    'Limba learns your unique aches and pains, then delivers personalised micro-routines that fit seamlessly into your workday.',
+    'Limba learns your unique aches and pains, then delivers personalised micro-routines and structured Journeys that fit seamlessly into your workday.',
 }
 
 export const betaContent = {

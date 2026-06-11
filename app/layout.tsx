@@ -5,7 +5,7 @@ import { AndroidAppBanner } from '@/app/components/ui'
 export const metadata: Metadata = {
   title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
   description:
-    'AI-personalised micro-routines that fit your life. Limba learns your unique aches and pains, then delivers targeted exercises in under 5 minutes. Built by Stanford & Imperial College health experts.',
+    'AI-personalised micro-routines and structured Journeys that fit your life. Limba learns your unique aches and pains, then delivers targeted exercises in under 5 minutes. Built by Stanford & Imperial College health experts.',
   keywords: [
     'AI wellness app',
     'AI personalised exercises',
@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     'musculoskeletal health',
     '5 minute wellness',
     'workplace wellness',
+    'guided stretch programme',
+    'knee mobility programme',
+    'back pain programme',
+    'hip mobility',
   ],
   authors: [{ name: 'Limba' }],
   icons: {
@@ -40,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
     description:
-      'AI-personalised micro-routines that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
+      'AI-personalised micro-routines and structured Journeys that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
     type: 'website',
     locale: 'en_GB',
     url: 'https://getlimba.com',
@@ -58,7 +62,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
     description:
-      'AI-personalised micro-routines that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
+      'AI-personalised micro-routines and structured Journeys that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
     images: ['https://getlimba.com/og-image.png'],
   },
   other: {
