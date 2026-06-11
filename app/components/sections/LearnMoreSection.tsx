@@ -6,6 +6,7 @@ import type { ReactNode } from 'react'
 import {
   SparkIcon,
   CompassIcon,
+  MountainIcon,
   FlameIcon,
   BackpackIcon,
   ChatIcon,
@@ -36,7 +37,7 @@ const howItWorksFeatures: HowItWorksFeature[] = [
   },
   {
     title: 'Journeys',
-    icon: <CompassIcon className="w-7 h-7" />,
+    icon: <MountainIcon className="w-7 h-7" />,
     paragraphs: [
       'When something has been bothering you for a while, pick a Journey: a guided programme that builds up stage by stage for your knees, lower back, or hips. It eases you in, so you are never thrown into the deep end.',
       'Do one short routine a day, watch your progress fill in along a winding path, and earn a milestone badge when you finish. Journeys run alongside your daily routine, and both keep your streak alive.',
