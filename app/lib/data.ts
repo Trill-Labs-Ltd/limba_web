@@ -4,13 +4,6 @@ export const SOCIAL_PROOF_COUNT = '500+'
 
 export const features: Feature[] = [
   {
-    id: 'ask-limba',
-    icon: 'chat',
-    title: 'Ask Limba',
-    description:
-      'Describe how you feel in plain language and get a focused routine instantly for you particular target goals. No guesswork, just guided relief tailored to your body.',
-  },
-  {
     id: 'personalised',
     icon: 'sparkle',
     title: 'Personalised to You',
@@ -23,6 +16,13 @@ export const features: Feature[] = [
     title: 'Journeys',
     description:
       'When an ache has been hanging around, follow a guided programme that builds up stage by stage for your knees, lower back, or hips. One short routine a day, with a badge waiting at the end.',
+  },
+  {
+    id: 'ask-limba',
+    icon: 'chat',
+    title: 'Ask Limba',
+    description:
+      'Describe how you feel in plain language and get a focused routine instantly for you particular target goals. No guesswork, just guided relief tailored to your body.',
   },
   {
     id: 'quick',
