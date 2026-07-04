@@ -3,12 +3,12 @@ import './globals.css'
 import { AndroidAppBanner } from '@/app/components/ui'
 
 export const metadata: Metadata = {
-  title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
+  title: 'Limba - Personalised Stretch Routines in Under 5 Minutes a Day',
   description:
-    'AI-personalised micro-routines and structured Journeys that fit your life. Limba learns your unique aches and pains, then delivers targeted exercises in under 5 minutes. Built by Stanford & Imperial College health experts.',
+    'Personalised micro-routines and structured Journeys that fit your life. Limba learns where your body is stiff — neck, lower back, hips — and delivers targeted stretches in under 5 minutes. Built with Stanford & Imperial College health experts.',
   keywords: [
-    'AI wellness app',
-    'AI personalised exercises',
+    'stretching app',
+    'personalised stretches',
     'micro-routines',
     'quick exercises',
     'back pain relief',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     'office stretches',
     'posture exercises',
     'remote worker wellness',
-    'AI health coach',
+    'mobility coach',
     'personalised fitness',
     'musculoskeletal health',
     '5 minute wellness',
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     title: 'Limba',
   },
   openGraph: {
-    title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
+    title: 'Limba - Personalised Stretch Routines in Under 5 Minutes a Day',
     description:
-      'AI-personalised micro-routines and structured Journeys that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
+      'Personalised micro-routines and structured Journeys that fit your life. Limba learns where your body is stiff and delivers targeted stretches in under 5 minutes.',
     type: 'website',
     locale: 'en_GB',
     url: 'https://getlimba.com',
@@ -54,15 +54,15 @@ export const metadata: Metadata = {
         url: 'https://getlimba.com/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Limba - AI-Powered Wellness App',
+        alt: 'Limba - Stretch & Mobility App',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Limba - AI-Powered Wellness in Under 5 Minutes a Day',
+    title: 'Limba - Personalised Stretch Routines in Under 5 Minutes a Day',
     description:
-      'AI-personalised micro-routines and structured Journeys that fit your life. Limba learns your unique aches and delivers targeted exercises in under 5 minutes.',
+      'Personalised micro-routines and structured Journeys that fit your life. Limba learns where your body is stiff and delivers targeted stretches in under 5 minutes.',
     images: ['https://getlimba.com/og-image.png'],
   },
   other: {

@@ -31,7 +31,7 @@ const howItWorksFeatures: HowItWorksFeature[] = [
     title: 'Personalised Daily Routines',
     icon: <CompassIcon className="w-7 h-7" />,
     paragraphs: [
-      'No more generic stretching videos. Limba uses the latest AI models to generate routines uniquely tailored to your body, targeting your tight neck, achy lower back, or stiff hips based on your profile and progress.',
+      'No more generic stretching videos. Limba builds routines uniquely tailored to your body, targeting your tight neck, achy lower back, or stiff hips based on your profile and progress.',
       'Each short routine adapts as you do. Limba learns what works for you, refining your plan over time. Short, beginner-friendly, and designed to be done anywhere.',
     ],
   },
