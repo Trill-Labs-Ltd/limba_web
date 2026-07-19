@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import { AndroidAppBanner } from '@/app/components/ui'
 
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body className="antialiased">
         <AndroidAppBanner />
         {children}
+        <Analytics />
       </body>
     </html>
   )
