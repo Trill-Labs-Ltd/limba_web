@@ -99,8 +99,8 @@ const showcaseFeatures = [
   },
   {
     ...howItWorksFeatures[4],
-    imageSrc: '/images/wellness-library.png',
-    imageAlt: 'Limba wellness library screen',
+    imageSrc: '/images/preview-routine.png',
+    imageAlt: 'Limba stretch detail screen showing Child\'s Pose instructions',
   },
 ]
 
