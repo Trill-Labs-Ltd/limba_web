@@ -80,22 +80,22 @@ export function HeroSection() {
                 aria-hidden="true"
               />
               
-              {/* Phone container — Library centered front, Ask Limba + Home flanking */}
+              {/* Phone container — Ask Limba centered front, Wellness Library + Home flanking */}
               <div className="relative flex items-end justify-center gap-0 sm:gap-1 md:gap-2 py-6 px-1 sm:px-2 md:px-4">
-                {/* Left — Ask Limba */}
+                {/* Left — Wellness Library */}
                 <div className="relative z-0 -mr-3 sm:-mr-4 md:-mr-5 mt-6 sm:mt-8 md:mt-12 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
                   <PhoneMockup
-                    src="/images/ask-limba.png"
-                    alt="Ask Limba conversational screen"
+                    src="/images/wellness-library.png"
+                    alt="Limba Wellness Library screen with stretches by body area"
                     widthClassName="w-[110px] sm:w-[170px] md:w-[200px] lg:w-[220px]"
                   />
                 </div>
 
-                {/* Middle / primary — Wellness Library */}
+                {/* Middle / primary — Ask Limba */}
                 <div className="relative z-20 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
                   <PhoneMockup
-                    src="/images/wellness-library.png"
-                    alt="Limba Wellness Library screen with stretches by body area"
+                    src="/images/ask-limba.png"
+                    alt="Ask Limba conversational screen"
                     widthClassName="w-[140px] sm:w-[210px] md:w-[250px] lg:w-[270px]"
                     priority
                   />
