@@ -80,24 +80,33 @@ export function HeroSection() {
                 aria-hidden="true"
               />
               
-              {/* Phone container */}
-              <div className="relative flex items-end justify-center gap-1 sm:gap-3 md:gap-4 lg:gap-5 py-6 px-2 sm:px-4 md:px-6">
-                {/* Primary Phone - Ask Limba Screen */}
-                <div className="relative z-10 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
+              {/* Phone container — Library centered front, Ask Limba + Home flanking */}
+              <div className="relative flex items-end justify-center gap-0 sm:gap-1 md:gap-2 py-6 px-1 sm:px-2 md:px-4">
+                {/* Left — Ask Limba */}
+                <div className="relative z-0 -mr-3 sm:-mr-4 md:-mr-5 mt-6 sm:mt-8 md:mt-12 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
                   <PhoneMockup
                     src="/images/ask-limba.png"
                     alt="Ask Limba conversational screen"
-                    widthClassName="w-[160px] sm:w-[240px] md:w-[280px] lg:w-[300px]"
+                    widthClassName="w-[110px] sm:w-[170px] md:w-[200px] lg:w-[220px]"
+                  />
+                </div>
+
+                {/* Middle / primary — Wellness Library */}
+                <div className="relative z-20 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
+                  <PhoneMockup
+                    src="/images/wellness-library.png"
+                    alt="Limba Wellness Library screen with stretches by body area"
+                    widthClassName="w-[140px] sm:w-[210px] md:w-[250px] lg:w-[270px]"
                     priority
                   />
                 </div>
-                
-                {/* Secondary Phone - Home dashboard in matching phone shell */}
-                <div className="relative z-0 -ml-2 sm:-ml-1 md:-ml-2 lg:-ml-3 mt-6 sm:mt-8 md:mt-12 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
+
+                {/* Right — Home dashboard */}
+                <div className="relative z-10 -ml-3 sm:-ml-4 md:-ml-5 mt-6 sm:mt-8 md:mt-12 animate-float drop-shadow-2xl transition-transform duration-300 hover:scale-105 hover:-translate-y-2">
                   <PhoneMockup
                     src="/images/dashboard.png"
                     alt="Limba home screen with today's routine and the Find your fix Journeys section"
-                    widthClassName="w-[140px] sm:w-[220px] md:w-[260px] lg:w-[280px]"
+                    widthClassName="w-[110px] sm:w-[170px] md:w-[200px] lg:w-[220px]"
                   />
                 </div>
               </div>
