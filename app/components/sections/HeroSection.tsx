@@ -37,9 +37,9 @@ export function HeroSection() {
   return (
     <section className="w-full overflow-hidden bg-gradient-to-b from-teal-100 to-teal-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 xl:gap-24 items-center">
           {/* Left Column - Main Copy */}
-          <div className="order-2 lg:order-1 space-y-6">
+          <div className="order-2 lg:order-1 space-y-6 lg:pr-4">
             {/* Badge */}
             <Badge
               icon={
@@ -76,7 +76,7 @@ export function HeroSection() {
             <div className="relative w-max max-w-full">
               {/* Gradient blob background */}
               <div 
-                className="absolute -inset-6 md:-inset-10 lg:-inset-12 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-[3rem] md:rounded-[4rem]"
+                className="absolute -inset-6 md:-inset-10 lg:-inset-y-12 lg:-inset-x-8 xl:-inset-x-10 bg-gradient-to-br from-teal-100 via-teal-50 to-emerald-100 rounded-[3rem] md:rounded-[4rem]"
                 aria-hidden="true"
               />
               
