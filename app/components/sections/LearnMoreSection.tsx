@@ -39,7 +39,7 @@ const howItWorksFeatures: HowItWorksFeature[] = [
     title: 'Journeys',
     icon: <MountainIcon className="w-7 h-7" />,
     paragraphs: [
-      'When something has been bothering you for a while, pick a Journey: a guided programme that builds up stage by stage for your knees, lower back, or hips. It eases you in, so you are never thrown into the deep end.',
+      'When something has been bothering you for a while, pick a Journey: Bulletproof Knees, Brand New Back, Buttery Hips, or create your own. Tell Limba what you want to work on and get a short daily path built just for you.',
       'Do one short routine a day, watch your progress fill in along a winding path, and earn a milestone badge when you finish. Journeys run alongside your daily routine, and both keep your streak alive.',
     ],
   },
@@ -89,8 +89,8 @@ const showcaseFeatures = [
   },
   {
     ...howItWorksFeatures[2],
-    imageSrc: '/images/journey-detail.png',
-    imageAlt: 'Limba Journey detail screen showing the Bulletproof Knees path map',
+    imageSrc: '/images/journey-overview.png',
+    imageAlt: 'Limba Journeys screen with Create A Journey, Bulletproof Knees, Brand New Back, and Buttery Hips',
   },
   {
     ...howItWorksFeatures[3],

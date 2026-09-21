@@ -15,7 +15,7 @@ export const features: Feature[] = [
     icon: 'journeys',
     title: 'Journeys',
     description:
-      'When an ache has been hanging around, follow a guided programme that builds up stage by stage for your knees, lower back, or hips. One short routine a day, with a badge waiting at the end.',
+      'When an ache has been hanging around, pick a Journey for your knees, back, or hips, or create your own. One short routine a day, with a badge waiting at the end.',
   },
   {
     id: 'ask-limba',
