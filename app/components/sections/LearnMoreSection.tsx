@@ -90,7 +90,7 @@ const showcaseFeatures = [
   {
     ...howItWorksFeatures[2],
     imageSrc: '/images/journey-overview.png',
-    imageAlt: 'Limba Journeys screen with Create A Journey, Bulletproof Knees, Brand New Back, and Buttery Hips',
+    imageAlt: 'Limba Journeys screen with an active Brand New Back journey, Create A Journey, and recommended journeys',
   },
   {
     ...howItWorksFeatures[3],
