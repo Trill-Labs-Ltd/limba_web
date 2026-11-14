@@ -14,6 +14,7 @@ import {
   summarise,
   type SharedRoutine,
 } from '@/app/lib/sharedRoutine'
+import { ShareOpenedBeacon } from './ShareOpenedBeacon'
 
 // Every view must hit the RPC: it checks expiry and counts the view.
 export const dynamic = 'force-dynamic'
@@ -98,6 +99,10 @@ export default async function SharedRoutinePage({
 
   return (
     <main className="min-h-screen bg-white">
+      <ShareOpenedBeacon
+        code={params.code}
+        senderUserId={routine.sender_id}
+      />
       <Header />
       <section className="w-full py-20 lg:py-28">
         <div className={`${TAILWIND_CLASSES.container} max-w-2xl text-center`}>
