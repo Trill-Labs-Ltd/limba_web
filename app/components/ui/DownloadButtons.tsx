@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
-const PLAY_STORE_URL =
+export const PLAY_STORE_URL =
   'https://play.google.com/store/apps/details?id=com.trillLabs.limba'
 
-const APP_STORE_URL =
+export const APP_STORE_URL =
   'https://apps.apple.com/us/app/limba-stretch-flexibility/id6756675956'
 
 interface DownloadButtonsProps {

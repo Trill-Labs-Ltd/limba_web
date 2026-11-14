@@ -5,18 +5,19 @@ import { notFound } from 'next/navigation'
 import { Header, Footer } from '@/app/components/layout'
 import { DownloadButtons } from '@/app/components/ui'
 import { TAILWIND_CLASSES } from '@/app/lib/constants'
-import { supabase } from '@/app/lib/supabase'
 import {
   buildOneLinkUrl,
-  isValidShareCode,
   sharedRoutineDescription,
   sharedRoutineTitle,
   summarise,
-  type SharedRoutine,
+  toPlayable,
+  type PlayableStretch,
 } from '@/app/lib/sharedRoutine'
-import { ShareOpenedBeacon } from './ShareOpenedBeacon'
+import { fetchSharedRoutine } from '@/app/lib/sharedRoutineApi'
+import { SharedRoutineExperience } from './SharedRoutineExperience'
 
-// Every view must hit the RPC: it checks expiry and counts the view.
+// Every view must hit the backend: it checks expiry, counts the view and signs
+// fresh video URLs for the player.
 export const dynamic = 'force-dynamic'
 
 const SITE_URL = 'https://getlimba.com'
@@ -25,26 +26,25 @@ interface SharedRoutinePageProps {
   params: { code: string }
 }
 
+interface LoadedRoutine {
+  senderName: string | null
+  senderId: string | null
+  stretches: PlayableStretch[]
+}
+
 /**
- * One RPC call per request, shared by generateMetadata and the page (React
- * cache() dedupes within a single render), so a visit counts as one view.
+ * One backend call per request, shared by generateMetadata and the page (React
+ * cache() dedupes within a single render), so a visit counts as one view. The
+ * backend's public endpoint (not the Supabase RPC) is used because it also
+ * returns stretch names, steps and signed videos for the browser player.
  */
-const getSharedRoutine = cache(
-  async (code: string): Promise<SharedRoutine | null> => {
-    if (!isValidShareCode(code)) return null
-    const { data, error } = await supabase.rpc('get_shared_routine', { code })
-    if (error) {
-      console.error('get_shared_routine failed', {
-        message: error.message,
-        code: error.code,
-      })
-      return null
-    }
-    const routine = data as SharedRoutine | null
-    if (!routine || !Array.isArray(routine.s)) return null
-    return routine
-  }
-)
+const getSharedRoutine = cache(async (code: string): Promise<LoadedRoutine | null> => {
+  const routine = await fetchSharedRoutine(code)
+  if (!routine) return null
+  const stretches = toPlayable(routine.stretches)
+  if (stretches.length === 0) return null
+  return { senderName: routine.sender_name, senderId: routine.sender_id, stretches }
+})
 
 export async function generateMetadata({
   params,
@@ -52,12 +52,12 @@ export async function generateMetadata({
   const routine = await getSharedRoutine(params.code)
   if (!routine) notFound()
 
-  const title = sharedRoutineTitle(routine.n)
-  const description = sharedRoutineDescription(summarise(routine.s))
+  const title = sharedRoutineTitle(routine.senderName)
+  const description = sharedRoutineDescription(summarise(routine.stretches))
   const url = `${SITE_URL}/r/${params.code}`
 
   // The OG/Twitter image comes from ./opengraph-image.tsx (file convention),
-  // which is static so link previews don't call the RPC again.
+  // which is static so link previews don't call the backend again.
   return {
     metadataBase: new URL(SITE_URL),
     title,
@@ -84,9 +84,10 @@ export async function generateMetadata({
  * Landing page for a shared-routine short link, https://getlimba.com/r/<code>.
  *
  * With the app installed, Universal Links / App Links open the app directly and
- * this page is never shown. Everyone else sees a preview of the routine and the
- * store buttons; the OneLink carries the code through install (deferred deep
- * link) so the routine is waiting when the app first opens.
+ * this page is never shown. Everyone else sees a preview of the routine and can
+ * do it right here in the browser ("Start routine"), open it in the app, or
+ * install. The OneLink carries the code through install (deferred deep link) so
+ * the routine is waiting when the app first opens.
  */
 export default async function SharedRoutinePage({
   params,
@@ -94,15 +95,11 @@ export default async function SharedRoutinePage({
   const routine = await getSharedRoutine(params.code)
   if (!routine) notFound()
 
-  const { stretchCount, totalMinutes } = summarise(routine.s)
+  const { stretchCount, totalMinutes } = summarise(routine.stretches)
   const oneLink = buildOneLinkUrl(params.code)
 
   return (
     <main className="min-h-screen bg-white">
-      <ShareOpenedBeacon
-        code={params.code}
-        senderUserId={routine.sender_id}
-      />
       <Header />
       <section className="w-full py-20 lg:py-28">
         <div className={`${TAILWIND_CLASSES.container} max-w-2xl text-center`}>
@@ -119,7 +116,7 @@ export default async function SharedRoutinePage({
             </div>
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-teal-900 mb-6">
-            {sharedRoutineTitle(routine.n)}
+            {sharedRoutineTitle(routine.senderName)}
           </h1>
           <div className="mb-10 inline-flex items-center gap-3 rounded-full bg-teal-50 px-5 py-2 text-lg font-medium text-teal-800">
             <span>
@@ -129,13 +126,19 @@ export default async function SharedRoutinePage({
             <span>{totalMinutes} min</span>
           </div>
           <p className="text-lg text-gray-600 mb-8">
-            Open it in Limba to follow along. New to Limba? It&rsquo;s free to
-            try, and the routine will be waiting once you&rsquo;ve installed it.
+            Follow along right here in your browser, no download needed. Got
+            Limba? Open it in the app instead.
           </p>
-          <div className="mb-8">
+          <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <SharedRoutineExperience
+              code={params.code}
+              senderUserId={routine.senderId}
+              stretches={routine.stretches}
+              oneLink={oneLink}
+            />
             <a
               href={`limba://r/${params.code}`}
-              className={`${TAILWIND_CLASSES.button.base} ${TAILWIND_CLASSES.button.primary} ${TAILWIND_CLASSES.button.sizes.md} inline-block`}
+              className={`${TAILWIND_CLASSES.button.base} ${TAILWIND_CLASSES.button.secondary} ${TAILWIND_CLASSES.button.sizes.md} inline-block`}
             >
               Open in app
             </a>

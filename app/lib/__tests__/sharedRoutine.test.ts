@@ -1,15 +1,55 @@
 import {
   buildOneLinkUrl,
+  formatDuration,
+  formatMuscle,
   isValidShareCode,
   sharedRoutineDescription,
   sharedRoutineTitle,
   summarise,
+  toPlayable,
+  type ApiSharedRoutineItem,
+  type PlayableStretch,
 } from '../sharedRoutine'
 
 /**
- * sharedRoutine helpers — these decide whether /r/<code> calls the RPC at all,
+ * sharedRoutine helpers — these decide whether /r/<code> calls the backend at
+ * all, how API items become playable stretches (must match the app's mapping),
  * what the preview and link-preview text say, and where the store buttons go.
  */
+
+function item(overrides: Partial<ApiSharedRoutineItem> = {}, stretch: Record<string, unknown> = {}): ApiSharedRoutineItem {
+  return {
+    d: 30,
+    x: null,
+    video_url: 'https://cdn.getlimba.com/v.mp4?sig',
+    video_expires_at: 1_900_000_000,
+    ...overrides,
+    stretch: {
+      id: 's1',
+      name: 'Neck Stretch',
+      reps: null,
+      target_muscles: ['neck', 'upper_back'],
+      instructions: 'Sit tall || Tilt your head ||  ',
+      ...stretch,
+    } as ApiSharedRoutineItem['stretch'],
+  }
+}
+
+function playable(overrides: Partial<PlayableStretch> = {}): PlayableStretch {
+  return {
+    id: 's',
+    name: 'Stretch',
+    steps: [],
+    targetMuscles: [],
+    seconds: 30,
+    bothSides: false,
+    mode: 'timed',
+    reps: null,
+    videoUrl: null,
+    videoExpiresAt: null,
+    ...overrides,
+  }
+}
 describe('isValidShareCode', () => {
   it.each(['abc1234', 'ABCDEFG', '0000000', 'aZ9bY8c'])('accepts %s', (code) => {
     expect(isValidShareCode(code)).toBe(true)
@@ -34,18 +74,66 @@ describe('isValidShareCode', () => {
   })
 })
 
+describe('toPlayable', () => {
+  it('maps an API item like the app does', () => {
+    expect(toPlayable([item({ d: 45, x: 1 })])).toEqual([
+      {
+        id: 's1',
+        name: 'Neck Stretch',
+        steps: ['Sit tall', 'Tilt your head'],
+        targetMuscles: ['neck', 'upper_back'],
+        seconds: 45,
+        bothSides: true,
+        mode: 'timed',
+        reps: null,
+        videoUrl: 'https://cdn.getlimba.com/v.mp4?sig',
+        videoExpiresAt: 1_900_000_000,
+      },
+    ])
+  })
+
+  it('plays a library stretch with reps in reps mode (the app exerciseMode rule)', () => {
+    const [stretch] = toPlayable([item({}, { reps: 10 })])
+    expect(stretch.mode).toBe('reps')
+    expect(stretch.reps).toBe(10)
+  })
+
+  it('drops items with no stretch, no id or a bad duration', () => {
+    const items = [
+      item({ d: 0 }),
+      item({ d: Number.NaN }),
+      { ...item(), stretch: null },
+      item({}, { id: '' }),
+      item({ d: 20 }, { id: 'keep' }),
+    ]
+    expect(toPlayable(items).map((s) => s.id)).toEqual(['keep'])
+  })
+
+  it('falls back for a missing name, steps, muscles and video', () => {
+    const [stretch] = toPlayable([
+      item({ video_url: null, video_expires_at: null }, { name: '  ', instructions: null, target_muscles: null }),
+    ])
+    expect(stretch).toMatchObject({ name: 'Stretch', steps: [], targetMuscles: [], videoUrl: null, videoExpiresAt: null })
+  })
+
+  it('handles a missing list', () => {
+    expect(toPlayable(undefined)).toEqual([])
+    expect(toPlayable(null)).toEqual([])
+  })
+})
+
 describe('summarise', () => {
   it('doubles stretches done on both sides and rounds minutes up', () => {
     const summary = summarise([
-      { id: 'a', d: 30 },
-      { id: 'b', d: 20, x: 1 },
-      { id: 'c', d: 45 },
+      playable({ seconds: 30 }),
+      playable({ seconds: 20, bothSides: true }),
+      playable({ seconds: 45 }),
     ])
     expect(summary).toEqual({ stretchCount: 3, totalSeconds: 115, totalMinutes: 2 })
   })
 
   it('gives whole minutes when the total is exact', () => {
-    expect(summarise([{ id: 'a', d: 60 }, { id: 'b', d: 30, x: 1 }])).toEqual({
+    expect(summarise([playable({ seconds: 60 }), playable({ seconds: 30, bothSides: true })])).toEqual({
       stretchCount: 2,
       totalSeconds: 120,
       totalMinutes: 2,
@@ -57,9 +145,24 @@ describe('summarise', () => {
   })
 
   it('ignores bad durations instead of returning NaN', () => {
-    // @ts-expect-error malformed input from the RPC
-    const summary = summarise([{ id: 'a', d: 'x' }, { id: 'b', d: -5 }, { id: 'c', d: 30 }])
+    const summary = summarise([playable({ seconds: Number.NaN }), playable({ seconds: -5 }), playable({ seconds: 30 })])
     expect(summary).toEqual({ stretchCount: 3, totalSeconds: 30, totalMinutes: 1 })
+  })
+})
+
+describe('formatting', () => {
+  it('formats muscles for display', () => {
+    expect(formatMuscle('lower_back')).toBe('Lower back')
+    expect(formatMuscle('hip-flexors')).toBe('Hip flexors')
+    expect(formatMuscle('NECK')).toBe('Neck')
+    expect(formatMuscle('  ')).toBe('')
+  })
+
+  it('formats durations', () => {
+    expect(formatDuration(45)).toBe('45s')
+    expect(formatDuration(60)).toBe('1 min')
+    expect(formatDuration(125)).toBe('2:05')
+    expect(formatDuration(-3)).toBe('0s')
   })
 })
 
