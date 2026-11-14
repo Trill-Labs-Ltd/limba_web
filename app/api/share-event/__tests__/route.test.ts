@@ -4,28 +4,32 @@
 import { POST } from '../route'
 
 /**
- * /api/share-opened — the beacon behind routine_share_link_opened. Link-preview
- * bots fetch every shared link, so letting them through would inflate opens.
- * We validate:
+ * /api/share-event — the beacon behind routine_share_link_opened and
+ * routine_share_completed on the web. Link-preview bots fetch every shared
+ * link, so letting them through would inflate opens. We validate:
  * - bot / missing user agents are ignored (no Mixpanel call)
- * - real browsers are tracked with the right payload
- * - bad codes are rejected and an unset token is a no-op
+ * - real browsers are tracked with the right payload and event
+ * - the page's per-tab distinct_id is passed through so events join up
+ * - unknown events and bad codes are rejected; an unset token is a no-op
  */
 const CHROME_UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'
 const SENDER = '3f1c2b4a-1d2e-4f5a-8b9c-0d1e2f3a4b5c'
 
+const TAB_ID = '9b2e7c1a-4d3f-4a6b-9c8d-1e2f3a4b5c6d'
+const OPENED = 'routine_share_link_opened'
+
 function makeRequest(body: unknown, userAgent: string | null = CHROME_UA) {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' }
   if (userAgent !== null) headers['User-Agent'] = userAgent
-  return new Request('https://getlimba.com/api/share-opened', {
+  return new Request('https://getlimba.com/api/share-event', {
     method: 'POST',
     headers,
     body: typeof body === 'string' ? body : JSON.stringify(body),
   })
 }
 
-describe('POST /api/share-opened', () => {
+describe('POST /api/share-event', () => {
   const originalFetch = global.fetch
   const originalToken = process.env.MIXPANEL_PROJECT_TOKEN
   let fetchMock: jest.Mock
@@ -56,19 +60,19 @@ describe('POST /api/share-opened', () => {
     ['generic spider', 'Baiduspider'],
     ['generic preview', 'LinkPreview/3.0'],
   ])('ignores %s', async (_name, ua) => {
-    const res = await POST(makeRequest({ code: 'abc1234', sender_user_id: SENDER }, ua))
+    const res = await POST(makeRequest({ event: OPENED, code: 'abc1234', sender_user_id: SENDER }, ua))
     expect(res.status).toBe(204)
     expect(fetchMock).not.toHaveBeenCalled()
   })
 
   it('ignores a request with no user agent', async () => {
-    const res = await POST(makeRequest({ code: 'abc1234' }, null))
+    const res = await POST(makeRequest({ event: OPENED, code: 'abc1234' }, null))
     expect(res.status).toBe(204)
     expect(fetchMock).not.toHaveBeenCalled()
   })
 
   it('tracks a real browser open in Mixpanel EU', async () => {
-    const res = await POST(makeRequest({ code: 'abc1234', sender_user_id: SENDER }))
+    const res = await POST(makeRequest({ event: OPENED, code: 'abc1234', sender_user_id: SENDER }))
     expect(res.status).toBe(204)
     expect(fetchMock).toHaveBeenCalledTimes(1)
 
@@ -86,17 +90,40 @@ describe('POST /api/share-opened', () => {
     })
   })
 
-  it('uses a fresh distinct_id per request', async () => {
-    await POST(makeRequest({ code: 'abc1234' }))
-    await POST(makeRequest({ code: 'abc1234' }))
+  it('uses a fresh distinct_id per request when the page sends none', async () => {
+    await POST(makeRequest({ event: OPENED, code: 'abc1234' }))
+    await POST(makeRequest({ event: OPENED, code: 'abc1234' }))
     const ids = fetchMock.mock.calls.map(
       ([, init]) => JSON.parse(init.body)[0].properties.distinct_id
     )
     expect(ids[0]).not.toBe(ids[1])
   })
 
+  it('passes the per-tab distinct_id through so open and completion join up', async () => {
+    await POST(makeRequest({ event: OPENED, code: 'abc1234', distinct_id: TAB_ID }))
+    await POST(makeRequest({ event: 'routine_share_completed', code: 'abc1234', distinct_id: TAB_ID, sender_user_id: SENDER }))
+    const sent = fetchMock.mock.calls.map(([, init]) => JSON.parse(init.body)[0])
+    expect(sent.map((e) => e.event)).toEqual([OPENED, 'routine_share_completed'])
+    expect(sent.map((e) => e.properties.distinct_id)).toEqual([TAB_ID, TAB_ID])
+    expect(sent[1].properties).toMatchObject({ code: 'abc1234', platform: 'web', sender_user_id: SENDER })
+  })
+
+  it('replaces a distinct_id that is not a uuid', async () => {
+    await POST(makeRequest({ event: OPENED, code: 'abc1234', distinct_id: 'me@example.com' }))
+    const [, init] = fetchMock.mock.calls[0]
+    const id = JSON.parse(init.body)[0].properties.distinct_id
+    expect(id).not.toBe('me@example.com')
+    expect(id).toMatch(/^[0-9a-f-]{36}$/)
+  })
+
+  it.each([['routine_shared'], ['$identify'], [undefined], [42]])('rejects event %p', async (event) => {
+    const res = await POST(makeRequest({ event, code: 'abc1234' }))
+    expect(res.status).toBe(400)
+    expect(fetchMock).not.toHaveBeenCalled()
+  })
+
   it('drops a sender id that is not a uuid', async () => {
-    await POST(makeRequest({ code: 'abc1234', sender_user_id: 'not-a-uuid' }))
+    await POST(makeRequest({ event: OPENED, code: 'abc1234', sender_user_id: 'not-a-uuid' }))
     const [, init] = fetchMock.mock.calls[0]
     expect(JSON.parse(init.body)[0].properties.sender_user_id).toBeNull()
   })
@@ -104,7 +131,7 @@ describe('POST /api/share-opened', () => {
   it.each([['abc123'], ['abc-1234'], [42], [undefined]])(
     'rejects code %p',
     async (code) => {
-      const res = await POST(makeRequest({ code }))
+      const res = await POST(makeRequest({ event: OPENED, code }))
       expect(res.status).toBe(400)
       expect(fetchMock).not.toHaveBeenCalled()
     }
@@ -118,7 +145,7 @@ describe('POST /api/share-opened', () => {
 
   it('is a no-op when the Mixpanel token is unset', async () => {
     delete process.env.MIXPANEL_PROJECT_TOKEN
-    const res = await POST(makeRequest({ code: 'abc1234' }))
+    const res = await POST(makeRequest({ event: OPENED, code: 'abc1234' }))
     expect(res.status).toBe(204)
     expect(fetchMock).not.toHaveBeenCalled()
   })
@@ -126,7 +153,7 @@ describe('POST /api/share-opened', () => {
   it('still answers 204 when Mixpanel is down', async () => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
     fetchMock.mockRejectedValueOnce(new Error('network'))
-    const res = await POST(makeRequest({ code: 'abc1234' }))
+    const res = await POST(makeRequest({ event: OPENED, code: 'abc1234' }))
     expect(res.status).toBe(204)
   })
 })
