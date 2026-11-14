@@ -1,10 +1,11 @@
 # /.well-known — deep link verification files
 
-These two files let `https://www.getlimba.com/start` open the Limba app
-directly (iOS Universal Links / Android App Links) when it's installed, and fall
-back to the website otherwise. They are matched against the mobile app's
-`associatedDomains` (iOS) and `autoVerify` intent filter (Android) configured in
-`limba_mobile/app.config.js`.
+These two files let `https://www.getlimba.com/start` and shared-routine short
+links (`https://getlimba.com/r/<code>`, served on both `getlimba.com` and
+`www.getlimba.com`) open the Limba app directly (iOS Universal Links / Android
+App Links) when it's installed, and fall back to the website otherwise. They are
+matched against the mobile app's `associatedDomains` (iOS) and `autoVerify`
+intent filter (Android) configured in `limba_mobile/app.config.js`.
 
 ## apple-app-site-association (iOS)
 
@@ -12,11 +13,18 @@ back to the website otherwise. They are matched against the mobile app's
   **with no file extension**, over HTTPS, with **no redirects**, and with
   `Content-Type: application/json` (enforced via `next.config.js` headers).
 - `appID` = `<TeamID>.<bundleId>` = `GY6477ZXJ3.com.TrillLabs.Limba-mobile`.
+- `paths` = `/start`, `/start/*` and `/r/*`. `/r/*` is the shared-routine short
+  link; the app must handle that route too (limba_mobile). Without the app, the
+  web page at `app/r/[code]/page.tsx` shows a preview and the store buttons.
+- The apex `getlimba.com` must serve this file itself (no redirect to `www`),
+  because short links use the apex and iOS checks each domain separately.
 - Apple's CDN caches this file. After deploying, give it time and re-test on a
   real device (Universal Links do not work in the simulator).
 
 ## assetlinks.json (Android)
 
+- Android has no path list here: the paths live in the app's intent filters, so
+  `/r` needs its own `pathPrefix` entry in `limba_mobile/app.config.js`.
 - Served at `https://www.getlimba.com/.well-known/assetlinks.json`.
 - `sha256_cert_fingerprints` lists **every** signing key that ships the app. The
   committed file contains all three (no action needed):
@@ -34,6 +42,7 @@ value can be horizontally truncated.
 ### Verifying after deploy
 
 - iOS: `https://app-site-association.cdn-apple.com/a/v1/www.getlimba.com`
+  and `https://app-site-association.cdn-apple.com/a/v1/getlimba.com`
 - Android: `https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://www.getlimba.com&relation=delegate_permission/common.handle_all_urls`
 - On-device (Android): `adb shell pm verify-app-links --re-verify com.trillLabs.limba`
   then `adb shell pm get-app-links com.trillLabs.limba`

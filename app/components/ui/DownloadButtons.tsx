@@ -10,12 +10,18 @@ interface DownloadButtonsProps {
   className?: string
   justify?: 'start' | 'center' | 'end'
   size?: 'sm' | 'md'
+  /** Override the App Store link, e.g. with an AppsFlyer OneLink. */
+  appStoreHref?: string
+  /** Override the Google Play link, e.g. with an AppsFlyer OneLink. */
+  playStoreHref?: string
 }
 
 export function DownloadButtons({
   className = '',
   justify = 'start',
   size = 'md',
+  appStoreHref = APP_STORE_URL,
+  playStoreHref = PLAY_STORE_URL,
 }: DownloadButtonsProps) {
   const justifyClass =
     justify === 'center'
@@ -32,7 +38,7 @@ export function DownloadButtons({
       className={`flex flex-row items-center ${justifyClass} gap-3 ${isSm ? '' : 'sm:gap-4 w-full'} ${className}`}
     >
       <a
-        href={APP_STORE_URL}
+        href={appStoreHref}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Limba on the App Store"
@@ -49,7 +55,7 @@ export function DownloadButtons({
       </a>
 
       <a
-        href={PLAY_STORE_URL}
+        href={playStoreHref}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Limba on Google Play"
