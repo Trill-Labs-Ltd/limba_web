@@ -33,7 +33,7 @@ export const FEATURES: Feature[] = [
   {
     image: '/player/features/journeys.webp',
     title: 'Journeys',
-    text: 'Step-by-step programmes for your knees, hips and back.',
+    text: 'Step-by-step programmes for your needs.',
   },
 ]
 
