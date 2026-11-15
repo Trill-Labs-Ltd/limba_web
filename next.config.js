@@ -4,6 +4,18 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  async redirects() {
+    return [
+      {
+        // Shared-routine links moved from /r/<code> to /shared-routine/<code>.
+        // Links already sent keep working in the browser; with the app
+        // installed they open it directly (both paths are in the AASA file).
+        source: '/r/:code',
+        destination: '/shared-routine/:code',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

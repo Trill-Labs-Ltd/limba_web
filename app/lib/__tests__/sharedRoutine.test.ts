@@ -12,7 +12,7 @@ import {
 } from '../sharedRoutine'
 
 /**
- * sharedRoutine helpers — these decide whether /r/<code> calls the backend at
+ * sharedRoutine helpers — these decide whether /shared-routine/<code> calls the backend at
  * all, how API items become playable stretches (must match the app's mapping),
  * what the preview and link-preview text say, and where the store buttons go.
  */

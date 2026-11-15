@@ -5,7 +5,7 @@ import { isValidShareCode, type ApiSharedRoutine } from './sharedRoutine'
  *
  * Server only: the backend's CORS config does not allow getlimba.com, and each
  * call counts a view, so the browser never calls it directly. Used by the
- * /r/<code> page (once per request via React cache()) and by the video refresh
+ * /shared-routine/<code> page (once per request via React cache()) and by the video refresh
  * route.
  */
 

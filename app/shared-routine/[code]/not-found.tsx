@@ -3,7 +3,7 @@ import { Header, Footer } from '@/app/components/layout'
 import { DownloadButtons } from '@/app/components/ui'
 import { TAILWIND_CLASSES } from '@/app/lib/constants'
 
-/** Shown for a badly formed, unknown or expired /r/<code> link. */
+/** Shown for a badly formed, unknown or expired /shared-routine/<code> link. */
 export default function SharedRoutineNotFound() {
   return (
     <main className="min-h-screen bg-white">

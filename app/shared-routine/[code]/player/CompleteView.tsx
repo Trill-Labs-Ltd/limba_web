@@ -171,8 +171,8 @@ export function CompleteView({
             />
             <span className="w-px bg-black/5" style={{ height: vs(30) }} />
             <Stat
-              // eslint-disable-next-line @next/next/no-img-element
               icon={
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src="/player/clock.webp"
                   alt=""

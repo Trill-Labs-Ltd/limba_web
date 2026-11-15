@@ -2,7 +2,7 @@ import { isBotUserAgent } from '@/app/lib/botUserAgent'
 import { isValidShareCode } from '@/app/lib/sharedRoutine'
 
 /**
- * Beacon from /r/<code>: tracks the web side of the share funnel in Mixpanel (EU):
+ * Beacon from /shared-routine/<code>: tracks the web side of the share funnel in Mixpanel (EU):
  *   routine_share_link_opened — a person opened the page
  *   routine_share_completed   — they finished the routine in the browser player
  *

@@ -55,7 +55,7 @@ export async function generateMetadata({
 
   const title = sharedRoutineTitle(routine.senderName)
   const description = sharedRoutineDescription(summarise(routine.stretches))
-  const url = `${SITE_URL}/r/${params.code}`
+  const url = `${SITE_URL}/shared-routine/${params.code}`
 
   // The OG/Twitter image comes from ./opengraph-image.tsx (file convention),
   // which is static so link previews don't call the backend again.
@@ -86,7 +86,8 @@ export async function generateMetadata({
 }
 
 /**
- * Landing page for a shared-routine short link, https://getlimba.com/r/<code>.
+ * Landing page for a shared-routine link, https://getlimba.com/shared-routine/<code>
+ * (older links use /r/<code>, which redirects here; see next.config.js).
  *
  * With the app installed, tapping the link opens the app directly (iOS
  * Universal Links via the AASA file, Android App Links via assetlinks.json) and

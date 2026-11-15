@@ -7,14 +7,14 @@ import { fetchSharedRoutine } from '@/app/lib/sharedRoutineApi'
 jest.mock('@/app/lib/sharedRoutineApi', () => ({ fetchSharedRoutine: jest.fn() }))
 
 /**
- * /api/r/<code>/videos — fresh signed video URLs for a long-open player tab.
+ * /api/shared-routine/<code>/videos — fresh signed video URLs for a long-open player tab.
  * It must return only the video fields and never be cached.
  */
 const fetchMock = fetchSharedRoutine as jest.MockedFunction<typeof fetchSharedRoutine>
 
-const get = (code: string) => GET(new Request(`https://getlimba.com/api/r/${code}/videos`), { params: { code } })
+const get = (code: string) => GET(new Request(`https://getlimba.com/api/shared-routine/${code}/videos`), { params: { code } })
 
-describe('GET /api/r/[code]/videos', () => {
+describe('GET /api/shared-routine/[code]/videos', () => {
   afterEach(() => fetchMock.mockReset())
 
   it('returns only id and video fields, uncached', async () => {

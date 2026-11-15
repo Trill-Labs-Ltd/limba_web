@@ -4,7 +4,7 @@
 import { apiBaseUrl, fetchSharedRoutine } from '../sharedRoutineApi'
 
 /**
- * fetchSharedRoutine — the page's only data source for /r/<code>. It must call
+ * fetchSharedRoutine — the page's only data source for /shared-routine/<code>. It must call
  * the public endpoint without auth, in English, never cached, and turn every
  * failure into null (the page then shows the friendly not-found page).
  */

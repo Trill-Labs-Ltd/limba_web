@@ -77,7 +77,7 @@ export function RoutinePlayer({
     if (refreshed.current) return
     refreshed.current = true
     try {
-      const res = await fetch(`/api/r/${code}/videos`, {
+      const res = await fetch(`/api/shared-routine/${code}/videos`, {
         credentials: 'omit',
         cache: 'no-store',
       })

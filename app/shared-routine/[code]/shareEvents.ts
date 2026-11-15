@@ -1,4 +1,4 @@
-/** Events the /r/<code> page reports to /api/share-event (Mixpanel, EU). */
+/** Events the /shared-routine/<code> page reports to /api/share-event (Mixpanel, EU). */
 export type ShareEvent = 'routine_share_link_opened' | 'routine_share_completed'
 
 interface ShareEventPayload {

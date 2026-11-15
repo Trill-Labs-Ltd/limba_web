@@ -2,7 +2,7 @@ import { isValidShareCode, toPlayable } from '@/app/lib/sharedRoutine'
 import { fetchSharedRoutine } from '@/app/lib/sharedRoutineApi'
 
 /**
- * Fresh signed video URLs for the /r/<code> browser player. Signed URLs last
+ * Fresh signed video URLs for the /shared-routine/<code> browser player. Signed URLs last
  * about an hour, so a tab left open longer asks here once. Returns only the
  * video fields. Each call counts a view on the backend, which is why the
  * player calls it at most once per tab.

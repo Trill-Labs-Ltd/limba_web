@@ -1,7 +1,8 @@
 # /.well-known — deep link verification files
 
-These two files let `https://www.getlimba.com/start` and shared-routine short
-links (`https://getlimba.com/r/<code>`, served on both `getlimba.com` and
+These two files let `https://www.getlimba.com/start` and shared-routine links
+(`https://getlimba.com/shared-routine/<code>`, and older `/r/<code>` links,
+served on both `getlimba.com` and
 `www.getlimba.com`) open the Limba app directly (iOS Universal Links / Android
 App Links) when it's installed, and fall back to the website otherwise. They are
 matched against the mobile app's `associatedDomains` (iOS) and `autoVerify`
@@ -13,9 +14,12 @@ intent filter (Android) configured in `limba_mobile/app.config.js`.
   **with no file extension**, over HTTPS, with **no redirects**, and with
   `Content-Type: application/json` (enforced via `next.config.js` headers).
 - `appID` = `<TeamID>.<bundleId>` = `GY6477ZXJ3.com.TrillLabs.Limba-mobile`.
-- `paths` = `/start`, `/start/*` and `/r/*`. `/r/*` is the shared-routine short
-  link; the app must handle that route too (limba_mobile). Without the app, the
-  web page at `app/r/[code]/page.tsx` shows a preview and the store buttons.
+- `paths` = `/start`, `/start/*`, `/shared-routine/*` and `/r/*`.
+  `/shared-routine/*` is the shared-routine link; `/r/*` is the older form, kept
+  so links already sent still open the app. The app must handle both routes
+  (limba_mobile). Without the app, the web page at
+  `app/shared-routine/[code]/page.tsx` shows the routine (`/r/<code>` redirects
+  there, see `next.config.js`).
 - The apex `getlimba.com` must serve this file itself (no redirect to `www`),
   because short links use the apex and iOS checks each domain separately.
 - Apple's CDN caches this file. After deploying, give it time and re-test on a
@@ -24,7 +28,8 @@ intent filter (Android) configured in `limba_mobile/app.config.js`.
 ## assetlinks.json (Android)
 
 - Android has no path list here: the paths live in the app's intent filters, so
-  `/r` needs its own `pathPrefix` entry in `limba_mobile/app.config.js`.
+  `/shared-routine/` and `/r/` each need a `pathPrefix` entry in
+  `limba_mobile/app.config.js`.
 - Served at `https://www.getlimba.com/.well-known/assetlinks.json`.
 - `sha256_cert_fingerprints` lists **every** signing key that ships the app. The
   committed file contains all three (no action needed):

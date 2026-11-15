@@ -1,5 +1,6 @@
 /**
- * Helpers for shared-routine short links (https://getlimba.com/r/<code>).
+ * Helpers for shared-routine short links (https://getlimba.com/shared-routine/<code>,
+ * older links /r/<code>).
  *
  * The routine lives in Supabase (`shared_routines`). The page reads it through
  * the backend's public endpoint (see sharedRoutineApi.ts), which also returns

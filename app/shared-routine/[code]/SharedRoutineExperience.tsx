@@ -24,7 +24,7 @@ function newDistinctId(): string | null {
 }
 
 /**
- * The interactive part of /r/<code>: reports the open, offers "Start routine",
+ * The interactive part of /shared-routine/<code>: reports the open, offers "Start routine",
  * runs the browser player and reports a completion. One anonymous id per tab
  * (memory only, no cookies or storage) ties the open and completion together.
  */
