@@ -2,8 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import type { RoutineSummary } from '@/app/lib/sharedRoutine'
-import { APP_STORE_URL, DownloadButtons, PLAY_STORE_URL } from '@/app/components/ui/DownloadButtons'
+import {
+  APP_STORE_URL,
+  DownloadButtons,
+  PLAY_STORE_URL,
+} from '@/app/components/ui/DownloadButtons'
 import { CheckCircleIcon, PersonSimpleTaiChiDuotoneIcon } from './appIcons'
+import { useAppScale } from './appScale'
 import styles from './player.module.css'
 
 /**
@@ -26,7 +31,8 @@ interface CompleteViewProps {
 
 /** Store link for this device when OneLink isn't configured. */
 function deviceStoreUrl(): string {
-  if (typeof navigator !== 'undefined' && /android/i.test(navigator.userAgent)) return PLAY_STORE_URL
+  if (typeof navigator !== 'undefined' && /android/i.test(navigator.userAgent))
+    return PLAY_STORE_URL
   return APP_STORE_URL
 }
 
@@ -40,9 +46,18 @@ function formatCompleteDuration(seconds: number): string {
   return `${mins}m ${secs}s`
 }
 
-const CONFETTI_COLOURS = ['#14B8A6', '#F59E0B', '#F472B6', '#60A5FA', '#A78BFA', '#34D399', '#FB923C']
+const CONFETTI_COLOURS = [
+  '#14B8A6',
+  '#F59E0B',
+  '#F472B6',
+  '#60A5FA',
+  '#A78BFA',
+  '#34D399',
+  '#FB923C',
+]
 
 export function CompleteView({ summary, oneLink }: CompleteViewProps) {
+  const { s, vs, ms } = useAppScale()
   // Resolved after mount so the server and client render the same href.
   const [storeUrl, setStoreUrl] = useState(APP_STORE_URL)
   useEffect(() => setStoreUrl(deviceStoreUrl()), [])
@@ -51,35 +66,111 @@ export function CompleteView({ summary, oneLink }: CompleteViewProps) {
   return (
     <div className="relative flex h-full flex-col bg-[#EFFEF9]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/player/routine-complete-bg.webp" alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
+      <img
+        src="/player/routine-complete-bg.webp"
+        alt=""
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+      />
       <Confetti />
 
-      <div className={`relative z-10 flex min-h-0 flex-1 flex-col px-6 pt-[env(safe-area-inset-top)] ${styles.enter}`}>
-        <div className="flex flex-1 flex-col items-center overflow-y-auto pb-[calc(20px+env(safe-area-inset-bottom))] pt-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mb-2 flex flex-col items-center">
-            <span className="mb-3 flex items-center gap-1.5 rounded-[18px] bg-white/70 px-3 py-1.5">
-              <CheckCircleIcon size={17} className="text-[#087F6B]" />
-              <span className="text-[11px] font-bold tracking-[1px] text-[#087F6B]">COMPLETED</span>
+      <div
+        className={`relative z-10 flex min-h-0 flex-1 flex-col ${styles.enter}`}
+        style={{
+          paddingLeft: s(24),
+          paddingRight: s(24),
+          paddingTop: 'env(safe-area-inset-top)',
+        }}
+      >
+        <div
+          className="flex flex-1 flex-col items-center overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{
+            paddingTop: vs(10),
+            paddingBottom: `calc(${vs(20)}px + env(safe-area-inset-bottom))`,
+          }}
+        >
+          <div
+            className="flex flex-col items-center"
+            style={{ marginBottom: vs(8) }}
+          >
+            <span
+              className="flex items-center bg-white/70"
+              style={{
+                gap: s(6),
+                paddingLeft: s(12),
+                paddingRight: s(12),
+                paddingTop: vs(6),
+                paddingBottom: vs(6),
+                borderRadius: s(18),
+                marginBottom: vs(12),
+              }}
+            >
+              <CheckCircleIcon size={s(17)} className="text-[#087F6B]" />
+              <span
+                className="font-bold text-[#087F6B]"
+                style={{ fontSize: ms(11), letterSpacing: 1 }}
+              >
+                COMPLETED
+              </span>
             </span>
-            <h2 className="mb-1 text-center text-[28px] font-bold tracking-[-1px] text-black">Routine Complete!</h2>
-            <p className="px-5 text-center text-[15px] font-medium leading-5 text-[#666666] opacity-80">
-              Nice work. Limba builds routines like this around your body, every day.
+            <h2
+              className="text-center font-bold text-black"
+              style={{
+                fontSize: ms(28),
+                letterSpacing: -1,
+                marginBottom: vs(4),
+              }}
+            >
+              Routine Complete!
+            </h2>
+            <p
+              className="text-center font-medium text-[#666666] opacity-80"
+              style={{
+                fontSize: ms(15),
+                lineHeight: `${ms(20)}px`,
+                paddingLeft: s(20),
+                paddingRight: s(20),
+              }}
+            >
+              Nice work. Limba builds routines like this around your body, every
+              day.
             </p>
           </div>
 
           <CelebratingCat />
 
-          <div className="mb-4 flex w-full items-center justify-evenly rounded-[20px] border border-[rgba(8,127,107,0.12)] bg-[#E9F8F3] px-1.5 py-3.5 shadow-[0_4px_12px_rgba(0,0,0,0.04)]">
+          <div
+            className="flex w-full items-center justify-evenly border border-[rgba(8,127,107,0.12)] bg-[#E9F8F3] shadow-[0_4px_12px_rgba(0,0,0,0.04)]"
+            style={{
+              borderRadius: s(20),
+              paddingTop: vs(14),
+              paddingBottom: vs(14),
+              paddingLeft: s(6),
+              paddingRight: s(6),
+              marginBottom: vs(16),
+            }}
+          >
             <Stat
-              icon={<PersonSimpleTaiChiDuotoneIcon size={24} className="text-[#008080]" />}
+              icon={
+                <PersonSimpleTaiChiDuotoneIcon
+                  size={s(24)}
+                  className="text-[#008080]"
+                />
+              }
               iconBackground="#E0F2F1"
               value={String(summary.stretchCount)}
               label="Stretches"
             />
-            <span className="h-[30px] w-px bg-black/5" />
+            <span className="w-px bg-black/5" style={{ height: vs(30) }} />
             <Stat
               // eslint-disable-next-line @next/next/no-img-element
-              icon={<img src="/player/clock.webp" alt="" className="h-6 w-6 object-contain" />}
+              icon={
+                <img
+                  src="/player/clock.webp"
+                  alt=""
+                  className="object-contain"
+                  style={{ width: s(24), height: s(24) }}
+                />
+              }
               iconBackground="#FFF8E1"
               value={formatCompleteDuration(summary.totalSeconds)}
               label="Duration"
@@ -89,65 +180,130 @@ export function CompleteView({ summary, oneLink }: CompleteViewProps) {
           {/* The CTA sits right under the summary, with the store badges below it. */}
           <a
             href={downloadHref}
-            className={`mt-2 flex h-14 w-full shrink-0 items-center justify-center rounded-[28px] bg-[#008080] text-lg font-bold tracking-[0.5px] text-white ${styles.glow}`}
+            className={`flex w-full shrink-0 items-center justify-center bg-[#008080] font-bold text-white ${styles.glow}`}
+            style={{
+              marginTop: vs(6),
+              height: vs(56),
+              borderRadius: s(28),
+              fontSize: ms(18),
+              letterSpacing: 0.5,
+            }}
           >
             Download Limba
           </a>
-          <DownloadButtons
-            className="mt-5"
-            justify="center"
-            size="sm"
-            appStoreHref={oneLink ?? undefined}
-            playStoreHref={oneLink ?? undefined}
-          />
+          <div style={{ marginTop: vs(20) }}>
+            <DownloadButtons
+              justify="center"
+              size="sm"
+              appStoreHref={oneLink ?? undefined}
+              playStoreHref={oneLink ?? undefined}
+            />
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-function Stat({ icon, iconBackground, value, label }: { icon: React.ReactNode; iconBackground: string; value: string; label: string }) {
+function Stat({
+  icon,
+  iconBackground,
+  value,
+  label,
+}: {
+  icon: React.ReactNode
+  iconBackground: string
+  value: string
+  label: string
+}) {
+  const { s, vs, ms } = useAppScale()
   return (
-    <div className="flex min-w-0 flex-1 items-center justify-center gap-1">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[11px]" style={{ background: iconBackground }}>
+    <div
+      className="flex min-w-0 flex-1 items-center justify-center"
+      style={{ gap: s(4) }}
+    >
+      <span
+        className="flex shrink-0 items-center justify-center"
+        style={{
+          width: s(36),
+          height: vs(36),
+          borderRadius: s(11),
+          background: iconBackground,
+        }}
+      >
         {icon}
       </span>
       <span className="min-w-0 shrink">
-        <span className="block text-lg font-bold text-black">{value}</span>
-        <span className="block text-[9px] font-semibold uppercase leading-[11px] text-[#666666]">{label}</span>
+        <span
+          className="block font-bold text-black"
+          style={{ fontSize: ms(18) }}
+        >
+          {value}
+        </span>
+        <span
+          className="block font-semibold uppercase text-[#666666]"
+          style={{ fontSize: ms(9), lineHeight: `${ms(11)}px` }}
+        >
+          {label}
+        </span>
       </span>
     </div>
   )
 }
 
-/** The Limba cat popping in with a glow, a ripple and twinkling sparkles. */
+/** The Limba cat popping in with a glow, a ripple and twinkling sparkles, in the app's 250x231 hero box. */
 function CelebratingCat() {
+  const { s, vs } = useAppScale()
   const sparkles = [
     { left: '12%', top: '18%', delay: '0s', size: 14 },
     { left: '82%', top: '24%', delay: '0.6s', size: 12 },
     { left: '76%', top: '72%', delay: '1.2s', size: 10 },
   ]
   return (
-    <div className="relative mb-[5px] flex h-[231px] w-[250px] items-center justify-center" aria-hidden="true">
+    <div
+      className="relative flex shrink-0 items-center justify-center"
+      style={{ width: s(250), height: s(231), marginBottom: vs(5) }}
+      aria-hidden="true"
+    >
       <span
-        className={`absolute h-[190px] w-[190px] rounded-full ${styles.bloom}`}
-        style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(178,223,223,0.55) 45%, rgba(178,223,223,0) 70%)' }}
+        className={`absolute rounded-full ${styles.bloom}`}
+        style={{
+          width: s(190),
+          height: s(190),
+          background:
+            'radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(178,223,223,0.55) 45%, rgba(178,223,223,0) 70%)',
+        }}
       />
-      <span className={`absolute h-[170px] w-[170px] rounded-full border-4 border-white/80 ${styles.ripple}`} />
-      {sparkles.map((s) => (
+      <span
+        className={`absolute rounded-full border-white/80 ${styles.ripple}`}
+        style={{ width: s(170), height: s(170), borderWidth: s(4) }}
+      />
+      {sparkles.map((sparkle) => (
         <svg
-          key={s.left}
+          key={sparkle.left}
           viewBox="0 0 24 24"
-          width={s.size}
-          height={s.size}
+          width={s(sparkle.size)}
+          height={s(sparkle.size)}
           className={`absolute ${styles.twinkle}`}
-          style={{ left: s.left, top: s.top, animationDelay: s.delay }}
+          style={{
+            left: sparkle.left,
+            top: sparkle.top,
+            animationDelay: sparkle.delay,
+          }}
         >
-          <path d="M12 0 14.5 9.5 24 12 14.5 14.5 12 24 9.5 14.5 0 12 9.5 9.5Z" fill="#F5A623" />
+          <path
+            d="M12 0 14.5 9.5 24 12 14.5 14.5 12 24 9.5 14.5 0 12 9.5 9.5Z"
+            fill="#F5A623"
+          />
         </svg>
       ))}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/player/limba-cat-happy.webp" alt="" className={`relative h-[200px] w-auto ${styles.catPop}`} />
+      <img
+        src="/player/limba-cat-happy.webp"
+        alt=""
+        className={`relative w-auto ${styles.catPop}`}
+        style={{ height: s(200) }}
+      />
     </div>
   )
 }
@@ -168,7 +324,10 @@ function Confetti() {
     }
   })
   return (
-    <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden" aria-hidden="true">
+    <div
+      className="pointer-events-none absolute inset-0 z-20 overflow-hidden"
+      aria-hidden="true"
+    >
       {pieces.map((p, i) => (
         <span
           key={i}

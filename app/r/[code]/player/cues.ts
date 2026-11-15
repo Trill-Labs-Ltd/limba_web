@@ -16,7 +16,9 @@ let context: AudioContext | null = null
 
 function audioContextClass(): typeof AudioContext | null {
   if (typeof window === 'undefined') return null
-  const w = window as typeof window & { webkitAudioContext?: typeof AudioContext }
+  const w = window as typeof window & {
+    webkitAudioContext?: typeof AudioContext
+  }
   return w.AudioContext ?? w.webkitAudioContext ?? null
 }
 
@@ -37,9 +39,16 @@ type Note = [number, number, number]
 const CUES: Record<Cue, Note[]> = {
   tick: [[660, 0, 0.08]],
   go: [[990, 0, 0.18]],
-  transition: [[523, 0, 0.1], [784, 0.11, 0.14]],
+  transition: [
+    [523, 0, 0.1],
+    [784, 0.11, 0.14],
+  ],
   final: [[880, 0, 0.06]],
-  complete: [[523, 0, 0.14], [659, 0.15, 0.14], [784, 0.3, 0.28]],
+  complete: [
+    [523, 0, 0.14],
+    [659, 0.15, 0.14],
+    [784, 0.3, 0.28],
+  ],
 }
 
 export function playCue(cue: Cue): void {

@@ -247,44 +247,47 @@ const STRETCH_ID_MAP: Record<string, string> = {
 
 // Name variations -> icon keys.
 const STRETCH_NAME_ALIASES: Record<string, string> = {
-  'across_body_shoulder_stretch': 'across_body_stretch',
-  'ankle_dorsiflexion_knee_to_wall': 'ankle_dorsiflexion',
-  'bird_dog': 'birddog',
-  'bent_knee_calf_stretch': 'standing_calf_stretch',
-  'butterfly': 'butterfly_pose',
-  'cat_cow': 'cat_cow_lumbar',
-  'cat_cow_upper_focus': 'cat_cow_upper_back',
-  'childs_pose': 'child_pose',
-  'childs_pose_lumbar_soften': 'child_pose',
-  'figure_4_glute_stretch': 'reclined_figure_four',
-  'figure4_glute_stretch': 'reclined_figure_four',
-  'glute_bridges_with_calf_raises': 'glute_bridges_calf_raises',
-  'good_mornings': 'goodmornings',
-  'good_mornings_bodyweight': 'goodmornings',
-  'hamstring_wall_stretch': 'wall_hamstring_stretch',
-  'hip_circle': 'hip_circle_standing',
-  'lying_snow_angels': 'supine_snow_angels',
-  'hands_clasped_behind_back': 'hands_clapsed_behind_back',
-  'hands_clasped_behind_back_lift': 'hands_clapsed_behind_back',
-  'half_kneeling_quad_reach': 'low_lunge_quad',
-  'low_lunge_quad_stretch_grab_foot': 'low_lunge_quad',
-  'standing_calf_stretch_gastrocnemius': 'standing_calf_stretch',
-  'standing_quad_stretch_side_hold': 'standing_quad_stretch',
-  'standing_toe_touch_flat_back': 'standing_toe_touch',
-  'thoracic_extension_on_chair': 'thoracic_extension_chair',
-  'toe_raises': 'toe_raises_slow_eccentric',
-  'wall_calf_press': 'wall_calf_raises',
-  'wall_assisted_standing_quad': 'wall_assisted_quad_stretch',
-  'wall_sits_with_calf_raises': 'wall_sits_calf_raises',
-  'terminal_knee_extension_tke': 'terminal_knee_extension',
-  'arm_circles_forward_and_back': 'arm_circles',
+  across_body_shoulder_stretch: 'across_body_stretch',
+  ankle_dorsiflexion_knee_to_wall: 'ankle_dorsiflexion',
+  bird_dog: 'birddog',
+  bent_knee_calf_stretch: 'standing_calf_stretch',
+  butterfly: 'butterfly_pose',
+  cat_cow: 'cat_cow_lumbar',
+  cat_cow_upper_focus: 'cat_cow_upper_back',
+  childs_pose: 'child_pose',
+  childs_pose_lumbar_soften: 'child_pose',
+  figure_4_glute_stretch: 'reclined_figure_four',
+  figure4_glute_stretch: 'reclined_figure_four',
+  glute_bridges_with_calf_raises: 'glute_bridges_calf_raises',
+  good_mornings: 'goodmornings',
+  good_mornings_bodyweight: 'goodmornings',
+  hamstring_wall_stretch: 'wall_hamstring_stretch',
+  hip_circle: 'hip_circle_standing',
+  lying_snow_angels: 'supine_snow_angels',
+  hands_clasped_behind_back: 'hands_clapsed_behind_back',
+  hands_clasped_behind_back_lift: 'hands_clapsed_behind_back',
+  half_kneeling_quad_reach: 'low_lunge_quad',
+  low_lunge_quad_stretch_grab_foot: 'low_lunge_quad',
+  standing_calf_stretch_gastrocnemius: 'standing_calf_stretch',
+  standing_quad_stretch_side_hold: 'standing_quad_stretch',
+  standing_toe_touch_flat_back: 'standing_toe_touch',
+  thoracic_extension_on_chair: 'thoracic_extension_chair',
+  toe_raises: 'toe_raises_slow_eccentric',
+  wall_calf_press: 'wall_calf_raises',
+  wall_assisted_standing_quad: 'wall_assisted_quad_stretch',
+  wall_sits_with_calf_raises: 'wall_sits_calf_raises',
+  terminal_knee_extension_tke: 'terminal_knee_extension',
+  arm_circles_forward_and_back: 'arm_circles',
 }
 
 export function normalizeStretchKey(name: string): string {
   if (!name) return ''
   let normalized = name.toLowerCase().trim()
   normalized = normalized.replace(/\s*\([^)]*\)/g, '')
-  normalized = normalized.replace(/[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g, '-')
+  normalized = normalized.replace(
+    /[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g,
+    '-'
+  )
   normalized = normalized.replace(/(\d+)\/(\d+)/g, '$1_$2')
   normalized = normalized.replace(/[\s\-_/]+/g, '_')
   normalized = normalized.replace(/[^\w_]/g, '')
@@ -296,24 +299,32 @@ export function normalizeStretchKey(name: string): string {
 const iconUrl = (key: string) => `/stretch-icons/${key}.webp`
 
 /** Illustration URL for a stretch, or null when there is none (same rules as the app). */
-export function stretchIconUrl(stretch: { id?: string | null; name?: string | null }): string | null {
+export function stretchIconUrl(stretch: {
+  id?: string | null
+  name?: string | null
+}): string | null {
   const id = stretch.id ?? undefined
-  if (id && STRETCH_ID_MAP[id] && ICON_KEYS.has(STRETCH_ID_MAP[id])) return iconUrl(STRETCH_ID_MAP[id])
+  if (id && STRETCH_ID_MAP[id] && ICON_KEYS.has(STRETCH_ID_MAP[id]))
+    return iconUrl(STRETCH_ID_MAP[id])
 
   const name = stretch.name ?? undefined
   if (!name) return null
   const key = normalizeStretchKey(name)
   if (key && ICON_KEYS.has(key)) return iconUrl(key)
-  if (key && STRETCH_NAME_ALIASES[key] && ICON_KEYS.has(STRETCH_NAME_ALIASES[key])) {
+  if (
+    key &&
+    STRETCH_NAME_ALIASES[key] &&
+    ICON_KEYS.has(STRETCH_NAME_ALIASES[key])
+  ) {
     return iconUrl(STRETCH_NAME_ALIASES[key])
   }
   if (key && key.length > 5) {
     const sorted = Array.from(ICON_KEYS).sort((a, b) => b.length - a.length)
     for (const iconKey of sorted) {
-      if (key.startsWith(iconKey) && iconKey.length >= 8) return iconUrl(iconKey)
+      if (key.startsWith(iconKey) && iconKey.length >= 8)
+        return iconUrl(iconKey)
       if (iconKey.startsWith(key) && key.length >= 8) return iconUrl(iconKey)
     }
   }
   return null
 }
-

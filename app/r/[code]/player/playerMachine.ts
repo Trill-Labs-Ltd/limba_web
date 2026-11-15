@@ -53,10 +53,20 @@ export function initPlayer(stretches: PlayableStretch[]): PlayerState {
 }
 
 function preview(index: number): PlayerState {
-  return { phase: 'preview', index, side: 1, remaining: PREVIEW_SECONDS, paused: false }
+  return {
+    phase: 'preview',
+    index,
+    side: 1,
+    remaining: PREVIEW_SECONDS,
+    paused: false,
+  }
 }
 
-function playing(stretch: PlayableStretch, index: number, side: 1 | 2): PlayerState {
+function playing(
+  stretch: PlayableStretch,
+  index: number,
+  side: 1 | 2
+): PlayerState {
   return {
     phase: 'playing',
     index,
@@ -69,13 +79,23 @@ function playing(stretch: PlayableStretch, index: number, side: 1 | 2): PlayerSt
 function next(ctx: PlayerContext, state: PlayerState): PlayerState {
   const nextIndex = state.index + 1
   if (nextIndex >= ctx.stretches.length) {
-    return { phase: 'complete', index: state.index, side: 1, remaining: 0, paused: false }
+    return {
+      phase: 'complete',
+      index: state.index,
+      side: 1,
+      remaining: 0,
+      paused: false,
+    }
   }
   return preview(nextIndex)
 }
 
 /** End of side 1 of a both-sided stretch, or the end of the stretch. */
-function finishSide(ctx: PlayerContext, state: PlayerState, stretch: PlayableStretch): PlayerState {
+function finishSide(
+  ctx: PlayerContext,
+  state: PlayerState,
+  stretch: PlayableStretch
+): PlayerState {
   if (stretch.bothSides && state.side === 1) {
     return stretch.mode === 'timed'
       ? { ...state, phase: 'swap', remaining: SWAP_SECONDS, paused: false }
@@ -84,7 +104,11 @@ function finishSide(ctx: PlayerContext, state: PlayerState, stretch: PlayableStr
   return next(ctx, state)
 }
 
-export function playerReducer(ctx: PlayerContext, state: PlayerState, event: PlayerEvent): PlayerState {
+export function playerReducer(
+  ctx: PlayerContext,
+  state: PlayerState,
+  event: PlayerEvent
+): PlayerState {
   if (event.type === 'RESTART') return initPlayer(ctx.stretches)
   if (state.phase === 'complete') return state
 
@@ -114,13 +138,19 @@ export function playerReducer(ctx: PlayerContext, state: PlayerState, event: Pla
       return state
 
     case 'SWITCH_SIDES':
-      if (state.phase === 'playing' && stretch.mode === 'reps' && stretch.bothSides && state.side === 1) {
+      if (
+        state.phase === 'playing' &&
+        stretch.mode === 'reps' &&
+        stretch.bothSides &&
+        state.side === 1
+      ) {
         return playing(stretch, state.index, 2)
       }
       return state
 
     case 'DONE':
-      if (state.phase === 'playing' && stretch.mode === 'reps') return finishSide(ctx, state, stretch)
+      if (state.phase === 'playing' && stretch.mode === 'reps')
+        return finishSide(ctx, state, stretch)
       return state
 
     case 'SKIP':
@@ -128,7 +158,8 @@ export function playerReducer(ctx: PlayerContext, state: PlayerState, event: Pla
 
     case 'BACK': {
       if (state.phase === 'swap') return playing(stretch, state.index, 1)
-      if (state.phase === 'playing' && state.side === 2) return playing(stretch, state.index, 1)
+      if (state.phase === 'playing' && state.side === 2)
+        return playing(stretch, state.index, 1)
       if (state.index > 0) {
         const previous = ctx.stretches[state.index - 1]
         return playing(previous, state.index - 1, 1)

@@ -6,6 +6,8 @@
  * muscles has a layer.
  */
 
+import { useAppScale } from './appScale'
+
 const FRONT_LAYERS = new Set([
   'chest',
   'shoulders',
@@ -19,7 +21,14 @@ const FRONT_LAYERS = new Set([
   'elbows',
   'tibialis_anterior',
 ])
-const BACK_LAYERS = new Set(['neck', 'upper_back', 'lower_back', 'glutes', 'hamstrings', 'calves'])
+const BACK_LAYERS = new Set([
+  'neck',
+  'upper_back',
+  'lower_back',
+  'glutes',
+  'hamstrings',
+  'calves',
+])
 
 /** Muscle values (as used in the stretches table) drawn with another muscle's layer. */
 const ALIASES: Record<string, string> = {
@@ -35,15 +44,21 @@ const ALIASES: Record<string, string> = {
 }
 
 /** Map layer key for a muscle value ('Upper Back', 'groin'), if it has one. */
-export function getMuscleMapKey(value: string | null | undefined): string | undefined {
+export function getMuscleMapKey(
+  value: string | null | undefined
+): string | undefined {
   if (!value) return undefined
-  const key = value.trim().toLowerCase().replace(/[\s-]+/g, '_')
+  const key = value
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, '_')
   const resolved = ALIASES[key] ?? key
-  return FRONT_LAYERS.has(resolved) || BACK_LAYERS.has(resolved) ? resolved : undefined
+  return FRONT_LAYERS.has(resolved) || BACK_LAYERS.has(resolved)
+    ? resolved
+    : undefined
 }
 
-const FIGURE_HEIGHT = 104
-const FIGURE_WIDTH = FIGURE_HEIGHT * (240 / 400)
+const FIGURE_ASPECT = 240 / 400
 
 const VIEWS = [
   { view: 'front', label: 'Front', layers: FRONT_LAYERS },
@@ -51,16 +66,42 @@ const VIEWS = [
 ] as const
 
 export function MuscleMap({ muscles }: { muscles: string[] }) {
-  const keys = Array.from(new Set(muscles.map(getMuscleMapKey).filter((k): k is string => !!k)))
+  const { s, vs, ms } = useAppScale()
+  const keys = Array.from(
+    new Set(muscles.map(getMuscleMapKey).filter((k): k is string => !!k))
+  )
   if (keys.length === 0) return null
 
+  // The app's MuscleMap: figureHeight = verticalScale(104), 240x400 artwork.
+  const figureHeight = vs(104)
+  const figure = { width: figureHeight * FIGURE_ASPECT, height: figureHeight }
+
   return (
-    <div className="flex shrink-0 gap-1 rounded-2xl bg-white p-2" aria-hidden="true">
+    <div
+      className="flex shrink-0 bg-white"
+      style={{
+        gap: s(4),
+        paddingTop: vs(8),
+        paddingBottom: vs(8),
+        paddingLeft: s(8),
+        paddingRight: s(8),
+        borderRadius: s(16),
+      }}
+      aria-hidden="true"
+    >
       {VIEWS.map(({ view, label, layers }) => (
-        <div key={view} className="flex flex-col items-center gap-0.5">
-          <div className="relative" style={{ width: FIGURE_WIDTH, height: FIGURE_HEIGHT }}>
+        <div
+          key={view}
+          className="flex flex-col items-center"
+          style={{ gap: vs(2) }}
+        >
+          <div className="relative" style={figure}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/muscle-map/female/${view}/base.png`} alt="" className="absolute inset-0 h-full w-full object-contain" />
+            <img
+              src={`/muscle-map/female/${view}/base.png`}
+              alt=""
+              className="absolute inset-0 h-full w-full object-contain"
+            />
             {keys
               .filter((key) => layers.has(key))
               .map((key) => (
@@ -73,7 +114,12 @@ export function MuscleMap({ muscles }: { muscles: string[] }) {
                 />
               ))}
           </div>
-          <span className="text-[9px] font-bold uppercase tracking-[0.6px] text-[#666666]">{label}</span>
+          <span
+            className="font-bold uppercase text-[#666666]"
+            style={{ fontSize: ms(9), letterSpacing: 0.6 }}
+          >
+            {label}
+          </span>
         </div>
       ))}
     </div>

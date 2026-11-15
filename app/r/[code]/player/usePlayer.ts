@@ -2,7 +2,12 @@
 
 import { useCallback, useEffect, useReducer, useRef } from 'react'
 import type { PlayableStretch } from '@/app/lib/sharedRoutine'
-import { initPlayer, playerReducer, type PlayerEvent, type PlayerState } from './playerMachine'
+import {
+  initPlayer,
+  playerReducer,
+  type PlayerEvent,
+  type PlayerState,
+} from './playerMachine'
 import { playCue, type Cue } from './cues'
 
 /**
@@ -12,7 +17,8 @@ import { playCue, type Cue } from './cues'
  */
 export function usePlayer(stretches: PlayableStretch[], muted: boolean) {
   const reducer = useCallback(
-    (state: PlayerState, event: PlayerEvent) => playerReducer({ stretches }, state, event),
+    (state: PlayerState, event: PlayerEvent) =>
+      playerReducer({ stretches }, state, event),
     [stretches]
   )
   const [state, dispatch] = useReducer(reducer, stretches, initPlayer)
@@ -50,20 +56,41 @@ export function usePlayer(stretches: PlayableStretch[], muted: boolean) {
   return { state, current, dispatch }
 }
 
-function cueFor(before: PlayerState, after: PlayerState, stretch: PlayableStretch | undefined): Cue | null {
-  if (after.phase === 'complete') return before.phase === 'complete' ? null : 'complete'
+function cueFor(
+  before: PlayerState,
+  after: PlayerState,
+  stretch: PlayableStretch | undefined
+): Cue | null {
+  if (after.phase === 'complete')
+    return before.phase === 'complete' ? null : 'complete'
 
   const movedOn =
-    after.phase !== before.phase || after.index !== before.index || after.side !== before.side
+    after.phase !== before.phase ||
+    after.index !== before.index ||
+    after.side !== before.side
   if (movedOn) {
-    if (after.phase === 'playing' && (before.phase === 'preview' || before.phase === 'swap')) return 'go'
-    if (after.phase === 'swap' || after.phase === 'preview' || after.phase === 'playing') return 'transition'
+    if (
+      after.phase === 'playing' &&
+      (before.phase === 'preview' || before.phase === 'swap')
+    )
+      return 'go'
+    if (
+      after.phase === 'swap' ||
+      after.phase === 'preview' ||
+      after.phase === 'playing'
+    )
+      return 'transition'
     return null
   }
 
   if (after.remaining >= before.remaining || after.paused) return null
   const countingDown = after.phase === 'preview' || after.phase === 'swap'
   if (countingDown && after.remaining <= 3) return 'tick'
-  if (after.phase === 'playing' && stretch?.mode === 'timed' && after.remaining <= 3) return 'final'
+  if (
+    after.phase === 'playing' &&
+    stretch?.mode === 'timed' &&
+    after.remaining <= 3
+  )
+    return 'final'
   return null
 }

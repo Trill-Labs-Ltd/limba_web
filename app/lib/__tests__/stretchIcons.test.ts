@@ -5,16 +5,27 @@ import { normalizeStretchKey, stretchIconUrl } from '../stretchIcons'
 /** Same lookup order as the app: library id, then name, alias, prefix match. */
 describe('stretchIconUrl', () => {
   it('uses the library id first', () => {
-    expect(stretchIconUrl({ id: 'cd0ecfae-50a5-4eee-9990-873106a21047', name: 'Anything' })).toBe(
-      '/stretch-icons/hamstring_scoops.webp'
-    )
+    expect(
+      stretchIconUrl({
+        id: 'cd0ecfae-50a5-4eee-9990-873106a21047',
+        name: 'Anything',
+      })
+    ).toBe('/stretch-icons/hamstring_scoops.webp')
   })
 
   it('falls back to the name, its alias, then a prefix match', () => {
-    expect(stretchIconUrl({ id: 'unknown', name: 'Downward Dog' })).toBe('/stretch-icons/downward_dog.webp')
-    expect(stretchIconUrl({ name: "Child's Pose (Lumbar Soften)" })).toBe('/stretch-icons/child_pose.webp')
-    expect(stretchIconUrl({ name: 'Bird Dog' })).toBe('/stretch-icons/birddog.webp')
-    expect(stretchIconUrl({ name: 'Ankle Dorsiflexion Knee-to-Wall' })).toBe('/stretch-icons/ankle_dorsiflexion.webp')
+    expect(stretchIconUrl({ id: 'unknown', name: 'Downward Dog' })).toBe(
+      '/stretch-icons/downward_dog.webp'
+    )
+    expect(stretchIconUrl({ name: "Child's Pose (Lumbar Soften)" })).toBe(
+      '/stretch-icons/child_pose.webp'
+    )
+    expect(stretchIconUrl({ name: 'Bird Dog' })).toBe(
+      '/stretch-icons/birddog.webp'
+    )
+    expect(stretchIconUrl({ name: 'Ankle Dorsiflexion Knee-to-Wall' })).toBe(
+      '/stretch-icons/ankle_dorsiflexion.webp'
+    )
   })
 
   it('returns null when there is no illustration', () => {

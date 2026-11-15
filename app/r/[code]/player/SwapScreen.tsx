@@ -2,48 +2,130 @@
 
 import { formatMuscle, type PlayableStretch } from '@/app/lib/sharedRoutine'
 import { ArrowsLeftRightIcon, PersonIcon } from './appIcons'
+import { useAppScale } from './appScale'
 import styles from './player.module.css'
 
 /**
  * "Swap sides" screen between the two sides of a stretch, ported from
- * limba_mobile src/components/routine/SwapSidesPrompt.tsx.
+ * limba_mobile src/components/routine/SwapSidesPrompt.tsx (same sizes, through
+ * the app's scale helpers).
  */
-export function SwapScreen({ stretch, remaining }: { stretch: PlayableStretch; remaining: number }) {
-  const muscles = stretch.targetMuscles.map(formatMuscle).filter(Boolean).join(', ')
+
+const TEAL = '#008080'
+const GREY = '#666666'
+
+export function SwapScreen({
+  stretch,
+  remaining,
+}: {
+  stretch: PlayableStretch
+  remaining: number
+}) {
+  const { s, vs, ms } = useAppScale()
+  const muscles = stretch.targetMuscles
+    .map(formatMuscle)
+    .filter(Boolean)
+    .join(', ')
 
   return (
-    <div className="flex min-h-full w-full items-center justify-center px-6">
-      <div className={`flex w-full flex-col items-center px-6 py-10 ${styles.slideIn}`}>
-        <div className={`mb-6 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-white/40 ${styles.rock}`}>
-          <ArrowsLeftRightIcon size={64} className="text-[#008080]" />
+    <div className="flex min-h-full w-full items-center justify-center">
+      <div
+        className={`flex flex-col items-center ${styles.slideIn}`}
+        style={{
+          width: `calc(100% - ${s(48)}px)`,
+          paddingTop: vs(40),
+          paddingBottom: vs(40),
+          paddingLeft: s(24),
+          paddingRight: s(24),
+        }}
+      >
+        <div
+          className={`flex items-center justify-center rounded-full bg-white/40 ${styles.rock}`}
+          style={{ width: s(100), height: s(100), marginBottom: vs(24) }}
+        >
+          <ArrowsLeftRightIcon size={s(64)} style={{ color: TEAL }} />
         </div>
 
-        <h2 className="mb-2 text-center text-[32px] font-bold tracking-[3px] text-[#008080]">SWAP SIDES</h2>
-        <p className="mb-6 text-center text-xl font-semibold text-black">{stretch.name}</p>
+        <h2
+          className="text-center font-bold"
+          style={{
+            fontSize: ms(32),
+            letterSpacing: 3,
+            marginBottom: vs(8),
+            color: TEAL,
+          }}
+        >
+          SWAP SIDES
+        </h2>
+        <p
+          className="text-center font-semibold text-black"
+          style={{ fontSize: ms(20), marginBottom: vs(24) }}
+        >
+          {stretch.name}
+        </p>
 
         {muscles && (
-          <div className="mb-3.5 mt-1.5 flex items-center justify-center">
-            <span className="flex items-center gap-2 rounded-[20px] bg-white/60 px-3 py-2 text-sm font-semibold text-black">
-              <PersonIcon size={18} className="text-[#008080]" />
+          <div
+            className="flex items-center justify-center"
+            style={{ marginTop: vs(6), marginBottom: vs(14) }}
+          >
+            <span
+              className="flex items-center bg-white/60 font-semibold text-black"
+              style={{
+                gap: s(8),
+                paddingTop: vs(8),
+                paddingBottom: vs(8),
+                paddingLeft: s(12),
+                paddingRight: s(12),
+                borderRadius: s(20),
+                fontSize: ms(14),
+              }}
+            >
+              <PersonIcon size={s(18)} style={{ color: TEAL }} />
               {muscles}
             </span>
           </div>
         )}
 
-        <p className="mb-8 text-center text-base leading-6 text-[#666666]">
+        <p
+          className="text-center"
+          style={{
+            fontSize: ms(16),
+            lineHeight: `${ms(24)}px`,
+            marginBottom: vs(32),
+            color: GREY,
+          }}
+        >
           Great job on the left side!
           <br />
           Now switch to your right side.
         </p>
 
-        <div className="mb-5 flex flex-col items-center">
-          <span className="mb-1.5 text-base font-semibold text-[#666666]">Starting in</span>
-          <span key={remaining} className={`text-[42px] font-bold tracking-[2px] text-[#008080] ${styles.springIn}`}>
+        <div
+          className="flex flex-col items-center"
+          style={{ marginBottom: vs(20) }}
+        >
+          <span
+            className="font-semibold"
+            style={{ fontSize: ms(16), marginBottom: vs(6), color: GREY }}
+          >
+            Starting in
+          </span>
+          <span
+            key={remaining}
+            className={`font-bold ${styles.springIn}`}
+            style={{ fontSize: ms(42), letterSpacing: 2, color: TEAL }}
+          >
             {Math.max(remaining, 0)}
           </span>
         </div>
 
-        <p className="text-center text-sm italic text-[#666666] opacity-70">Take a moment to adjust your position</p>
+        <p
+          className="text-center italic opacity-70"
+          style={{ fontSize: ms(14), color: GREY }}
+        >
+          Take a moment to adjust your position
+        </p>
       </div>
     </div>
   )

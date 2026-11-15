@@ -50,8 +50,14 @@ function advance(seconds: number) {
 describe('RoutinePlayer', () => {
   beforeAll(() => {
     // jsdom has no media playback.
-    Object.defineProperty(HTMLMediaElement.prototype, 'play', { configurable: true, value: jest.fn().mockResolvedValue(undefined) })
-    Object.defineProperty(HTMLMediaElement.prototype, 'pause', { configurable: true, value: jest.fn() })
+    Object.defineProperty(HTMLMediaElement.prototype, 'play', {
+      configurable: true,
+      value: jest.fn().mockResolvedValue(undefined),
+    })
+    Object.defineProperty(HTMLMediaElement.prototype, 'pause', {
+      configurable: true,
+      value: jest.fn(),
+    })
   })
 
   beforeEach(() => jest.useFakeTimers())
@@ -62,7 +68,15 @@ describe('RoutinePlayer', () => {
 
   it('plays the routine through to "Download Limba"', () => {
     const onCompleted = jest.fn()
-    render(<RoutinePlayer code="Xk3p9Qa" stretches={ROUTINE} oneLink={ONE_LINK} onClose={jest.fn()} onCompleted={onCompleted} />)
+    render(
+      <RoutinePlayer
+        code="Xk3p9Qa"
+        stretches={ROUTINE}
+        oneLink={ONE_LINK}
+        onClose={jest.fn()}
+        onCompleted={onCompleted}
+      />
+    )
 
     // Preview: illustration, duration, both sides, target muscles, 5 s countdown.
     expect(screen.getByText('GET READY')).toBeInTheDocument()
@@ -72,15 +86,25 @@ describe('RoutinePlayer', () => {
     expect(screen.getByText('Both sides')).toBeInTheDocument()
     expect(screen.getByText('TARGET MUSCLES')).toBeInTheDocument()
     expect(screen.getByText('Hamstrings')).toBeInTheDocument()
-    expect(document.querySelector('img[src="/stretch-icons/hamstring_scoops.webp"]')).not.toBeNull()
-    expect(document.querySelector('img[src="/muscle-map/female/back/hamstrings.png"]')).not.toBeNull()
-    expect(screen.getByRole('button', { name: 'Start now' })).toHaveTextContent('5')
+    expect(
+      document.querySelector('img[src="/stretch-icons/hamstring_scoops.webp"]')
+    ).not.toBeNull()
+    expect(
+      document.querySelector(
+        'img[src="/muscle-map/female/back/hamstrings.png"]'
+      )
+    ).not.toBeNull()
+    expect(screen.getByRole('button', { name: 'Start now' })).toHaveTextContent(
+      '5'
+    )
 
     // Left side: video, side pill, numbered instructions, timer.
     advance(5)
     expect(screen.getByText('Left side')).toBeInTheDocument()
     expect(screen.getByText('Tilt your head')).toBeInTheDocument()
-    expect(screen.getByLabelText('Hamstring Scoops demonstration video')).toHaveAttribute('src', ROUTINE[0].videoUrl!)
+    expect(
+      screen.getByLabelText('Hamstring Scoops demonstration video')
+    ).toHaveAttribute('src', ROUTINE[0].videoUrl!)
     expect(screen.getByText('0:02')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Back' })).toBeDisabled()
 
@@ -114,16 +138,28 @@ describe('RoutinePlayer', () => {
     expect(screen.getByText('COMPLETED')).toBeInTheDocument()
     expect(screen.getByText('Routine Complete!')).toBeInTheDocument()
     expect(screen.getByText('34s')).toBeInTheDocument() // 2s x 2 sides + 30s
-    expect(screen.getByRole('link', { name: 'Download Limba' })).toHaveAttribute('href', ONE_LINK)
+    expect(
+      screen.getByRole('link', { name: 'Download Limba' })
+    ).toHaveAttribute('href', ONE_LINK)
     // Store badges under the button, also through OneLink.
-    const badges = screen.getAllByRole('link').filter((a) => a.getAttribute('href') === ONE_LINK)
+    const badges = screen
+      .getAllByRole('link')
+      .filter((a) => a.getAttribute('href') === ONE_LINK)
     expect(badges).toHaveLength(3)
     expect(onCompleted).toHaveBeenCalledTimes(1)
   })
 
   it('skips, goes back, and closes from the X and on Escape', () => {
     const onClose = jest.fn()
-    render(<RoutinePlayer code="Xk3p9Qa" stretches={ROUTINE} oneLink={null} onClose={onClose} onCompleted={jest.fn()} />)
+    render(
+      <RoutinePlayer
+        code="Xk3p9Qa"
+        stretches={ROUTINE}
+        oneLink={null}
+        onClose={onClose}
+        onCompleted={jest.fn()}
+      />
+    )
 
     fireEvent.click(screen.getByRole('button', { name: 'Start now' }))
     fireEvent.click(screen.getByRole('button', { name: 'Skip stretch' }))
@@ -142,7 +178,15 @@ describe('RoutinePlayer', () => {
 
   it('shows Switch sides on the first side of a both-sided reps stretch', () => {
     const reps: PlayableStretch = { ...ROUTINE[1], bothSides: true }
-    render(<RoutinePlayer code="Xk3p9Qa" stretches={[reps]} oneLink={null} onClose={jest.fn()} onCompleted={jest.fn()} />)
+    render(
+      <RoutinePlayer
+        code="Xk3p9Qa"
+        stretches={[reps]}
+        oneLink={null}
+        onClose={jest.fn()}
+        onCompleted={jest.fn()}
+      />
+    )
     fireEvent.click(screen.getByRole('button', { name: 'Start now' }))
     fireEvent.click(screen.getByRole('button', { name: 'Switch sides' }))
     expect(screen.getByText('Right side')).toBeInTheDocument()
@@ -150,17 +194,37 @@ describe('RoutinePlayer', () => {
   })
 
   it('falls back to the store link when OneLink is not configured', () => {
-    render(<RoutinePlayer code="Xk3p9Qa" stretches={[ROUTINE[1]]} oneLink={null} onClose={jest.fn()} onCompleted={jest.fn()} />)
+    render(
+      <RoutinePlayer
+        code="Xk3p9Qa"
+        stretches={[ROUTINE[1]]}
+        oneLink={null}
+        onClose={jest.fn()}
+        onCompleted={jest.fn()}
+      />
+    )
     fireEvent.click(screen.getByRole('button', { name: 'Start now' }))
     fireEvent.click(screen.getByRole('button', { name: 'Done' }))
-    expect(screen.getByRole('link', { name: 'Download Limba' }).getAttribute('href')).toMatch(/^https:\/\/apps\.apple\.com\//)
+    expect(
+      screen.getByRole('link', { name: 'Download Limba' }).getAttribute('href')
+    ).toMatch(/^https:\/\/apps\.apple\.com\//)
   })
 
   it('remembers the mute toggle', () => {
-    render(<RoutinePlayer code="Xk3p9Qa" stretches={ROUTINE} oneLink={null} onClose={jest.fn()} onCompleted={jest.fn()} />)
+    render(
+      <RoutinePlayer
+        code="Xk3p9Qa"
+        stretches={ROUTINE}
+        oneLink={null}
+        onClose={jest.fn()}
+        onCompleted={jest.fn()}
+      />
+    )
     fireEvent.click(screen.getByRole('button', { name: 'Start now' }))
     fireEvent.click(screen.getByRole('button', { name: 'Mute sounds' }))
-    expect(screen.getByRole('button', { name: 'Unmute sounds' })).toHaveAttribute('aria-pressed', 'true')
+    expect(
+      screen.getByRole('button', { name: 'Unmute sounds' })
+    ).toHaveAttribute('aria-pressed', 'true')
     expect(window.localStorage.getItem('limba_player_sound_muted')).toBe('1')
   })
 })
