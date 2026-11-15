@@ -21,6 +21,7 @@ import { SharedRoutineExperience } from './SharedRoutineExperience'
 export const dynamic = 'force-dynamic'
 
 const SITE_URL = 'https://getlimba.com'
+const APP_STORE_ID = '6756675956'
 
 interface SharedRoutinePageProps {
   params: { code: string }
@@ -77,17 +78,23 @@ export async function generateMetadata({
       title,
       description,
     },
+    // Safari's Smart App Banner: "Open" takes the app straight to this routine.
+    other: {
+      'apple-itunes-app': `app-id=${APP_STORE_ID}, app-argument=${url}`,
+    },
   }
 }
 
 /**
  * Landing page for a shared-routine short link, https://getlimba.com/r/<code>.
  *
- * With the app installed, Universal Links / App Links open the app directly and
+ * With the app installed, tapping the link opens the app directly (iOS
+ * Universal Links via the AASA file, Android App Links via assetlinks.json) and
  * this page is never shown. Everyone else sees a preview of the routine and can
- * do it right here in the browser ("Start routine"), open it in the app, or
- * install. The OneLink carries the code through install (deferred deep link) so
- * the routine is waiting when the app first opens.
+ * do it right here in the browser ("Start routine") or install. The OneLink
+ * carries the code through install (deferred deep link) so the routine is
+ * waiting when the app first opens. In Safari, the Smart App Banner's "Open"
+ * also lands on this routine (app-argument).
  */
 export default async function SharedRoutinePage({
   params,
@@ -125,10 +132,6 @@ export default async function SharedRoutinePage({
             <span aria-hidden="true">·</span>
             <span>{totalMinutes} min</span>
           </div>
-          <p className="text-lg text-gray-600 mb-8">
-            Follow along right here in your browser, no download needed. Got
-            Limba? Open it in the app instead.
-          </p>
           <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <SharedRoutineExperience
               code={params.code}
@@ -136,12 +139,6 @@ export default async function SharedRoutinePage({
               stretches={routine.stretches}
               oneLink={oneLink}
             />
-            <a
-              href={`limba://r/${params.code}`}
-              className={`${TAILWIND_CLASSES.button.base} ${TAILWIND_CLASSES.button.secondary} ${TAILWIND_CLASSES.button.sizes.md} inline-block`}
-            >
-              Open in app
-            </a>
           </div>
           <DownloadButtons
             justify="center"
