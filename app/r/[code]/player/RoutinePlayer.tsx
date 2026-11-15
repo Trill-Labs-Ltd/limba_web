@@ -1,15 +1,18 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Inter } from 'next/font/google'
 import { summarise, type PlayableStretch } from '@/app/lib/sharedRoutine'
-import { canGoBack, PREVIEW_SECONDS, SWAP_SECONDS } from './playerMachine'
+import { canGoBack, PREVIEW_SECONDS } from './playerMachine'
 import { usePlayer } from './usePlayer'
 import { readMuted, writeMuted } from './cues'
-import { Countdown } from './Countdown'
-import { StretchStage } from './StretchStage'
-import { PlayerControls } from './PlayerControls'
+import { PreviewScreen } from './PreviewScreen'
+import { SwapScreen } from './SwapScreen'
+import { PlayingScreen } from './PlayingScreen'
 import { CompleteView } from './CompleteView'
-import { CloseIcon, SoundIcon } from './icons'
+
+// The app's typeface (Inter 400-700).
+const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'], display: 'swap' })
 
 interface RoutinePlayerProps {
   code: string
@@ -27,9 +30,13 @@ interface VideoSource {
 /** Refresh a signed video this many seconds before it expires (the app uses 120 s too). */
 const VIDEO_EXPIRY_MARGIN_S = 120
 
+/** The app's routine-player background. */
+const BACKGROUND = 'linear-gradient(180deg, #7BD3C3 0%, #C6EEE6 55%, #F0FBF8 100%)'
+
 /**
  * Full-screen browser player for a shared routine. Plays the stretches the way
- * the app does (see playerMachine.ts) and ends on "Download Limba".
+ * the app does (see playerMachine.ts) and looks like the app's player: the
+ * same screens, colours, type and controls, in a phone-width column.
  */
 export function RoutinePlayer({ code, stretches, oneLink, onClose, onCompleted }: RoutinePlayerProps) {
   const [muted, setMuted] = useState(false)
@@ -100,92 +107,61 @@ export function RoutinePlayer({ code, stretches, oneLink, onClose, onCompleted }
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
-  const closeButton = useRef<HTMLButtonElement>(null)
-  useEffect(() => closeButton.current?.focus(), [])
-
-  const progress =
-    state.phase === 'complete'
-      ? 1
-      : (state.index + (state.phase === 'preview' ? 0 : state.phase === 'swap' ? 0.5 : state.side === 2 ? 0.5 : 0.25)) /
-        total
+  const dialog = useRef<HTMLDivElement>(null)
+  useEffect(() => dialog.current?.focus(), [])
 
   return (
-    <div role="dialog" aria-modal="true" aria-label="Routine player" className="fixed inset-0 z-50 overflow-y-auto bg-white">
-      <div className="mx-auto flex min-h-full max-w-md flex-col px-4 pb-4 pt-4">
-        <header className="flex items-center gap-3">
-          <button
-            ref={closeButton}
-            type="button"
-            onClick={onClose}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-teal-900 hover:bg-teal-50"
-            aria-label="Close player"
-          >
-            <CloseIcon />
-          </button>
-          <div className="flex-1">
-            {state.phase !== 'complete' && (
-              <p className="mb-1 text-center text-xs font-semibold text-gray-500">
-                {state.index + 1} of {total}
-              </p>
-            )}
-            <div className="h-1.5 w-full overflow-hidden rounded-full bg-teal-100" aria-hidden="true">
-              <div className="h-full rounded-full bg-teal-500 transition-[width] duration-500" style={{ width: `${progress * 100}%` }} />
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={toggleMuted}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-teal-900 hover:bg-teal-50"
-            aria-label={muted ? 'Turn sound on' : 'Mute sound'}
-            aria-pressed={muted}
-          >
-            <SoundIcon muted={muted} />
-          </button>
-        </header>
+    <div
+      ref={dialog}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Routine player"
+      className={`${inter.className} fixed inset-0 z-50 text-left outline-none`}
+      style={{ background: BACKGROUND }}
+    >
+      <div className="relative mx-auto h-full w-full max-w-[430px] overflow-hidden" style={{ background: BACKGROUND }}>
+        {state.phase === 'complete' && <CompleteView summary={summarise(stretches)} oneLink={oneLink} />}
 
-        <div className="mt-4 flex-1">
-          {state.phase === 'complete' && (
-            <CompleteView summary={summarise(stretches)} oneLink={oneLink} onClose={onClose} />
-          )}
-
-          {current && (state.phase === 'preview' || state.phase === 'swap') && (
-            <Countdown
-              kind={state.phase}
+        {current && state.phase === 'preview' && (
+          <div className="h-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <PreviewScreen
+              key={state.index}
               stretch={current}
-              isFirst={state.index === 0}
+              stretchNumber={state.index + 1}
+              totalStretches={total}
               remaining={state.remaining}
-              total={state.phase === 'swap' ? SWAP_SECONDS : PREVIEW_SECONDS}
-              paused={state.paused}
+              total={PREVIEW_SECONDS}
               onReady={() => dispatch({ type: 'READY' })}
             />
-          )}
+          </div>
+        )}
 
-          {current && state.phase === 'playing' && (
-            <StretchStage
-              stretch={current}
-              side={state.side}
-              paused={state.paused}
-              videoUrl={videoFor(current).url}
-              onVideoError={() => void refreshVideos()}
-            />
-          )}
-        </div>
+        {current && state.phase === 'swap' && (
+          <div className="h-full overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <SwapScreen stretch={current} remaining={state.remaining} />
+          </div>
+        )}
 
         {current && state.phase === 'playing' && (
-          <div className="sticky bottom-0 mt-4 bg-white/95 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-3 backdrop-blur">
-            <PlayerControls
-              stretch={current}
-              side={state.side}
-              remaining={state.remaining}
-              paused={state.paused}
-              canGoBack={canGoBack(state)}
-              onBack={() => dispatch({ type: 'BACK' })}
-              onSkip={() => dispatch({ type: 'SKIP' })}
-              onTogglePause={() => dispatch({ type: state.paused ? 'RESUME' : 'PAUSE' })}
-              onSwitchSides={() => dispatch({ type: 'SWITCH_SIDES' })}
-              onDone={() => dispatch({ type: 'DONE' })}
-            />
-          </div>
+          <PlayingScreen
+            stretch={current}
+            side={state.side}
+            remaining={state.remaining}
+            paused={state.paused}
+            progressText={`${state.index + 1} of ${total}`}
+            videoUrl={videoFor(current).url}
+            muted={muted}
+            canGoBack={canGoBack(state)}
+            onToggleMuted={toggleMuted}
+            onClose={onClose}
+            onBack={() => dispatch({ type: 'BACK' })}
+            onSkip={() => dispatch({ type: 'SKIP' })}
+            onTogglePause={() => dispatch({ type: state.paused ? 'RESUME' : 'PAUSE' })}
+            onSwitchSides={() => dispatch({ type: 'SWITCH_SIDES' })}
+            onDone={() => dispatch({ type: 'DONE' })}
+            onVideoError={() => void refreshVideos()}
+          />
         )}
       </div>
     </div>

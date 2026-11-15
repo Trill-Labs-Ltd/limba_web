@@ -1,0 +1,148 @@
+/* Motion for the browser player, matching the app's Animated/Reanimated timings. */
+
+/* NextStretchPreview: the countdown pulses on every tick (1 -> 1.18 -> 1). */
+.pulseA {
+  animation: pulseA 320ms ease-out;
+}
+.pulseB {
+  animation: pulseB 320ms ease-out;
+}
+/* Two identical animations, alternated per tick so the pulse restarts without a remount. */
+@keyframes pulseA {
+  0% { transform: scale(1); }
+  37% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@keyframes pulseB {
+  0% { transform: scale(1); }
+  37% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+/* SwapSidesPrompt: the arrows rock -15deg <-> 15deg every 1.5 s. */
+.rock {
+  animation: rock 3s ease-in-out infinite;
+}
+@keyframes rock {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+
+/* SwapSidesPrompt: the content slides up and fades in. */
+.slideIn {
+  animation: slideIn 300ms ease-out both;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SwapSidesPrompt: each number springs in from 0.8. */
+.springIn {
+  animation: springIn 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes springIn {
+  from { transform: scale(0.8); }
+  to { transform: scale(1); }
+}
+
+/* TimerCapsule: a gentle beat each second, stronger in the final three. */
+.beatA { animation: beatA 430ms ease-out; }
+.beatB { animation: beatB 430ms ease-out; }
+.beatFinalA { animation: beatFinalA 430ms ease-out; }
+.beatFinalB { animation: beatFinalB 430ms ease-out; }
+@keyframes beatA { 0% { transform: scale(1); } 26% { transform: scale(1.045); } 100% { transform: scale(1); } }
+@keyframes beatB { 0% { transform: scale(1); } 26% { transform: scale(1.045); } 100% { transform: scale(1); } }
+@keyframes beatFinalA { 0% { transform: scale(1); } 26% { transform: scale(1.08); } 100% { transform: scale(1); } }
+@keyframes beatFinalB { 0% { transform: scale(1); } 26% { transform: scale(1.08); } 100% { transform: scale(1); } }
+
+/* StretchPlayer: the side pill pops when the side changes. */
+.sidePop {
+  animation: sidePop 420ms ease-out;
+}
+@keyframes sidePop {
+  0% { transform: scale(1); opacity: 1; }
+  26% { transform: scale(1.28); opacity: 1; }
+  40% { transform: scale(0.45); opacity: 0; }
+  70% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* GlowingButton: pulse 1 -> 1.05 with the glow growing, 800 ms each way. */
+.glow {
+  animation: glow 1.6s ease-in-out infinite;
+}
+@keyframes glow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 16px rgba(0, 128, 128, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 32px rgba(0, 128, 128, 0.9); }
+}
+
+/* Routine complete: the cat pops in, then keeps a gentle bounce. */
+.catPop {
+  animation: catPop 700ms cubic-bezier(0.34, 1.56, 0.64, 1) both, catBounce 2.4s ease-in-out 900ms infinite;
+}
+@keyframes catPop {
+  from { opacity: 0; transform: scale(0.3) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes catBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Routine complete: a glow blooms behind the cat. */
+.bloom {
+  animation: bloom 900ms ease-out 150ms both;
+}
+@keyframes bloom {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Routine complete: a ring ripples out once. */
+.ripple {
+  animation: ripple 1.2s ease-out 300ms both;
+}
+@keyframes ripple {
+  from { opacity: 0.7; transform: scale(0.5); }
+  to { opacity: 0; transform: scale(1.5); }
+}
+
+/* Routine complete: sparkles keep twinkling. */
+.twinkle {
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.6) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+
+/* Routine complete: confetti falls across the screen. */
+.confetti {
+  animation-name: confettiFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes confettiFall {
+  from { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+  to { transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(720deg); }
+}
+
+/* Routine complete: the content fades and scales in. */
+.enter {
+  animation: enter 500ms ease-out both;
+}
+@keyframes enter {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulseA, .pulseB, .rock, .slideIn, .springIn, .beatA, .beatB, .beatFinalA, .beatFinalB, .sidePop, .glow,
+  .catPop, .bloom, .ripple, .twinkle, .enter {
+    animation: none;
+  }
+  .confetti {
+    display: none;
+  }
+}

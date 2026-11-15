@@ -158,13 +158,15 @@ describe('playerMachine', () => {
       expect(run(routine, [{ type: 'BACK' }], playingB)).toMatchObject({ phase: 'playing', index: 0 })
     })
 
-    it('on the first stretch restarts it, and does nothing from the first preview', () => {
+    it('is off on the first stretch, and does nothing from the first preview', () => {
       const first = initPlayer(routine)
       expect(canGoBack(first)).toBe(false)
       expect(run(routine, [{ type: 'BACK' }], first)).toEqual(first)
 
+      // Like the app, Back is off on the first side of the first stretch...
       const playing = run(routine, [{ type: 'READY' }, ...ticks(3)])
-      expect(canGoBack(playing)).toBe(true)
+      expect(canGoBack(playing)).toBe(false)
+      // ...and a stray BACK there just restarts the timer.
       expect(run(routine, [{ type: 'BACK' }], playing)).toMatchObject({ phase: 'playing', index: 0, remaining: 5 })
     })
   })

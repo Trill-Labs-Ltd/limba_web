@@ -144,7 +144,10 @@ export function playerReducer(ctx: PlayerContext, state: PlayerState, event: Pla
 
 /** Whether BACK would do anything, so the button can be dimmed like the app's. */
 export function canGoBack(state: PlayerState): boolean {
+  // Same as the app's routine-player: nothing to go back to on the first side
+  // of the first stretch.
   if (state.phase === 'complete') return false
-  if (state.phase === 'preview') return state.index > 0
-  return true
+  if (state.phase === 'swap') return true
+  if (state.phase === 'playing' && state.side === 2) return true
+  return state.index > 0
 }
