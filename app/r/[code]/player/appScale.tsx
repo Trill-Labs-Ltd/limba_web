@@ -12,8 +12,9 @@ import { createContext, useContext, useEffect, useState } from 'react'
  * - ms() (moderateScale)  fonts: half way between the size and s(size)
  *
  * On the web the "screen" is the player column (phone width, at most 430 px)
- * and the visible height of the browser window, so a layout that fits the
- * app's screen also fits between the browser's toolbars.
+ * and the visible height of the browser window (capped at the app's 393:852
+ * shape for tall desktop windows), so a layout that fits the app's screen also
+ * fits between the browser's toolbars.
  */
 
 export const BASE_WIDTH = 393
@@ -43,13 +44,22 @@ export function makeAppScale(width: number, height: number): AppScale {
   }
 }
 
+/** The scale for a browser window of this size. */
+export function scaleForWindow(
+  innerWidth: number,
+  innerHeight: number
+): AppScale {
+  const width = Math.min(innerWidth, MAX_COLUMN_WIDTH)
+  // A tall desktop window would stretch every vertical size past a phone's
+  // proportions, so the height is capped at the app's design aspect ratio.
+  const height = Math.min(innerHeight, width * (BASE_HEIGHT / BASE_WIDTH))
+  return makeAppScale(width, height)
+}
+
 function measure(): AppScale {
   if (typeof window === 'undefined')
     return makeAppScale(BASE_WIDTH, BASE_HEIGHT)
-  return makeAppScale(
-    Math.min(window.innerWidth, MAX_COLUMN_WIDTH),
-    window.innerHeight
-  )
+  return scaleForWindow(window.innerWidth, window.innerHeight)
 }
 
 const AppScaleContext = createContext<AppScale>(

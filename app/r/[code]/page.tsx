@@ -135,6 +135,7 @@ export default async function SharedRoutinePage({
           <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <SharedRoutineExperience
               code={params.code}
+              senderName={routine.senderName}
               senderUserId={routine.senderId}
               stretches={routine.stretches}
               oneLink={oneLink}

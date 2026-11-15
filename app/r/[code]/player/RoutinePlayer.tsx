@@ -21,6 +21,8 @@ const inter = Inter({
 
 interface RoutinePlayerProps {
   code: string
+  /** Sender's first name, for the finish screen. */
+  senderName: string | null
   stretches: PlayableStretch[]
   oneLink: string | null
   onClose: () => void
@@ -47,6 +49,7 @@ const BACKGROUND =
  */
 export function RoutinePlayer({
   code,
+  senderName,
   stretches,
   oneLink,
   onClose,
@@ -158,7 +161,11 @@ export function RoutinePlayer({
           style={{ maxWidth: MAX_COLUMN_WIDTH, background: BACKGROUND }}
         >
           {state.phase === 'complete' && (
-            <CompleteView summary={summarise(stretches)} oneLink={oneLink} />
+            <CompleteView
+              summary={summarise(stretches)}
+              oneLink={oneLink}
+              senderName={senderName}
+            />
           )}
 
           {current && state.phase === 'preview' && (

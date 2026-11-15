@@ -1,4 +1,9 @@
-import { BASE_HEIGHT, BASE_WIDTH, makeAppScale } from '../appScale'
+import {
+  BASE_HEIGHT,
+  BASE_WIDTH,
+  makeAppScale,
+  scaleForWindow,
+} from '../appScale'
 
 /** Same maths as limba_mobile src/utils/responsive.ts. */
 describe('makeAppScale', () => {
@@ -24,5 +29,13 @@ describe('makeAppScale', () => {
     expect(s(44)).toBeLessThan(44)
     expect(ms(16)).toBeLessThan(16)
     expect(ms(16)).toBeGreaterThan(s(16))
+  })
+
+  it('caps the column at 430 px and the height at phone proportions', () => {
+    // A tall desktop window: 430 wide column, 1380 px high.
+    const { s, vs, height } = scaleForWindow(1440, 1380)
+    expect(s(393)).toBeCloseTo(430)
+    expect(height).toBeCloseTo(430 * (852 / 393))
+    expect(vs(56)).toBeCloseTo(56 * (430 / 393))
   })
 })

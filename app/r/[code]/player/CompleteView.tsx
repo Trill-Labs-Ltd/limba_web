@@ -9,13 +9,15 @@ import {
 } from '@/app/components/ui/DownloadButtons'
 import { CheckCircleIcon, PersonSimpleTaiChiDuotoneIcon } from './appIcons'
 import { useAppScale } from './appScale'
+import { FeatureCarousel } from './FeatureCarousel'
 import styles from './player.module.css'
 
 /**
  * End of the routine, ported from limba_mobile app/(app)/routine-complete.tsx
  * as a guest sees it: the celebration background, "Completed" pill, the Limba
- * cat celebrating, the Stretches / Duration card, the glowing button and the
- * store badges under it.
+ * cat celebrating and the Stretches / Duration card, then a swipeable strip of
+ * app features (web only), with the glowing button and the store badges
+ * pinned to the bottom.
  * "Download Limba" goes through OneLink, so after install the app opens on
  * this shared routine (deferred deep link).
  *
@@ -27,6 +29,8 @@ import styles from './player.module.css'
 interface CompleteViewProps {
   summary: RoutineSummary
   oneLink: string | null
+  /** Sender's first name, for the feature strip's heading. */
+  senderName: string | null
 }
 
 /** Store link for this device when OneLink isn't configured. */
@@ -56,7 +60,11 @@ const CONFETTI_COLOURS = [
   '#FB923C',
 ]
 
-export function CompleteView({ summary, oneLink }: CompleteViewProps) {
+export function CompleteView({
+  summary,
+  oneLink,
+  senderName,
+}: CompleteViewProps) {
   const { s, vs, ms } = useAppScale()
   // Resolved after mount so the server and client render the same href.
   const [storeUrl, setStoreUrl] = useState(APP_STORE_URL)
@@ -75,17 +83,15 @@ export function CompleteView({ summary, oneLink }: CompleteViewProps) {
 
       <div
         className={`relative z-10 flex min-h-0 flex-1 flex-col ${styles.enter}`}
-        style={{
-          paddingLeft: s(24),
-          paddingRight: s(24),
-          paddingTop: 'env(safe-area-inset-top)',
-        }}
+        style={{ paddingTop: 'env(safe-area-inset-top)' }}
       >
         <div
           className="flex flex-1 flex-col items-center overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{
             paddingTop: vs(10),
-            paddingBottom: `calc(${vs(20)}px + env(safe-area-inset-bottom))`,
+            paddingBottom: vs(16),
+            paddingLeft: s(24),
+            paddingRight: s(24),
           }}
         >
           <div
@@ -177,12 +183,25 @@ export function CompleteView({ summary, oneLink }: CompleteViewProps) {
             />
           </div>
 
-          {/* The CTA sits right under the summary, with the store badges below it. */}
+          <FeatureCarousel senderName={senderName} />
+        </div>
+
+        {/* Pinned, so Download Limba stays on screen while the visitor swipes. */}
+        <div
+          className="shrink-0"
+          style={{
+            paddingTop: vs(12),
+            paddingLeft: s(24),
+            paddingRight: s(24),
+            paddingBottom: `calc(${vs(16)}px + env(safe-area-inset-bottom))`,
+            background:
+              'linear-gradient(180deg, rgba(220,245,236,0) 0%, rgba(220,245,236,0.92) 28%, rgba(220,245,236,0.96) 100%)',
+          }}
+        >
           <a
             href={downloadHref}
-            className={`flex w-full shrink-0 items-center justify-center bg-[#008080] font-bold text-white ${styles.glow}`}
+            className={`flex w-full items-center justify-center bg-[#008080] font-bold text-white ${styles.glow}`}
             style={{
-              marginTop: vs(6),
               height: vs(56),
               borderRadius: s(28),
               fontSize: ms(18),
@@ -191,7 +210,7 @@ export function CompleteView({ summary, oneLink }: CompleteViewProps) {
           >
             Download Limba
           </a>
-          <div style={{ marginTop: vs(20) }}>
+          <div style={{ marginTop: vs(12) }}>
             <DownloadButtons
               justify="center"
               size="sm"

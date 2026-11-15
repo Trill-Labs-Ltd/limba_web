@@ -9,13 +9,18 @@ import { sendShareEvent } from './shareEvents'
 
 interface SharedRoutineExperienceProps {
   code: string
+  /** Sender's first name, shown on the player's finish screen. */
+  senderName: string | null
   senderUserId: string | null
   stretches: PlayableStretch[]
   oneLink: string | null
 }
 
 function newDistinctId(): string | null {
-  return typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : null
+  return typeof crypto !== 'undefined' &&
+    typeof crypto.randomUUID === 'function'
+    ? crypto.randomUUID()
+    : null
 }
 
 /**
@@ -23,7 +28,13 @@ function newDistinctId(): string | null {
  * runs the browser player and reports a completion. One anonymous id per tab
  * (memory only, no cookies or storage) ties the open and completion together.
  */
-export function SharedRoutineExperience({ code, senderUserId, stretches, oneLink }: SharedRoutineExperienceProps) {
+export function SharedRoutineExperience({
+  code,
+  senderName,
+  senderUserId,
+  stretches,
+  oneLink,
+}: SharedRoutineExperienceProps) {
   const distinctId = useRef<string | null>(null)
   const idForTab = useCallback(() => {
     distinctId.current = distinctId.current ?? newDistinctId()
@@ -35,7 +46,11 @@ export function SharedRoutineExperience({ code, senderUserId, stretches, oneLink
   useEffect(() => {
     if (openSent.current) return
     openSent.current = true
-    sendShareEvent('routine_share_link_opened', { code, senderUserId, distinctId: idForTab() })
+    sendShareEvent('routine_share_link_opened', {
+      code,
+      senderUserId,
+      distinctId: idForTab(),
+    })
   }, [code, senderUserId, idForTab])
 
   const [run, setRun] = useState(0)
@@ -47,7 +62,11 @@ export function SharedRoutineExperience({ code, senderUserId, stretches, oneLink
   }
   const close = useCallback(() => setRun(0), [])
   const completed = useCallback(() => {
-    sendShareEvent('routine_share_completed', { code, senderUserId, distinctId: idForTab() })
+    sendShareEvent('routine_share_completed', {
+      code,
+      senderUserId,
+      distinctId: idForTab(),
+    })
   }, [code, senderUserId, idForTab])
 
   useEffect(() => {
@@ -72,6 +91,7 @@ export function SharedRoutineExperience({ code, senderUserId, stretches, oneLink
         <RoutinePlayer
           key={run}
           code={code}
+          senderName={senderName}
           stretches={stretches}
           oneLink={oneLink}
           onClose={close}

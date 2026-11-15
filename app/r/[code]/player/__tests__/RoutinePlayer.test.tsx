@@ -71,6 +71,7 @@ describe('RoutinePlayer', () => {
     render(
       <RoutinePlayer
         code="Xk3p9Qa"
+        senderName="Tracy"
         stretches={ROUTINE}
         oneLink={ONE_LINK}
         onClose={jest.fn()}
@@ -147,6 +148,34 @@ describe('RoutinePlayer', () => {
       .filter((a) => a.getAttribute('href') === ONE_LINK)
     expect(badges).toHaveLength(3)
     expect(onCompleted).toHaveBeenCalledTimes(1)
+
+    // App features to swipe through, headed with the sender's name.
+    expect(
+      screen.getByText('Tracy builds routines like this with Limba')
+    ).toBeInTheDocument()
+    for (const title of [
+      'A new routine every day',
+      'Ask Limba',
+      'Journeys',
+      'The Wellness Library',
+    ]) {
+      expect(
+        screen.getByAltText(`${title} in the Limba app`)
+      ).toBeInTheDocument()
+    }
+    // The strip moves on by itself, and a dot jumps to a feature.
+    const dot = (name: string) =>
+      screen.getByRole('button', { name: `Show ${name}` })
+    expect(dot('A new routine every day')).toHaveAttribute(
+      'aria-current',
+      'true'
+    )
+    advance(4)
+    expect(dot('Ask Limba')).toHaveAttribute('aria-current', 'true')
+    fireEvent.click(dot('The Wellness Library'))
+    expect(dot('The Wellness Library')).toHaveAttribute('aria-current', 'true')
+    advance(8)
+    expect(dot('The Wellness Library')).toHaveAttribute('aria-current', 'true')
   })
 
   it('skips, goes back, and closes from the X and on Escape', () => {
@@ -154,6 +183,7 @@ describe('RoutinePlayer', () => {
     render(
       <RoutinePlayer
         code="Xk3p9Qa"
+        senderName={null}
         stretches={ROUTINE}
         oneLink={null}
         onClose={onClose}
@@ -181,6 +211,7 @@ describe('RoutinePlayer', () => {
     render(
       <RoutinePlayer
         code="Xk3p9Qa"
+        senderName={null}
         stretches={[reps]}
         oneLink={null}
         onClose={jest.fn()}
@@ -197,6 +228,7 @@ describe('RoutinePlayer', () => {
     render(
       <RoutinePlayer
         code="Xk3p9Qa"
+        senderName={null}
         stretches={[ROUTINE[1]]}
         oneLink={null}
         onClose={jest.fn()}
@@ -214,6 +246,7 @@ describe('RoutinePlayer', () => {
     render(
       <RoutinePlayer
         code="Xk3p9Qa"
+        senderName={null}
         stretches={ROUTINE}
         oneLink={null}
         onClose={jest.fn()}
