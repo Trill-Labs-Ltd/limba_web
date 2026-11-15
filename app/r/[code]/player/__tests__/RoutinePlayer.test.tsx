@@ -138,6 +138,15 @@ describe('RoutinePlayer', () => {
     // Finish.
     expect(screen.getByText('COMPLETED')).toBeInTheDocument()
     expect(screen.getByText('Routine Complete!')).toBeInTheDocument()
+    // The subtitle writes Limba as the wordmark too.
+    expect(
+      screen.getByText(
+        (_, el) =>
+          el?.tagName === 'P' &&
+          !!el.textContent?.startsWith('Nice work.') &&
+          !!el.querySelector('img[alt="Limba"]')
+      )
+    ).toBeInTheDocument()
     expect(screen.getByText('34s')).toBeInTheDocument() // 2s x 2 sides + 30s
     expect(
       screen.getByRole('link', { name: 'Download Limba' })

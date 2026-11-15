@@ -10,6 +10,7 @@ import {
 import { CheckCircleIcon, PersonSimpleTaiChiDuotoneIcon } from './appIcons'
 import { useAppScale } from './appScale'
 import { FeatureCarousel } from './FeatureCarousel'
+import { WithWordmark } from './Wordmark'
 import styles from './player.module.css'
 
 /**
@@ -137,8 +138,10 @@ export function CompleteView({
                 paddingRight: s(20),
               }}
             >
-              Nice work. Limba builds routines like this around your body, every
-              day.
+              <WithWordmark
+                text="Nice work. Limba builds routines like this around your body, every day."
+                fontSize={ms(15)}
+              />
             </p>
           </div>
 
