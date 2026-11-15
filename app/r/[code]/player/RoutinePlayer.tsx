@@ -29,7 +29,7 @@ const VIDEO_EXPIRY_MARGIN_S = 120
 
 /**
  * Full-screen browser player for a shared routine. Plays the stretches the way
- * the app does (see playerMachine.ts) and ends on "Subscribe to Limba".
+ * the app does (see playerMachine.ts) and ends on "Download Limba".
  */
 export function RoutinePlayer({ code, stretches, oneLink, onClose, onCompleted }: RoutinePlayerProps) {
   const [muted, setMuted] = useState(false)
