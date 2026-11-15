@@ -19,14 +19,14 @@ function deviceStoreUrl(): string {
 }
 
 /**
- * End of the routine. "Subscribe to Limba" goes through OneLink, so after
+ * End of the routine. "Download Limba" goes through OneLink, so after
  * install the app opens on this shared routine (deferred deep link).
  */
 export function CompleteView({ summary, oneLink, onClose }: CompleteViewProps) {
   // Resolved after mount so the server and client render the same href.
   const [storeUrl, setStoreUrl] = useState(APP_STORE_URL)
   useEffect(() => setStoreUrl(deviceStoreUrl()), [])
-  const subscribeHref = oneLink ?? storeUrl
+  const downloadHref = oneLink ?? storeUrl
 
   return (
     <div className="flex flex-col items-center py-10 text-center">
@@ -50,10 +50,10 @@ export function CompleteView({ summary, oneLink, onClose }: CompleteViewProps) {
       </dl>
 
       <a
-        href={subscribeHref}
+        href={downloadHref}
         className={`${TAILWIND_CLASSES.button.base} ${TAILWIND_CLASSES.button.primary} ${TAILWIND_CLASSES.button.sizes.lg} mt-10 inline-block`}
       >
-        Subscribe to Limba
+        Download Limba
       </a>
 
       <div className="mt-8">

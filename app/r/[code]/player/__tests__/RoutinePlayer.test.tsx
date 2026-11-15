@@ -4,7 +4,7 @@ import { RoutinePlayer } from '../RoutinePlayer'
 
 /**
  * The browser player end to end with fake timers: countdown, timed stretch with
- * a side swap, a reps stretch, then the "Subscribe to Limba" finish that goes
+ * a side swap, a reps stretch, then the "Download Limba" finish that goes
  * through OneLink and reports the completion once.
  */
 
@@ -55,7 +55,7 @@ describe('RoutinePlayer', () => {
   beforeEach(() => jest.useFakeTimers())
   afterEach(() => jest.useRealTimers())
 
-  it('plays the routine through to "Subscribe to Limba"', () => {
+  it('plays the routine through to "Download Limba"', () => {
     const onCompleted = jest.fn()
     const onClose = jest.fn()
     render(<RoutinePlayer code="Xk3p9Qa" stretches={ROUTINE} oneLink={ONE_LINK} onClose={onClose} onCompleted={onCompleted} />)
@@ -98,7 +98,7 @@ describe('RoutinePlayer', () => {
 
     // Finish.
     expect(screen.getByText('Routine complete!')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Subscribe to Limba' })).toHaveAttribute('href', ONE_LINK)
+    expect(screen.getByRole('link', { name: 'Download Limba' })).toHaveAttribute('href', ONE_LINK)
     expect(onCompleted).toHaveBeenCalledTimes(1)
 
     fireEvent.click(screen.getByRole('button', { name: 'Close' }))
@@ -126,7 +126,7 @@ describe('RoutinePlayer', () => {
     render(<RoutinePlayer code="Xk3p9Qa" stretches={[ROUTINE[1]]} oneLink={null} onClose={jest.fn()} onCompleted={jest.fn()} />)
     fireEvent.click(screen.getByRole('button', { name: 'Start now' }))
     fireEvent.click(screen.getByRole('button', { name: 'Done' }))
-    expect(screen.getByRole('link', { name: 'Subscribe to Limba' }).getAttribute('href')).toMatch(/^https:\/\/apps\.apple\.com\//)
+    expect(screen.getByRole('link', { name: 'Download Limba' }).getAttribute('href')).toMatch(/^https:\/\/apps\.apple\.com\//)
   })
 
   it('remembers the mute toggle', () => {
