@@ -115,6 +115,9 @@ describe('RoutinePlayer', () => {
     expect(screen.getByText('Routine Complete!')).toBeInTheDocument()
     expect(screen.getByText('34s')).toBeInTheDocument() // 2s x 2 sides + 30s
     expect(screen.getByRole('link', { name: 'Download Limba' })).toHaveAttribute('href', ONE_LINK)
+    // Store badges under the button, also through OneLink.
+    const badges = screen.getAllByRole('link').filter((a) => a.getAttribute('href') === ONE_LINK)
+    expect(badges).toHaveLength(3)
     expect(onCompleted).toHaveBeenCalledTimes(1)
   })
 

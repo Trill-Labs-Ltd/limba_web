@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import type { RoutineSummary } from '@/app/lib/sharedRoutine'
-import { APP_STORE_URL, PLAY_STORE_URL } from '@/app/components/ui/DownloadButtons'
+import { APP_STORE_URL, DownloadButtons, PLAY_STORE_URL } from '@/app/components/ui/DownloadButtons'
 import { CheckCircleIcon, PersonSimpleTaiChiDuotoneIcon } from './appIcons'
 import styles from './player.module.css'
 
 /**
  * End of the routine, ported from limba_mobile app/(app)/routine-complete.tsx
  * as a guest sees it: the celebration background, "Completed" pill, the Limba
- * cat celebrating, the Stretches / Duration card and one glowing button.
+ * cat celebrating, the Stretches / Duration card, the glowing button and the
+ * store badges under it.
  * "Download Limba" goes through OneLink, so after install the app opens on
  * this shared routine (deferred deep link).
  *
@@ -54,7 +55,7 @@ export function CompleteView({ summary, oneLink }: CompleteViewProps) {
       <Confetti />
 
       <div className={`relative z-10 flex min-h-0 flex-1 flex-col px-6 pt-[env(safe-area-inset-top)] ${styles.enter}`}>
-        <div className="flex flex-1 flex-col items-center overflow-y-auto pb-5 pt-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex flex-1 flex-col items-center overflow-y-auto pb-[calc(20px+env(safe-area-inset-bottom))] pt-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <div className="mb-2 flex flex-col items-center">
             <span className="mb-3 flex items-center gap-1.5 rounded-[18px] bg-white/70 px-3 py-1.5">
               <CheckCircleIcon size={17} className="text-[#087F6B]" />
@@ -84,15 +85,21 @@ export function CompleteView({ summary, oneLink }: CompleteViewProps) {
               label="Duration"
             />
           </div>
-        </div>
 
-        <div className="mt-1.5 w-full pb-[calc(20px+env(safe-area-inset-bottom))]">
+          {/* The CTA sits right under the summary, with the store badges below it. */}
           <a
             href={downloadHref}
-            className={`flex h-14 w-full items-center justify-center rounded-[28px] bg-[#008080] text-lg font-bold tracking-[0.5px] text-white ${styles.glow}`}
+            className={`mt-2 flex h-14 w-full shrink-0 items-center justify-center rounded-[28px] bg-[#008080] text-lg font-bold tracking-[0.5px] text-white ${styles.glow}`}
           >
             Download Limba
           </a>
+          <DownloadButtons
+            className="mt-5"
+            justify="center"
+            size="sm"
+            appStoreHref={oneLink ?? undefined}
+            playStoreHref={oneLink ?? undefined}
+          />
         </div>
       </div>
     </div>
