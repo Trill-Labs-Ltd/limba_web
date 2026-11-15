@@ -6,7 +6,8 @@
         "appID": "GY6477ZXJ3.com.TrillLabs.Limba-mobile",
         "paths": [
           "/start",
-          "/start/*"
+          "/start/*",
+          "/r/*"
         ]
       }
     ]
