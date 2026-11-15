@@ -31,16 +31,37 @@ export const FEATURES: Feature[] = [
     text: 'Tell Limba what feels tight and get a routine for it.',
   },
   {
-    image: '/player/features/journey-detail.webp',
+    image: '/player/features/journeys.webp',
     title: 'Journeys',
     text: 'Step-by-step programmes for your knees, hips and back.',
   },
-  {
-    image: '/player/features/wellness-library.webp',
-    title: 'The Wellness Library',
-    text: 'Every stretch, sorted by the part of you that needs it.',
-  },
 ]
+
+/**
+ * Writes "Limba" as the app's LIMBA wordmark (the logo artwork), sized to the
+ * capital height of the text around it, like the app's "Ask LIMBA" header.
+ */
+function WithWordmark({ text, fontSize }: { text: string; fontSize: number }) {
+  const parts = text.split('Limba')
+  return (
+    <>
+      {parts.map((part, i) => (
+        <span key={i}>
+          {part}
+          {i < parts.length - 1 && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src="/images/LIMBA@2x.png"
+              alt="Limba"
+              className="inline-block w-auto align-baseline"
+              style={{ height: fontSize * 0.72 }}
+            />
+          )}
+        </span>
+      ))}
+    </>
+  )
+}
 
 export function FeatureCarousel({ senderName }: { senderName: string | null }) {
   const { s, vs, ms } = useAppScale()
@@ -115,7 +136,7 @@ export function FeatureCarousel({ senderName }: { senderName: string | null }) {
         className="text-center font-bold text-black"
         style={{ fontSize: ms(17), marginBottom: vs(12), letterSpacing: -0.3 }}
       >
-        {heading}
+        <WithWordmark text={heading} fontSize={ms(17)} />
       </h3>
 
       <div
@@ -171,7 +192,7 @@ export function FeatureCarousel({ senderName }: { senderName: string | null }) {
                   marginBottom: vs(6),
                 }}
               >
-                {feature.title}
+                <WithWordmark text={feature.title} fontSize={ms(16)} />
               </p>
               <p
                 className="font-medium text-[#666666]"

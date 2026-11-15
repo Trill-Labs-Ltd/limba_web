@@ -150,15 +150,16 @@ describe('RoutinePlayer', () => {
     expect(onCompleted).toHaveBeenCalledTimes(1)
 
     // App features to swipe through, headed with the sender's name.
+    // "Limba" is written as the app's wordmark.
     expect(
-      screen.getByText('Tracy builds routines like this with Limba')
+      screen.getByRole('heading', {
+        name: 'Tracy builds routines like this with Limba',
+      })
     ).toBeInTheDocument()
-    for (const title of [
-      'A new routine every day',
-      'Ask Limba',
-      'Journeys',
-      'The Wellness Library',
-    ]) {
+    expect(
+      document.querySelector('h3 img[src="/images/LIMBA@2x.png"]')
+    ).not.toBeNull()
+    for (const title of ['A new routine every day', 'Ask Limba', 'Journeys']) {
       expect(
         screen.getByAltText(`${title} in the Limba app`)
       ).toBeInTheDocument()
@@ -172,10 +173,10 @@ describe('RoutinePlayer', () => {
     )
     advance(4)
     expect(dot('Ask Limba')).toHaveAttribute('aria-current', 'true')
-    fireEvent.click(dot('The Wellness Library'))
-    expect(dot('The Wellness Library')).toHaveAttribute('aria-current', 'true')
+    fireEvent.click(dot('Journeys'))
+    expect(dot('Journeys')).toHaveAttribute('aria-current', 'true')
     advance(8)
-    expect(dot('The Wellness Library')).toHaveAttribute('aria-current', 'true')
+    expect(dot('Journeys')).toHaveAttribute('aria-current', 'true')
   })
 
   it('skips, goes back, and closes from the X and on Escape', () => {
